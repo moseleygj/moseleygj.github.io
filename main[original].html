@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Gordon Moseley - Main</title>
+        <script src="script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
+
+        <link rel="stylesheet"  id="theme-stylesheet" href="style-dark.css">
+        <link rel="stylesheet"  id="theme-stylesheet" href="navBar.css">
+        <link rel="stylesheet"  href="tags.css">
+        <link rel="stylesheet"  href="footer.css">
+        <link rel="stylesheet"  href="wave.css">
+        <link rel="stylesheet"  id="theme-stylesheet" href="toggle.css">
+        <link rel="stylesheet"  href="projectContainer.css">
+        <link rel="stylesheet"  href="projectPreviewBrowser.css">
+</head>
+
+<!-- *************************************************
+
+ I see you taking a look at the recipe... ;-) 
+
+ *****************************************************
+ !-->
+
+        <body onload="whatsTheTime()">
+          <!--NavBar Start-->
+          <div class="navbar" style="border-bottom:1px solid grey;">
+            <!-- Logo Section (Left side) -->
+            <div class="logo" >
+              <img  src="computer-chip-clipart.png" alt="Logo" class="logo-img"> <!--logo image -->
+            </div>
+            
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            
+            <div class="menu-items"   id="menu">
+              <a href="#linkAbout"><i class="fa fa-user,menuItem"></i>&nbsp; About<span class="currentLink">•</span></a>
+              <a href="#linkResume"><i class="fa fa-file-text,menuItem"></i>&nbsp; Resume<span class="currentLink">•</span></a>
+              <a href="#linkProjects"><i class="fa fa-file-text,menuItem"></i>&nbsp; Projects<span class="currentLink">•</span></a>
+              <a href="#linkContact"><i class="fa fa-envelope,menuItem"></i>&nbsp; Contact<span class="currentLink">•</span></a>
+            </div>
+            
+            <!-- Star icon, visible only on large screens -->
+            <div class="random-icon">
+              <label class="switch">
+                <input type="checkbox" id="genBtn" onclick="changeMyStyle()">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+
+          <!--start of page beneath mainTitleBar-->
+            <div style="margin:8px 0px 0px;padding:0px 16px">
+            <div style="width:100%;height:auto;border-radius:25px;padding-top:50px">
+              <div style="position:relative;"><img src="avatarDefault.png" id="avatarMain" alt="main avatar image"></div>  
+              </div>
+              
+              
+                <p id="userName" style="min-width:320px;max-width:855px;width:100%;margin:64px auto 78px"><span class="waving-hand">👋&nbsp;</span>Hi, I’m <i id="myName">Gordon Moseley</i> – an IT specialist, CyberSecurity enthusiast, and part-time Developer dedicated to creating innovative solutions.</p>
+
+             <!-- <center><button type ="button" onclick="changeMyStyle()" id="genBtn">Turn the lights off<i class="fa-regular fa-lightbulb"></i></button></center>-->
+                        
+<!--links to personal stuff-->
+<div class="casing">
+ 
+<div id="linkAbout"></div>
+  <div class="linkage"> 
+    <i class="fa fa-building-o linkageFontTheme" aria-hidden="true" class="linkageFontTheme"></i>
+    <div ><a href="" class="textLabel">Princeton University</a></div>
+  </div>
+
+  <div class="linkage">
+    <i class="fa fa-map-marker linkageFontTheme" aria-hidden="true" class="linkageFontTheme"></i>
+    <div ><a href="#" style="text-decoration: none" class="textLabel">NYC</a></div>
+  </div>
+
+  <div class="linkage">
+    <i class="fa fa-clock-o linkageFontTheme" aria-hidden="true" ></i>
+    <div ><a href="" id="timeNow" class="textLabel"> </a></div>
+  </div>
+
+  <div class="linkage">
+    <i class="fa fa-github linkageFontTheme" aria-hidden="true" ></i>
+    <div ><a href="https://moseleygj.github.io" onmouseout="revert()" onmouseover="changeImg1()" class="textLabel">GitHub</a></div>
+  </div>
+
+  <div class="linkage">
+    <i class="fa fa-linkedin linkageFontTheme" aria-hidden="true" ></i>
+    <div ><a href="https://www.linkedin.com/in/gordon-moseley-07773818/" onmouseout="revert()" onmouseover="changeImg1()" class="textLabel">LinkedIn</a></div>
+  </div>
+
+</div>
+
+<div class="border-split" style="margin-top: 64px;" ></div>
+<h2 >Achievements</h2>
+<div class="badgesRow">
+  <a href="#" class="badges"><img class="badges" alt="badges" title="FCC ARRL Radio Technician" src="FCC-Seal.png"></a>
+  <a href="#" class="badges"><img class="badges" alt="badges" title="" src="ComptiaA+.png"></a>
+  <a href="#" class="badges"><img class="badges" alt="badges" title="" src="ComTiaLinux+.png"></a>
+  <a href="#" class="badges"><img class="badges" alt="badges" title="" src="CompTiaSecurity+.png"></a>
+  <a href="#" class="badges"><img class="badges" alt="badges" title="Google Certified CyberSecurity" src="GCS.png"></a>
+  <a href="#" class="badges"><img class="badges" alt="badges" title="Google IT Automation with Python" src="GPA.png"></a>
+  <a href="#" class="badges"><img class="badges" alt="badges" title="ISC2 SSCP" src="ISC2_SSCP_RGB__mark.webp" style="background: white;
+border-radius: 20px;"></a>
+<!--Certification Section end-->
+</div>
+<div class="border-split" id="linkResume" style="margin:70px 0 70px" ></div>
+
+
+
+<div class="badgesRow">
+        <div class="section-wrapper">
+          <!-- Resume Download Section -->
+          <section class="card-section">
+            <i class="fa fa-file-text-o" aria-hidden="true" style="font-size:60px"></i>
+            <h2>Résumé</h2>
+            <p class="subtitle">Available in multiple formats</p>
+            <div class="download-buttons">
+              <a href="" class="btn">PDF</a>
+              <a href="" class="btn">Word</a>
+              <button class="btn secondary" onclick="showHash()">Show File Hash</button>
+            </div>
+            <p id="hash-value" class="hash-output" hidden></p>
+          </section>
+
+          <!-- Barcode Section -->
+          <section class="card-section">
+            <i class="fa fa-qrcode" aria-hidden="true" style="font-size:60px"></i>
+            <h2>Scan Me</h2>
+            <p class="subtitle">View on mobile</p>
+            <div class="barcode-wrapper">
+              <img src="qr-code-dark.png" style="border-radius: 20px 0px;" alt="Barcode" class="barcode-img">
+            </div>
+          </section>
+        </div>
+</div>
+              <div class="border-split" style="margin-top:100px" ></div>
+
+ <!--what I'm Learning --->        
+<h2 >🌱 I'm Learning</h2>
+<div class="badgesRow" style="min-height:100px">
+
+    <div class="basicTag" style="background:#32ade6">
+      <i class="fa fa-android" aria-hidden="true"></i>&nbsp;AI/ML
+    </div>
+
+    <div class="basicTag" style="background:#34c759">
+      <i class="fa fa-github" aria-hidden="true"></i>&nbsp;RHCSA
+    </div>
+
+    <div class="basicTag" style="background:#af52de">
+      <i class="fa fa-lock" aria-hidden="true"></i>&nbsp;CISSP
+    </div>
+
+    <div class="basicTag" style="background:#f58b00">
+      <i class="fa fa-cloud " aria-hidden="true"></i>&nbsp;CLOUD
+    </div>
+
+</div>
+
+
+<div class="border-split" style="margin-bottom:34px" ></div>
+
+<h2 >⚡Random Fact</h2>
+  <div class="badgesRow">
+    <p class="contentDescriptionText" id="randomFact"></p>
+  </div>
+<div class="border-split" style="margin-bottom:34px" ></div>
+
+<!--test zone-->
+<h2 id="linkProjects" style="margin-top:80px">⚙️ Projects</h2>
+<div class="badgesRow">
+<p class="contentDescriptionText">Web Design & UI/UX </p>
+
+
+<!-- PROJECTS zone-->
+<div class="proj-preview-frame" style="height:362px"> <!--custom height added to div to be the same size as others -->
+  <div class="proj-preview-header">
+      <div class="proj-preview-circles">
+          <div class="proj-preview-circle proj-red"></div>
+          <div class="proj-preview-circle proj-yellow"></div>
+          <div class="proj-preview-circle proj-green"></div>
+      </div>
+      <div class="proj-preview-urlbar">My Clone of NetFlix</div>
+  </div>
+  <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
+      <img class="proj-preview-img" src="TheSpot.gif" alt="Placeholder Image">
+  </div>
+</div>
+
+    <div class="proj-preview-frame">
+      <div class="proj-preview-header">
+        <div class="proj-preview-circles">
+          <div class="proj-preview-circle proj-red"></div>
+          <div class="proj-preview-circle proj-yellow"></div>
+          <div class="proj-preview-circle proj-green"></div>
+        </div>
+        <div class="proj-preview-urlbar">Music Artist Website</div>
+      </div>
+      <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
+          <img class="proj-preview-img" src="musicArtist.gif" alt="Placeholder Image">
+      </div>
+    </div>
+
+    <div class="proj-preview-frame">
+        <div class="proj-preview-header">
+            <div class="proj-preview-circles">
+                <div class="proj-preview-circle proj-red"></div>
+                <div class="proj-preview-circle proj-yellow"></div>
+                <div class="proj-preview-circle proj-green"></div>
+            </div>
+            <div class="proj-preview-urlbar">Azar Ministries - Church</div>
+        </div>
+        <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
+            <img class="proj-preview-img" src="azar-light.gif" alt="Placeholder Image">
+        </div>
+    </div>
+
+    <div class="proj-preview-frame">
+      <div class="proj-preview-header">
+          <div class="proj-preview-circles">
+              <div class="proj-preview-circle proj-red"></div>
+              <div class="proj-preview-circle proj-yellow"></div>
+              <div class="proj-preview-circle proj-green"></div>
+          </div>
+          <div class="proj-preview-urlbar">Art Profile</div>
+      </div>
+      <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
+          <img class="proj-preview-img" src="art.gif" alt="Placeholder Image">
+      </div>
+  </div>
+
+  <div>
+    <div class="proj-preview-frame">
+        <div class="proj-preview-header">
+            <div class="proj-preview-circles">
+                <div class="proj-preview-circle proj-red"></div>
+                <div class="proj-preview-circle proj-yellow"></div>
+                <div class="proj-preview-circle proj-green"></div>
+            </div>
+            <div class="proj-preview-urlbar">Signage</div>
+        </div>
+        <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
+            <img class="proj-preview-img" src="https://raw.githubusercontent.com/moseleygj/WebPages/refs/heads/master/Sinage_clock/Screenshot.png" alt="Placeholder Image">
+        </div>
+    </div>
+
+<!--skills section-->
+    <!-- <div class="proj-preview-frame">
+      <div class="proj-preview-header">
+          <div class="proj-preview-circles">
+              <div class="proj-preview-circle proj-red"></div>
+              <div class="proj-preview-circle proj-yellow"></div>
+              <div class="proj-preview-circle proj-green"></div>
+          </div>
+          <div class="proj-preview-urlbar">Food Menu Sinage</div>
+      </div>
+      <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
+          <img class="proj-preview-img" src="https://github.com/moseleygj/WebPages/blob/master/foodMenu/Screenshot%20From%202025-05-07%2018-08-13.png?raw=true">
+      </div>
+  </div> -->
+
+
+  <!--end of portfolio screenshots-->
+<!-- 
+  <div class="macbook-frame">
+    <div class="macbook-screen">
+      <img src="https://github.com/moseleygj/WebPages/blob/master/FortuneCookie/fortune.gif?raw=true" />
+    </div>
+  </div>
+</div>
+</div> -->
+
+
+<!--dont remove div below-->
+   
+              <div style="height:2000px"></div>
+
+<!--Don't remove above - it's a spacer-->
+</div>
+
+
+<div class="border-split" style="margin-top:100px; " ></div>
+     
+    <h2 >🪄 Skills</h2>
+    <div class="badgesRow" style="min-height:100px;height:auto;overflow-y: auto;">
+    <!-- <p class="contentDescriptionText">spaceholder</p>-->
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;LINUX
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;HTML
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;CSS
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;PYTHON
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;PHP
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;BASH
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;GIT
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;MacOS
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;Automation
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;Cryptography
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;System Hardening
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;Incident Response
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;Risk Identification
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;Risk Analysis
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;Access Control
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;CLI
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;Network Analyzers
+        </div>
+
+        <div class="basicTag" style="border:2px solid grey;border-radius:985px;color:grey">
+          <i   style="color:white" aria-hidden="true"></i>&nbsp;Vulnerability Assessment
+        </div>
+</div>
+
+<!--contact section-->
+<div class="border-split" style="margin-top:100px" ></div>
+
+         
+<h2>🕵️ Contact</h2>
+  <div class="badgesRow" style="min-height:100px"></div>
+  
+
+<div id="section-content-wrapper" style="display: flex;
+justify-content: center;gap: 2rem;flex-wrap: wrap;">
+<!--section content start-->
+  <section id="linkContact" class="card-section specialCard">
+    <i class="fa fa-envelope-o" aria-hidden="true" style="font-size:60px"></i>
+    <h2>Mail</h2>
+    <p class="subtitle">Send me a message</p>
+    <div class="barcode-wrapper">
+      <div >
+        <button class="btn secondary" onclick="showHash()" title="moseleygj@gmail.com">CONTACT </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="linkContact" class="card-section specialCard">
+    <i class="fa fa-phone" aria-hidden="true" style="font-size:60px"></i>
+    <h2>Phone</h2>
+    <p class="subtitle">(347) 670 3223</p>
+    <div class="barcode-wrapper">
+     <a href="tel:+13476703223"><button class="btn secondary">CALL</button></a> <div>
+      </div>
+    </div>
+  </section>
+
+  <section id="linkContact" class="card-section specialCard" >
+    <i class="fa fa-question-circle-o" aria-hidden="true" style="font-size:60px"></i>
+    <h2>FAQs</h2>
+    <p class="subtitle" style="margin-bottom: 0;"><b>CITIZENSHIP:</b> U.S.</p>
+    <p class="subtitle" style="margin-bottom: 0;"><b>RELOCATION:</b> Open</p>
+    <p class="subtitle" style="margin-bottom: 0;"><b>TRANSPORTATION:</b> Reliable</p>
+    <p class="subtitle" style="margin-bottom: 0;"><b>WORK ENVIRONMENT:</b> Flexible</p>
+  </section>
+
+</div><!--section content end-->
+</div>
+
+            </div>
+<div style="height:200px;width:400px;"></div>
+
+            <div style="position:relative;height:1px;width:1px;overflow:visible;z-index:3"><img style= "bottom:0;position:absolute;height:230px;"src="rick.gif"></div>
+<!--Footer start-->
+<div id="myFoot">
+  <div style="height:100%;width:50%;float:left; display:flex;
+  justify-content:center;
+  
+  align-items:center;">
+    <div >Copyright &copy; 2022 - 2025</div>
+  </div>
+
+  <div style="height:100%;width:49%;float:left;  display:flex;
+  justify-content:center; align-items:center;flex-wrap:wrap">
+    <div class="designedWithCaption">Designed with <i class="fa fa-heart fa-beat" style="color:red" aria-hidden="true"></i>
+      by <a href="" style="color:#434343;">Gordon</a>
+      <div style="width:100%;text-align:center;height:auto;margin-top:10px">
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer Ending-->
+</body>
+</html>

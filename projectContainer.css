@@ -1,0 +1,53 @@
+#projectContainer{ display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  width:100%;
+flex-wrap: wrap}
+  .macbook-frame {
+    width: 300px;
+    max-width: 800px;
+    background: #333;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+    margin:10px;
+  }
+
+  .macbook-frame::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 6px;
+    background: #666;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  .macbook-screen {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+
+  .macbook-screen img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .label {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #333;
+  }

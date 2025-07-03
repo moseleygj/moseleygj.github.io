@@ -1,0 +1,190 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+/* Basic reset and layout */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+ /* background-color: #111;*/
+  /*color: white;*/
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  padding: 10px 20px;
+  position: relative;
+  width: 100%;
+  /*fix this later
+  opacity:0.5;
+  filter:blur(4px);*/
+  
+}
+
+.currentLink {
+  margin-left: auto;
+  padding-right: 15px;
+  display:none;
+  transition: opacity 0.3s ease;
+}
+
+
+/* Logo styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 40px; /* Adjust the logo size */
+  width: auto;
+}
+
+.menuItem{
+ display:none; 
+}
+/* Menu items container */
+.menu-items {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center; /* Center menu items on large screens */
+  flex: 1;
+  transition: all 0.3s ease;
+  opacity:0.98;
+}
+
+/* Menu links styling */
+.menu-items a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  transition: background 0.3s;
+  border-bottom: 1.5px solid none;
+  font-size:20px;
+}
+
+/* Hover effect for links */
+.menu-items a:hover {
+  color:whitesmoke;
+}
+
+/* Random icon styling (shown on large screens only) */
+.random-icon {
+  font-size: 24px;
+  display: block; /* Make visible on large screens */
+  position: absolute;
+  right: 50px; /* Place star on the right edge of the menu */
+}
+
+/* Hamburger button */
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  display: none; /* Hidden by default on desktop */
+}
+
+/* Mobile menu (when screen size is smaller than 768px) */
+@media (max-width: 768px) {
+
+/* Show .currentLink when hovering over the <a> tag */
+a:hover .currentLink {
+  /*opacity: 1;*/
+  display:block;
+}
+
+/* Logo styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+  /* Hide menu links and set them to stack vertically */
+  .menu-items {
+    display: none;
+    flex-direction: column;
+    width: 93%;
+    background-color: rgb(66 66 69/99.9%);
+    font-weight:600;
+    font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px 1px #000;
+    z-index: 1000;
+    gap: 0;
+  }
+
+  /* Show hamburger button on mobile */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Display the menu items when "active" class is added */
+  .menu-items.active {
+    display: flex;
+  }
+
+  /* Styling for individual menu items on mobile */
+  .menu-items a {
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    border-bottom: none; /* Remove bottom border on mobile */
+  }
+
+  /* Hide the random icon in mobile mode */
+  .random-icon {
+    display: none; /* Hide the icon in mobile view */
+  }
+
+  /* Hide logo and show hamburger menu */
+  .logo {
+    display: none; /* Hide logo in mobile view */
+  }
+}
+
+/* Large screens, make sure the navbar takes the full width */
+@media (min-width: 769px) {
+  .navbar {
+    width: 100%;
+  }
+
+  /* Make sure the logo stays visible in large screens */
+  .logo {
+    display: flex; /* Show the logo on large screens */
+  }
+}
+
+
+
+@media (min-width: 769px) {
+}
+
+  /* navbar,position=fixed or unset */

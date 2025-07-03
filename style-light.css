@@ -1,0 +1,208 @@
+/*light theme*/
+#genBtn{
+    padding:5px 16px;
+    border:1.5px solid #d1d9e0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  
+    border-radius:10px;
+    color:#33383e;
+    background-color:#f6f8fa;
+    max-width:718px;
+    min-width:256px;
+    width: auto;
+    margin-bottom:20px;
+    margin-top:10px;
+  }
+
+  #avatarMain{left:50%;border-radius:50%;border:4px solid #dfe0e0;height:296px;display:block;margin: 0 auto  0}
+  .listText{color:#f0f6fc;text-decoration:none;list-style-type: none;}
+  .border-split{background-color:#E1DFE1;height:1px ;width:97%;margin: 20px auto;}
+  .badgesRow{min-height:69px;height:auto; padding-left: 30px }
+  .badges{height:96px;margin-right:6px;width:96px;cursor: pointer}
+
+  body{background-color:#FFFFFF;}
+  .casing{
+    border: 1px solid none;max-width:712px;
+    min-width:255px;
+    width:300px;
+  }
+  
+  .linkage{
+    height:25px;
+    background-color:none;
+    margin-bottom:4px;
+    line-height:1.5;
+  }
+  
+  
+  .imgHeader{height:12px;width:16px;float:left;padding-right:8px;  line-height:1.5;
+    margin-top:1.5px
+  }
+  
+  .textLabel{
+    float:left;
+    text-decoration:none;
+    color:hsl(216deg 12.82% 15.29%);
+
+    width:250px;
+    font-size:20px;/*1.25em*/
+  }
+  .textLabel:hover{
+    text-decoration:none;
+    color:orange;
+  }
+
+  #fullName{color:#33383e;font-size:34px;text-align:center;line-height: 1.25;margin-bottom:0;padding:0px 0px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji'}
+  #userName{color:#59636e;font-size:24px;text-align:center;line-height: 1.25;;width:855px;margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji'}
+
+  .linkageFontTheme{color:#59636e;float:left;line-height:1.5;margin-left:5px;margin-right:12px; line-height: 1.5;
+    font:20px;}
+  h2{
+    color:#1f2328;
+    font-size:2.25em;
+
+  }
+  .contentDescriptionText{
+    color:#8a8a8e;
+    font-size:1.75em;
+  }
+
+/*light themed dowload section*/
+:root {
+  --bg-color: #f5f5f7; /* Light background color */
+  --card-color: #ffffff; /* White cards */
+  --text-color: #1c1c1e; /* Dark text color */
+  --subtext-color: #8e8e93; /* Light grey for subtitles */
+  --button-primary-bg: #007aff; /* Blue button color */
+  --button-primary-hover: #0051a8; /* Darker blue for hover */
+  --button-secondary-bg: #f4f4f5; /* Light grey for secondary buttons */
+  --button-secondary-hover: #e1e1e6; /* Darker grey for hover */
+}
+html{
+  scroll-behavior: smooth;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);*/
+  color: var(--text-color);
+  margin: 0;
+  /*padding: 2rem;*/
+}
+
+/* Layout Wrapper */
+.section-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Shared Card Style */
+.card-section {
+  background: var(--card-color);
+  width: 400px;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1); /* Light shadow */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.specialCard{
+  flex: 1 1 400px; /* grow if there's space, shrink if needed, base width 200px */
+  min-width: 200px;
+    /*max-width:600px;*/
+  }
+.card-section h2 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: var(--subtext-color);
+  margin-bottom: 2rem;
+  font-size: 1.25em;
+}
+
+.download-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn {
+  background-color: var(--button-primary-bg);
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--button-primary-hover);
+}
+
+.btn.secondary {
+  background-color: var(--button-secondary-bg);
+  color: var(--text-color);
+}
+
+.btn.secondary:hover {
+  background-color: var(--button-secondary-hover);
+}
+
+.hash-output {
+  margin-top: 1rem;
+  font-family: monospace;
+  font-size: 11px;
+  word-break: break-word;
+  color: var(--subtext-color);
+}
+
+/* Barcode Styling */
+.barcode-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.barcode-img {
+  width: 160px;
+  height: auto;
+  max-height: 200px;
+}
+/*download section end*/
+
+
+
+#myName{
+  color:#434343;font-family:"Zeyada";font-size:44px;font-weight:400px;
+}
+
+/*skills section*/
+.basicTag-skills{
+  color:#1f2328;
+  border:2px solid grey;
+  background:white;
+}
+
+/*cyberSecurity*/
+.project-content{
+  background:White;
+}
+.project-title{
+  color:#1f2328;
+}
+.project-card{
+  background:#d0d0d0;
+}

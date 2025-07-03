@@ -1,0 +1,79 @@
+:root {
+    --bg-color: #1c1c1e;
+    --card-color: #2c2c2e;
+    --text-color: #f2f2f7;
+    --subtext-color: #8e8e93;
+    --button-primary-bg: #0a84ff;
+    --button-primary-hover: #0060df;
+    --button-secondary-bg: #3a3a3c;
+    --button-secondary-hover: #505053;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 2rem;
+  }
+  
+  .resume-section {
+    background: var(--card-color);
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  
+  .resume-section h2 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .subtitle {
+    color: var(--subtext-color);
+    margin-bottom: 2rem;
+  }
+  
+  .download-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .btn {
+    background-color: var(--button-primary-bg);
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn:hover {
+    background-color: var(--button-primary-hover);
+  }
+  
+  .btn.secondary {
+    background-color: var(--button-secondary-bg);
+    color: white;
+  }
+  
+  .btn.secondary:hover {
+    background-color: var(--button-secondary-hover);
+  }
+  
+  .hash-output {
+    margin-top: 1rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+    word-break: break-word;
+    color: var(--subtext-color);
+  }
+  

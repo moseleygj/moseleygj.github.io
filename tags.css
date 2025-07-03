@@ -1,0 +1,45 @@
+.basicTag{
+  color:white;
+  font:bold;
+  min-width:10px;
+  max-width:240px;
+  width:auto;
+  /*padding:6px;*/
+  padding:10px 14px;
+  /*border-radius:2.5px;*/
+  border-radius:980px;
+  margin:5px;float:left;
+  font-family: sans-serif;;
+  /*added more boldness for clearity below*/
+  font-weight:bolder;
+}
+
+.basicTag-skills{
+ /* color:grey;*/
+  font:bold;
+  min-width:10px;
+  max-width:240px;
+  width:auto;
+  /*padding:6px;*/
+  padding:10px 14px;
+  /*border-radius:2.5px;*/
+  /*border-radius:980px;*/
+  margin:5px;float:left;
+  font-family: sans-serif;;
+  /*added more boldness for clearity below*/
+  font-weight:bolder;
+
+  border:2px solid grey;border-radius:985px;/*color:grey*/
+}
+.hashTags{
+   float:left;background:skyblue;color:white;width:auto;border-radius:5px;padding:6px  10px;margin:5px;
+  font-weight:bold;font-size: 0.8em;
+}
+.hashTagHousing
+{
+  width:100%;
+  height: 80px;
+  background: none;
+  margin-top: 10px;
+
+}
