@@ -77,8 +77,8 @@ function revert() {
 
 
   function showHash() {
-    const hashPart1 = '<b>SHA256(PDF):</b> a7f525c7b3455e903a9c4cb6fd908693157d240da8338c1e98339e9c1986485d ';
-    const hashPart2 = '<b>SHA256(DOC):</b> 7fefafd784705204f826279195a08f46177ba5f01215804039690e6936b5c606';
+    const hashPart1 = '<b>SHA256(PDF):</b> 7500f0d03421e5cbdcbbffde65c3910a53e0d0a65487ed109f650081064c9ec2';
+    const hashPart2 = '<b>SHA256(DOC):</b> ceca3b57b63197805aca5d2c2a8935a4c20aae3d024011ee4d25624b62405e42';
     const hashElement = document.getElementById('hash-value');
     
     hashElement.innerHTML = `${hashPart1}<br>${hashPart2}`;  // Adding <br> to break the line
