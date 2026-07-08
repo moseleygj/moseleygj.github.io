@@ -1,525 +1,807 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-      <title>Gordon Moseley - Main</title>
-        <script src="script.js"></script>
-        <link rel="icon" type="image/x-icon" href="icon.ico">
-        <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-jLKHWMZtO8qH3K7R0T+GAQzbnJmEepC8u0xZzt7t27Ahv/jz0MJ6Vpjgi3kA9RSk" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-        <link rel="stylesheet" href="fontawesome-free-6.7.2-web/css/all.css">
+<head>    
+<link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="fontawesome-free-6.7.2-web/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=build" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <title>&nbsp;Gordon Moseley</title>
 
-        <link rel="stylesheet" href="cyberSecProjects.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
-
-        <link rel="stylesheet"  id="theme-stylesheet" href="style-dark.css">
-        <link rel="stylesheet"   href="navBar.css">
-        <link rel="stylesheet"  href="tags.css">
-        <link rel="stylesheet"  href="footer.css">
-        <link rel="stylesheet"  href="wave.css">
-        <link rel="stylesheet"   href="toggle.css">
-        <link rel="stylesheet"  href="projectContainer.css">
-        <link rel="stylesheet"  href="projectPreviewBrowser.css">
 </head>
+<div class="navbar">
+  <div class="logo">
+    <img src="computer-chip-clipart.png" alt="Logo" class="logo-img">
+  </div>
+  
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  
+  <div class="menu-items" id="menu">
+    <a href="#linkAbout">&nbsp; About<span class="currentLink">•</span></a>
+    <a href="#linkResume">&nbsp; Resume<span class="currentLink">•</span></a>
+    <a href="#linkProjects">&nbsp; Projects<span class="currentLink">•</span></a>
+    <a href="#linkContact">&nbsp; Contact<span class="currentLink">•</span></a>
+  </div>
+  
+  <div class="random-icon">
+    <label class="switch">
+      <input type="checkbox" id="genBtn" onclick="changeMyStyle()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+<!--end of nav -->
 
-<!-- *************************************************
 
- I see you taking a look at the recipe... ;-) 
 
- *****************************************************
- !-->
+  <style>
+        <!-- FontAwesome Vector Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
 
-        <body onload="whatsTheTime()">
-          <!--NavBar Start-->
-          <div class="navbar" style="border-bottom:1px solid grey;">
-            <!-- Logo Section (Left side) -->
-            <div class="logo" >
-              <img  src="computer-chip-clipart.png" alt="Logo" class="logo-img"> <!--logo image -->
-            </div>
+        body {
+            background-color: #1c1c1e;
+            color: #ffffff;
+            /*padding: 40px 16px;*/
+            display: flex;
+            flex-direction: column; /* Forces all sections to stack on top of each other */
+            align-items: center;    /* Centers all sections horizontally */
+            gap: 24px;              /* Consistent professional layout spacing */
+            overflow-x: auto;       /* Gracefully handles screens narrower than the 500px min-width */
+        }
+
+
+
+        
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION CONTAINER -->
+    <div class="profile-header-card">
+        <div class="banner-background"></div>
+        
+        <div class="avatar-wrapper">
+            <img src="https://moseleygj.github.io/avatarDefault.png" alt="Profile Photo">
+        </div>
+
+        <div class="profile-info">
+            <h1><span class="waving-hand">👋&nbsp;</span>Gordon Moseley</h1>
+            <div class="headline">IT specialist, CyberSecurity enthusiast, and part-time Developer dedicated to creating innovative solutions</div>
             
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-            
-            <div class="menu-items"   id="menu">
-              <a href="#linkAbout"><i class="fa fa-user,menuItem"></i>&nbsp; About<span class="currentLink">•</span></a>
-              <a href="#linkResume"><i class="fa fa-file-text,menuItem"></i>&nbsp; Resume<span class="currentLink">•</span></a>
-              <a href="#linkProjects"><i class="fa fa-file-text,menuItem"></i>&nbsp; Projects<span class="currentLink">•</span></a>
-              <a href="#linkContact"><i class="fa fa-envelope,menuItem"></i>&nbsp; Contact<span class="currentLink">•</span></a>
+                              <div class="meta-info" style="padding-top:24px">
+                <div>    <i class="fa-solid fa-location-dot linkageFontTheme" aria-hidden="true" class="linkageFontTheme"></i>
+ <span>&nbsp;NYC</span></div>
+                <div>    <i class="fa-regular fa-building linkageFontTheme" aria-hidden="true" class="linkageFontTheme"></i>
+ <span>&nbsp;Princeton University</span></div>
+                <div><i class="fa-brands fa-github linkageFontTheme" aria-hidden="true" ></i><a href="https://moseleygj.github.io/" class="meta-link"style="color:white;text-decoration:none; target="_blank" >&nbsp;&nbsp;GitHub</a></div>
+                <div><i class="fa-brands fa-linkedin-in linkageFontTheme" aria-hidden="true" ></i><a href="https://www.linkedin.com/in/gordon-moseley-07773818/" class="linkageFontTheme" target="_blank" style="color:white;text-decoration:none;">&nbsp;&nbsp;LinkedIn</a></div>
             </div>
-            
-            <!-- Star icon, visible only on large screens -->
-            <div class="random-icon">
-              <label class="switch">
-                <input type="checkbox" id="genBtn" onclick="changeMyStyle()">
-                <span class="slider round"></span>
-              </label>
+        </div>
+    </div> 
+
+       <!-- EXPANDABLE RESUME BLOCK ARCHITECTURE -->
+    <div class="resume-section-wrapper">
+        <div class="resume-download-card">
+            <div class="resume-text">
+                <h3>Download Resume</h3>
+                <p>Review my complete background and professional experience history.</p>
             </div>
-          </div>
+            <div class="resume-buttons-group">
+                <a href="#" class="btn-download btn-pdf" download>
+                    <span><i class="fa-solid fa-file-pdf"></i></i></span> PDF
+                </a>
+                <a href="#" class="btn-download btn-word" download>
+                    <span><i class="fa-solid fa-file-word"></i></span> DOCX
+                </a>
+            </div>
+        </div>
 
-          <!--start of page beneath mainTitleBar-->
-            <div style="margin:8px 0px 0px;padding:0px 16px">
-            <div style="width:100%;height:auto;border-radius:25px;padding-top:50px">
-              <div style="position:relative;"><img src="avatarDefault.png" id="avatarMain" alt="main avatar image"></div>  
-              </div>
-              
-              
-               <!--<p id="userName" style="min-width:320px;max-width:855px;width:100%;margin:64px auto 78px"><span class="waving-hand">👋&nbsp;</span>Hi, I’m <i id="myName">Gordon Moseley</i> – an IT specialist, CyberSecurity enthusiast, and part-time Developer dedicated to creating innovative solutions.</p>-->
-                <p id="userName" style="min-width:320px;max-width:855px;width:100%;margin:64px auto 78px"><span class="waving-hand">👋&nbsp;</span>Hi, I’m <i id="myName">Gordon Moseley</i> – an IT specialist, CyberSecurity enthusiast, and part-time Developer dedicated to creating innovative solutions.</p>
-
-
-             <!-- <center><button type ="button" onclick="changeMyStyle()" id="genBtn">Turn the lights off<i class="fa-regular fa-lightbulb"></i></button></center>-->
-                        
-<!--links to personal stuff-->
-<div class="casing">
+        <!-- Collapsible panel -->
+        <details class="checksum-menu">
+            <summary class="checksum-trigger">Verify File Integrity (SHA-256)</summary>
+            <div class="checksum-content">
+                <div class="hash-row">
+                    <span class="hash-label">resume.pdf hash</span>
+                    <span class="hash-value">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+                </div>
+                <div class="hash-row">
+                    <span class="hash-label">resume.docx hash</span>
+                    <span class="hash-value">8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88d52b0cfd3e3be</span>
+                </div>
+            </div>
+        </details>
+    </div>
+                  
+<!--certs-->
  
-<div id="linkAbout"></div>
-  <div class="linkage"> 
-    <i class="fa-regular fa-building linkageFontTheme" aria-hidden="true" class="linkageFontTheme"></i>
-    <div ><a href="https://www.princeton.edu" class="textLabel" target="_blank">Princeton University</a></div>
-  </div>
-
-  <div class="linkage">
-    <i class="fa-solid fa-location-dot linkageFontTheme" aria-hidden="true" class="linkageFontTheme"></i>
-    <div ><a href="#" style="text-decoration: none" class="textLabel">NYC</a></div>
-  </div>
-
-  <div class="linkage">
-    <i class="fa-regular fa-clock linkageFontTheme" aria-hidden="true" ></i>
-    <div ><a href="" id="timeNow" class="textLabel"> </a></div>
-  </div>
-
-  <div class="linkage">
-    <i class="fa-brands fa-github linkageFontTheme" aria-hidden="true" ></i>
-    <div ><a href="https://moseleygj.github.io" onmouseout="revert()" onmouseover="changeImg1()" class="textLabel">GitHub</a></div>
-  </div>
-
-  <div class="linkage">
-    <i class="fa-brands fa-linkedin-in linkageFontTheme" aria-hidden="true" ></i>
-    <div ><a href="https://www.linkedin.com/in/gordon-moseley-07773818/" onmouseout="revert()" onmouseover="changeImg1()" class="textLabel">LinkedIn</a></div>
-  </div>
-
-</div>
-
-<div class="border-split" style="margin-top: 64px;" ></div>
-<h2 >Achievements</h2>
-<div class="badgesRow">
-  <a href="#" class="badges"><img class="badges" alt="badges" title="FCC ARRL Radio Technician" src="FCC-Seal.png"></a>
-  <a href="#" class="badges"><img class="badges" alt="badges" title="" src="ComptiaA+.png"></a>
-  <a href="#" class="badges"><img class="badges" alt="badges" title="" src="ComTiaLinux+.png"></a>
-  <a href="#" class="badges"><img class="badges" alt="badges" title="" src="CompTiaSecurity+.png"></a>
-  <a href="#" class="badges"><img class="badges" alt="badges" title="Google Certified CyberSecurity" src="GCS.png"></a>
-  <a href="#" class="badges"><img class="badges" alt="badges" title="Google IT Automation with Python" src="GPA.png"></a>
-  <a href="#" class="badges"><img class="badges" alt="badges" title="ISC2 SSCP" src="ISC2_SSCP_RGB__mark.webp" style="background: white;
-border-radius: 20px;"></a>
-<!--Certification Section end-->
-</div>
-<div class="border-split" id="linkResume" style="margin:70px 0 70px" ></div>
-
-
-
-<div class="badgesRow">
-        <div class="section-wrapper">
-          <!-- Resume Download Section -->
-          <section class="card-section">
-            <i class="fa fa-file-text-o" aria-hidden="true" style="font-size:60px"></i>
-            <h2>Résumé</h2>
-            <p class="subtitle">Available in multiple formats</p>
-            <div class="download-buttons">
-              <a href="Gordon Moseley_RESUME_2025.pdf" class="btn">PDF</a>
-              <a href="Gordon Moseley_RESUME_2025.docx" class="btn">Word</a>
-              <button class="btn secondary" onclick="showHash()">Show File Hash</button>
-            </div>
-            <p id="hash-value" class="hash-output" hidden></p>
-          </section>
-
-          <!-- Barcode Section -->
-          <section class="card-section">
-            <i class="fa fa-qrcode" aria-hidden="true" style="font-size:60px"></i>
-            <h2>Scan Me</h2>
-            <p class="subtitle">View on mobile</p>
-            <div class="barcode-wrapper">
-              <img src="qr-code-dark.png" style="border-radius: 20px 0px;" alt="Barcode" class="barcode-img">
-            </div>
-          </section>
-        </div>
-</div>
-              <div class="border-split" style="margin-top:100px" ></div>
-
- <!--what I'm Learning --->        
-<h2 >🌱 I'm Learning</h2>
-<div class="badgesRow" style="min-height:100px">
-
-    <div class="basicTag" style="background:#32ade6">
-      <i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;AI/ML
-    </div>
-
-    <div class="basicTag" style="background:#34c759">
-      <i class="fab fa-redhat" aria-hidden="true"></i>&nbsp;RHCSA
-    </div>
-
-    <div class="basicTag" style="background:#af52de">
-      <i class="fa fa-lock" aria-hidden="true"></i>&nbsp;CISSP
-    </div>
-
-    <div class="basicTag" style="background:#f58b00">
-      <i class="fa fa-cloud " aria-hidden="true"></i>&nbsp;CLOUD
-    </div>
-
-</div>
-
-
-<div class="border-split" style="margin-bottom:34px" ></div>
-
-<h2 >⚡Random Fact</h2>
-  <div class="badgesRow">
-    <p class="contentDescriptionText" id="randomFact"></p>
-  </div>
-<div class="border-split" style="margin-bottom:34px" ></div>
-
-<!--test zone-->
-<h2 id="linkProjects" style="margin-top:80px">⚙️ Projects</h2>
-<div class="badgesRow">
-<p class="contentDescriptionText">Web Design & UI/UX </p>
-
-<style>.fix::after {
-  content: "";
-  display: table;
-  clear: both;/*border:1px solid pink*/
-}</style>
-<!-- PROJECTS zone-->
- <div class="fix">
-<div class="proj-preview-frame" style="height:362px"> <!--custom height added to div to be the same size as others -->
-  <div class="proj-preview-header">
-      <div class="proj-preview-circles">
-          <div class="proj-preview-circle proj-red"></div>
-          <div class="proj-preview-circle proj-yellow"></div>
-          <div class="proj-preview-circle proj-green"></div>
-      </div>
-      <div class="proj-preview-urlbar">My Clone of NetFlix</div>
-  </div>
-  <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
-      <img class="proj-preview-img" src="TheSpot.gif" alt="Placeholder Image">
-  </div>
-</div>
-
-    <div class="proj-preview-frame">
-      <div class="proj-preview-header">
-        <div class="proj-preview-circles">
-          <div class="proj-preview-circle proj-red"></div>
-          <div class="proj-preview-circle proj-yellow"></div>
-          <div class="proj-preview-circle proj-green"></div>
-        </div>
-        <div class="proj-preview-urlbar">Music Artist Website</div>
-      </div>
-      <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
-          <img class="proj-preview-img" src="musicArtist.gif" alt="Placeholder Image">
-      </div>
-    </div>
-
-    <div class="proj-preview-frame">
-        <div class="proj-preview-header">
-            <div class="proj-preview-circles">
-                <div class="proj-preview-circle proj-red"></div>
-                <div class="proj-preview-circle proj-yellow"></div>
-                <div class="proj-preview-circle proj-green"></div>
-            </div>
-            <div class="proj-preview-urlbar">Azar Ministries - Church</div>
-        </div>
-        <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
-            <img class="proj-preview-img" src="azar-light.gif" alt="Placeholder Image">
-        </div>
-    </div>
-
-    <div class="proj-preview-frame">
-      <div class="proj-preview-header">
-          <div class="proj-preview-circles">
-              <div class="proj-preview-circle proj-red"></div>
-              <div class="proj-preview-circle proj-yellow"></div>
-              <div class="proj-preview-circle proj-green"></div>
-          </div>
-          <div class="proj-preview-urlbar">Art Profile</div>
-      </div>
-      <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
-          <img class="proj-preview-img" src="art.gif" alt="Placeholder Image">
-      </div>
-  </div>
-
-  <div>
-    <div class="proj-preview-frame">
-        <div class="proj-preview-header">
-            <div class="proj-preview-circles">
-                <div class="proj-preview-circle proj-red"></div>
-                <div class="proj-preview-circle proj-yellow"></div>
-                <div class="proj-preview-circle proj-green"></div>
-            </div>
-            <div class="proj-preview-urlbar">Signage</div>
-        </div>
-        <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
-            <img class="proj-preview-img" src="https://raw.githubusercontent.com/moseleygj/WebPages/refs/heads/master/Sinage_clock/Screenshot.png" alt="Placeholder Image">
-        </div>
-    </div>
-    <div class="proj-preview-frame">
-      <div class="proj-preview-header">
-          <div class="proj-preview-circles">
-              <div class="proj-preview-circle proj-red"></div>
-              <div class="proj-preview-circle proj-yellow"></div>
-              <div class="proj-preview-circle proj-green"></div>
-          </div>
-          <div class="proj-preview-urlbar">Fortune</div>
-      </div>
-      <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
-          <img class="proj-preview-img" src="fortune.gif" alt="fortune cookie site">
-      </div>
-  </div>
-
-</div>
-</div>
-<!--make a light mode version and add it to the media query later-->
-<p class="contentDescriptionText">CyberSecurity </p>
-  <div class="project-card">
-    <img src="cyberSecurityPython.gif" alt="MD5 HASH:5d8250190d24dbf939d9a4abe4af4a34">
-    <div class="project-content">
-      <div class="project-title">SSH Security Monitoring & IP Blocking Tool</div>
-
-            <div class="project-description">        A <b>Python</b> CLI utility that parses SSH logs to track failed and successful login attempts, summarizes failed login IP counts by day, and enables blocking suspicious IPs via iptables. It also integrates Fail2Ban status checks for enhanced SSH protection.<br/><br/>
-<div class="hashTagHousing"><div class="hashTags" style="background:#00CA4E"><i class="fa-brands fa-python"></i>&nbsp PYTHON</div>
-        <div class="hashTags" style="background:#f58b00"><i class="fa-solid fa-hashtag"></i>&nbspBash</div>
-        <div class="hashTags" style="background:purple"><i class="fa-solid fa-terminal"></i>&nbspCLI</div>
-        <div class="hashTags" style="background:#FF605C"><i class="fa-brands fa-linux"></i>&nbspLinux</div>
-      </div>
+  <div class="section-container" style="max-width:1080px;margin-top:10px">
+        <h2>Certifications</h2>
         
-</div>
-      <a href="SecLogParse.py" class="project-link" target="_blank"><i class="fa-brands fa-github"></i> View Source Code</a>
+        <div class="cert-grid">
+
+            <!-- Cert 1 -->
+            <div class="cert-card">
+                <div class="cert-info">
+                    <h3>CompTia Linux+</h3>
+                    <p>CompTIA</p>
+                </div>
+            </div>
+
+            <!-- Cert 2 -->
+            <div class="cert-card">
+                <div class="cert-info">
+                    <h3>CompTIA Security+</h3>
+                    <p>CompTIA</p>
+                </div>
+            </div>
+
+            <!-- Cert 3 -->
+            <div class="cert-card">
+                <div class="cert-info">
+                    <h3>CompTIA A+</h3>
+                    <p>CompTIA</p>
+                </div>
+            </div>
+
+            <!-- Cert 4 -->
+            <div class="cert-card">
+                <div class="cert-info">
+                    <h3>SSCP (Systems Security Certified Practitioner)</h3>
+                    <p>ISC²</p>
+                </div>
+            </div>
+
+            <!-- Cert 5 -->
+            <div class="cert-card">
+                <div class="cert-info">
+                    <h3>Google CyberSecurity</h3>
+                    <p>Google </p>
+                </div>
+            </div>
+
+            <!-- Cert 6 -->
+            <div class="cert-card">
+                <div class="cert-info">
+                    <h3>Google IT Automation with Python</h3>
+                    <p>Google</p>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
-<!--div of sec project-->
-  <div class="project-card">
-    <img style ="height:202px"src="cleanNMap.gif" alt="MD5 HASH:5d8250190d24dbf939d9a4abe4af4a34">
-    <div class="project-content">
-      <div class="project-title">Stylized Nmap Scanner</div>
-      <div class="project-description">
-        Scans a network using Nmap, cleans and parses the output, and enhances readability with icons, color-coding, and bold formatting to improve situational awareness and help identify vulnerabilities.<br/><br/><br/>
-        <div class="hashTagHousing">
-        <div class="hashTags" style="background:#006ef5">NMAP</div>
-        <div class="hashTags" style="background:#f58b00"><i class="fa-solid fa-hashtag"></i>&nbspBash</div>
-                <div class="hashTags" style="background:#FF605C"><i class="fa-brands fa-linux"></i>&nbspLinux</div>
 
+  <!--certs-->
+                
+                  <!--/*skills section start-->
+          <div class="skills-section-wrapper">
+    <!--<div class="section-title">Core Technical Arsenal</div>-->
+          <h2>Technology Stack</h2>
 
-        <div class="hashTags" style="background:purple"><i class="fa-solid fa-terminal"></i>&nbspCLI</div>
-
-        
-</div>
-      </div>
-      <a href="parseNMap.sh" class="project-link" target="_blank"><i class="fa-brands fa-github"></i> View Source Code</a>
-    </div>
-  </div>
-    <div class="project-card">
-    <img src="integrity.gif" alt="MD5 HASH:5d8250190d24dbf939d9a4abe4af4a34">
-    <div class="project-content">
-      <div class="project-title">Linux System Integrity Checker</div>
-      <div class="project-description">
-A Python CLI tool using a Bash script to hash critical Linux files, create a secure baseline, and detect changes. It supports system hardening and tamper detection for compliance and threat response.
-   <div class="hashTagHousing">
-        <div class="hashTags" style="background:#00CA4E"><i class="fa-brands fa-python"></i>&nbsp PYTHON</div>
-        <div class="hashTags" style="background:#f58b00"><i class="fa-solid fa-hashtag"></i>&nbspBash</div>
-        <div class="hashTags" style="background:#FF605C"><i class="fa-brands fa-linux"></i>&nbspLinux</div>
-
-
-        <div class="hashTags" style="background:purple"><i class="fa-solid fa-terminal"></i>&nbspCLI</div>
-</div>
-</div>
-      <a href="checksumSecurity.zip" class="project-link" target="_blank"><i class="fa-brands fa-github"></i> View Source Code</a>
-    </div>
-  </div>
-
-
-<!--skills section-->
-    <!-- <div class="proj-preview-frame">
-      <div class="proj-preview-header">
-          <div class="proj-preview-circles">
-              <div class="proj-preview-circle proj-red"></div>
-              <div class="proj-preview-circle proj-yellow"></div>
-              <div class="proj-preview-circle proj-green"></div>
-          </div>
-          <div class="proj-preview-urlbar">Food Menu Sinage</div>
-      </div>
-      <div class="proj-preview-imgwrap" style="max-width: 500px; max-height: 300px;">
-          <img class="proj-preview-img" src="https://github.com/moseleygj/WebPages/blob/master/foodMenu/Screenshot%20From%202025-05-07%2018-08-13.png?raw=true">
-      </div>
-  </div> -->
-
-
-  <!--end of portfolio screenshots-->
-<!-- 
-  <div class="macbook-frame">
-    <div class="macbook-screen">
-      <img src="https://github.com/moseleygj/WebPages/blob/master/FortuneCookie/fortune.gif?raw=true" />
-    </div>
-  </div>
-</div>
-</div> -->
-
-
-<!--dont remove div below-->
-   
-              <div style="height:600px"></div>
-
-<!--Don't remove above - it's a spacer-->
-</div>
-
-
-<div class="border-split" style="margin-top:100px;clear: both " ></div>
-     
-    <h2 >🪄 Skills</h2>
-    <div class="badgesRow" style="min-height:100px;height:auto;overflow-y: auto;">
-    <!-- <p class="contentDescriptionText">spaceholder</p>-->
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;LINUX
-        </div>
-
-       <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;MacOS
-        </div>
-
-        <div class="basicTag-skills">
-          <i  aria-hidden="true"></i>&nbsp;HTML
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;CSS
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;PYTHON
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;PHP
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;BASH
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;GIT
-        </div>
-
-         <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Docker
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Automation
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Cryptography
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;System Hardening
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Incident Response
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Risk Identification
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Risk Analysis
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Access Control
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;CLI
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Network Analyzers
-        </div>
-
-        <div class="basicTag-skills" >
-          <i  aria-hidden="true"></i>&nbsp;Vulnerability Assessment
-        </div>
-</div>
-
-<!--contact section-->
-<div class="border-split" style="margin-top:100px" ></div>
-
-         
-<h2>🕵️ Contact</h2>
-  <div class="badgesRow" style="min-height:100px"></div>
-  
-
-<div id="section-content-wrapper" style="display: flex;
-justify-content: center;gap: 2rem;flex-wrap: wrap;">
-<!--section content start-->
-  <section id="linkContact" class="card-section specialCard">
-    <i class="fa-solid fa-envelope" aria-hidden="true" style="font-size:60px;color:#32ade6"></i>
-    <h2>Mail</h2>
-    <p class="subtitle">Send me a message</p>
-    <div class="barcode-wrapper">
-      <div >
-        <button class="btn secondary" onclick="showHash()" title="moseleygj@gmail.com">CONTACT </button>
-      </div>
-    </div>
-  </section>
-
-  <section id="linkContact" class="card-section specialCard">
-    <i class="fa-solid fa-phone" aria-hidden="true" style="font-size:60px;color:#32ade6"></i>
-    <h2>Phone</h2>
-    <p class="subtitle">(347) 670 3223</p>
-    <div class="barcode-wrapper">
-     <a href="tel:+13476703223"><button class="btn secondary">CALL</button></a> <div>
-      </div>
-    </div>
-  </section>
-
-  <section id="linkContact" class="card-section specialCard" >
-    <i class="fa-solid fa-circle-question" aria-hidden="true" style="font-size:60px;color:#32ade6"></i>
-    <h2>FAQs</h2>
-    <p class="subtitle" style="margin-bottom: 0;"><b>CITIZENSHIP:</b> U.S.</p>
-    <p class="subtitle" style="margin-bottom: 0;"><b>RELOCATION:</b> Open</p>
-    <p class="subtitle" style="margin-bottom: 0;"><b>WILLING TO TRAVEL:</b> Yes</p>
-    <p class="subtitle" style="margin-bottom: 0;"><b>WORK ENVIRONMENT:</b> Remote / On-site / Hybrid</p>
-    <p class="subtitle" style="margin-bottom: 0;"><b>TRANSPORTATION:</b> Own vehicle</p>
-  </section>
-
-</div><!--section content end-->
-</div>
+    
+    <div class="skills-grid">
+        <!-- CARD 1: OPERATING SYSTEMS & ENVIRONMENTS -->
+        <div class="skill-card">
+            <div class="card-header">
+<i class="fa-solid fa-desktop"></i>               <h4>OS & Environments</h4>
+            </div>
+            <div class="tags-container">
+                <span class="skill-tag">Linux / Unix</span>
+                <span class="skill-tag">macOS Enterprise</span>
+                <span class="skill-tag">Windows Server</span>
+                <span class="skill-tag">Self-Hosted Lab</span>
+                <span class="skill-tag">Headless Server</span>
+                <span class="skill-tag">Proxmox</span>
 
             </div>
-<div style="height:200px;width:400px;"></div>
+        </div>
 
-            <!--<div style="position:relative;height:1px;width:1px;overflow:visible;z-index:3"><img style= "bottom:0;position:absolute;height:230px;"src="rick.gif"></div>-->
-<!--Footer start-->
-<div id="myFoot">
-  <div style="height:100%;width:50%;float:left; display:flex;
-  justify-content:center;
-  
-  align-items:center;">
-    <div >Copyright &copy; 2022 - 2025</div>
-  </div>
+        <!-- CARD 2: NETWORKING & SECURITY INFRASTRUCTURE -->
+        <div class="skill-card">
+            <div class="card-header">
+<i class="fa-solid fa-shield-halved"></i>                <h4>Network & Security</h4>
+            </div>
+            <div class="tags-container">
+                <span class="skill-tag">Infrastructure</span>
+                <span class="skill-tag">SSH</span>
+                <span class="skill-tag">Security Log Analysis</span>
+                <span class="skill-tag">Cryptography</span>
+                <span class="skill-tag">Incident Response</span>
+                <span class="skill-tag">System Hardening</span>
+                <span class="skill-tag">NIST</span>
+                <span class="skill-tag">Tenable Nessus</span>
+                <span class="skill-tag">NMap</span>
 
-  <div style="height:100%;width:49%;float:left;  display:flex;
-  justify-content:center; align-items:center;flex-wrap:wrap">
-    <div class="designedWithCaption">Designed with <i class="fa fa-heart fa-beat" style="color:red" aria-hidden="true"></i>
-      by <a href="" style="color:#434343;">Gordon</a>
-      <div style="width:100%;text-align:center;height:auto;margin-top:10px">
+
+                <span class="skill-tag">SIEM</span>
+                <span class="skill-tag">HIPAA</span>
+                <span class="skill-tag">Endpoint Security</span>
+                <span class="skill-tag">Jamf Pro / ABM</span>
+                <span class="skill-tag">Access Control</span>
+                <span class="skill-tag">Vulnerability Assessment</span>
+
+
+            </div>
+        </div>
+
+        <!-- CARD 3: AUTOMATION, TOOLS & METHODOLOGIES -->
+        <div class="skill-card">
+            <div class="card-header">
+                  
+                  
+<i class="fa-solid fa-wrench"></i>            <h4>Tools & Engineering</h4>
+            </div>
+            <div class="tags-container">
+                <span class="skill-tag">PHP / SQL</span>
+                <span class="skill-tag">Bash</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Automation</span>
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">AutoDesk Fusion CAD</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">VS Code / VS Codium</span>
+
+            </div>
+        </div>
+    </div>
+</div>
+              
+ <!--projects start-->                      <h2 style="width:100%;max-width:1080px;">Projects</h2>
+
+     <div class="dashboard-grid">
+        
+        <div class="dashboard-card">
+            <div class="card-preview-area">
+                <img src="https://moseleygj.github.io/cyberSecurityPython.gif" alt="Services Code Preview">
+            </div>
+            <div class="card-meta-footer">
+                <div class="meta-header-row">
+                    <div class="title-block">
+                        <span class="meta-title">SSH Security Monitoring & IP Blocking Tool</span>
+                        <p class="meta-subtext">A Python CLI utility that parses SSH logs to track failed and successful login attempts, summarizes failed login IP counts by day, and enables blocking suspicious IPs via iptables. It also integrates Fail2Ban status checks for enhanced SSH protection.</p>
+                    </div>
+                </div>
+                <div class="card-tags">
+                    <span class="tag-badge">CLI</span>
+                    <span class="tag-badge alt-stack">PYTHON</span>
+                    <span class="tag-badge alt-stack">BASH</span>
+                    <span class="tag-badge alt-stack">LINUX</span>
+
+                </div>
+                <div class="metrics-bar">
+                    <div class="metric-badge"><i class="fa-brands fa-github"></i> GitHub</div>
+                    <div class="metric-badge"><i class="fa-solid fa-eye"></i> View</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-preview-area">
+                <img src="https://moseleygj.github.io/cleanNMap.gif" alt="Landing Page Preview">
+            </div>
+            <div class="card-meta-footer">
+                <div class="meta-header-row">
+                    <div class="title-block">
+                        <span class="meta-title">Stylized Nmap Scanner</span>
+                        <p class="meta-subtext">Scans a network using Nmap, cleans and parses the output, and enhances readability with icons, color-coding, and bold formatting to improve situational awareness and help identify vulnerabilities.</p>
+                    </div>
+                </div>
+                <div class="card-tags">
+                    <span class="tag-badge">NMAP</span>
+                    <span class="tag-badge">BASH</span>
+                    <span class="tag-badge">CLI</span>
+                    <span class="tag-badge alt-stack">LINUX</span>
+                </div>
+                <div class="metrics-bar">
+                    <div class="metric-badge"><i class="fa-brands fa-github"></i> GitHub</div>
+                    <div class="metric-badge"><i class="fa-solid fa-eye"></i> View</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-preview-area">
+                <img src="https://moseleygj.github.io/integrity.gif" alt="ThinkableJoy Interface Preview">
+            </div>
+            <div class="card-meta-footer">
+                <div class="meta-header-row">
+                    <div class="title-block">
+                        <span class="meta-title">Linux System Integrity Checker</span>
+                        <p class="meta-subtext">A Python CLI tool using a Bash script to hash critical Linux files, create a secure baseline, and detect changes. It supports system hardening and tamper detection for compliance and threat response. </p>
+                    </div>
+                </div>
+                <div class="card-tags">
+                    <span class="tag-badge">PYTHON</span>
+                    <span class="tag-badge">BASH</span>
+                    <span class="tag-badge">LINUX</span>
+                    <span class="tag-badge alt-stack">CLI</span>
+                    
+                </div>
+                <div class="metrics-bar">
+                    <div class="metric-badge"><i class="fa-brands fa-github"></i> GitHub</div>
+                    <div class="metric-badge"><i class="fa-solid fa-eye"></i> View</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-preview-area">
+                <img src="https://moseleygj.github.io/TheSpot.gif" alt="Auth Gateway API Preview">
+            </div>
+            <div class="card-meta-footer">
+                <div class="meta-header-row">
+                    <div class="title-block">
+                        <span class="meta-title">My Clone of Netflix</span>
+                        <p class="meta-subtext">Netflix UI clone</p>
+                    </div>
+                </div>
+                <div class="card-tags">
+                    <span class="tag-badge">JAVASCIPT</span>
+                    <span class="tag-badge alt-stack">HTML</span>
+                    <span class="tag-badge alt-stack">CSS</span>
+                </div>
+                <div class="metrics-bar">
+                    <div class="metric-badge"><i class="fa-brands fa-github"></i> GitHub</div>
+                    <div class="metric-badge"><i class="fa-solid fa-eye"></i> View</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-preview-area">
+                <img src="https://moseleygj.github.io/musicArtist.gif" alt="Analytics Engine Preview">
+            </div>
+            <div class="card-meta-footer">
+                <div class="meta-header-row">
+                    <div class="title-block">
+                        <span class="meta-title">Music Artist Website</span>
+                        <p class="meta-subtext">Music Artist Website</p>
+                    </div>
+                </div>
+                <div class="card-tags">
+                    <span class="tag-badge">JAVASCRIPT</span>
+                    <span class="tag-badge alt-stack">CSS</span>
+                    <span class="tag-badge alt-stack">HTML</span>
+                </div>
+                <div class="metrics-bar">
+                    <div class="metric-badge"><i class="fa-brands fa-github"></i> <a href="https://github.com/moseleygj/WebPages/tree/master/MusicArtistPromotionalSite" style="color:#2892f7;text-decoration:none">GitHub</a></div>
+                    <div class="metric-badge"><i class="fa-solid fa-eye"></i> View</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-preview-area">
+                <img src="https://moseleygj.github.io/azar-light.gif" alt="UI Component Library Preview">
+            </div>
+            <div class="card-meta-footer">
+                <div class="meta-header-row">
+                    <div class="title-block">
+                        <span class="meta-title">Azar Ministries - Church</span>
+                        <p class="meta-subtext">Custom webpage for Church</p>
+                    </div>
+                </div>
+                <div class="card-tags">
+                    <span class="tag-badge">CSS</span>
+                    <span class="tag-badge">JS</span>
+                    <span class="tag-badge">HTML</span>
+                </div>
+                <div class="metrics-bar">
+                    <div class="metric-badge"><i class="fa-brands fa-github"></i> GitHub</div>
+                    <div class="metric-badge"><i class="fa-solid fa-eye"></i> View</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+                  
+                  
+                  <!--projects end --> 
+                  <!--timeline start-->
+                  <div class="timeline-container">
+        <h1 class="timeline-title">At a glance</h1>
+        <p class="timeline-subtitle">&nbsp;&nbsp;It's fun to reduce your life into a few bullet points so here's an incomplete and wholly unsatisfying attempt to summarize my resume with a couple of milestones:</p>
+
+        <div class="timeline-wrapper">
+
+            <div class="timeline-row left">
+                <div class="timeline-dot color-gold"></div>
+                <div class="timeline-content">
+                    <div class="event-header">College</div>
+                    <p class="event-description">Computer Programming & Info Sys.</p>
+                </div>
+            </div>
+
+            <div class="timeline-row right">
+                <div class="timeline-dot color-purple"></div>
+                <div class="timeline-content">
+                    <div class="event-header">U.S Navy</div>
+                    <p class="event-description">Information Systems Technician</p>
+                </div>
+            </div>
+
+            <div class="timeline-row left">
+                <div class="timeline-dot color-coral"></div>
+                <div class="timeline-content">
+                    <div class="event-header">DataVelocity</div>
+                    <p class="event-description">Apple MacOS System Administrator</p>
+                </div>
+            </div>
+
+            <div class="timeline-row right">
+                <div class="timeline-dot color-green"></div>
+                <div class="timeline-content">
+                    <div class="event-header">National Grid</div>
+                    <p class="event-description">Helpdesk</p>
+                </div>
+            </div>
+
+            <div class="timeline-row left">
+                <div class="timeline-dot color-gold"></div>
+                <div class="timeline-content">
+                    <div class="event-header"> U.S. Department of Labor</div>
+                    <p class="event-description">Help Desk Level III</p>
+                </div>
+            </div>
+
+            <div class="timeline-row right">
+                <div class="timeline-dot color-purple"></div>
+                <div class="timeline-content">
+                    <div class="event-header">University of Florida</div>
+                    <p class="event-description"> Studied Electrical</p>
+                </div>
+            </div>
+
+            <div class="timeline-row left">
+                <div class="timeline-dot color-coral"></div>
+                <div class="timeline-content">
+                    <div class="event-header">AIG / DELL</div>
+                    <p class="event-description">I.T. Vulnerability Analyst</p>
+                </div>
+            </div>
+          
+            <div class="timeline-row right">
+                <div class="timeline-dot color-green"></div>
+                <div class="timeline-content">
+                    <div class="event-header">Brookdale / DELL</div>
+                    <p class="event-description">Computer Analyst  </p>
+                </div>
+            </div>
+
+            <div class="timeline-row left">
+                <div class="timeline-dot color-gold"></div>
+                <div class="timeline-content">
+                    <div class="event-header">Princeton University</div>
+                    <p class="event-description">IT Specialist</p>
+                </div>
+            </div>
+          
+            <div class="timeline-row right">
+                <div class="timeline-dot color-coral" id="currentJob"></div>
+                <div class="timeline-content">
+                    <div class="event-header">BlackRock (BeamLiving)</div>
+                    <p class="event-description">IAM & Infrastructure </p>
+                </div>
+            </div>
+
+ <!--           <div class="timeline-row left">
+                <div class="timeline-dot color-coral"></div>
+                <div class="timeline-content">
+                    <div class="event-header">Job 6</div>
+                    <p class="event-description">Got sucked into the boardgaming hobby</p>
+                </div>
+            </div>-->
+                  
+                  
+
+        </div>
+                  <!-- timeline end-->
+                  
+                  
+                  
+                  <!--contact start -->
+                  
+                  
+                  <style>
+
+</style>
+                  
+                  
+                  
+                  <div class="resources-container">
+    <h2><span class="contact-header-icon"></span> Contact</h2>
+
+    <div class="resources-grid">
+        
+        <!-- CARD 1: CHANNELS -->
+        <div class="resource-card">
+            <div class="card-content">
+                <h3>Contact Me</h3>
+               <!-- <p class="subtitle">Direct operational communication options</p>-->
+                
+                <div class="info-table"> 
+                    <div class="info-row">
+                        <span class="info-label">Email</span>
+                        <span class="info-value"><a href="mailto:MoseleyGJ@gmail.com" target="_blank" class="highlight-blue">moseleygj@gmail.com</a>&nbsp;&nbsp;<a href="" ><i class="fa-regular fa-copy" title="Copy email" style="color:white" id="email"></i></a></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Phone</span>
+                        <span class="info-value highlight-blue">(347) 670-3223 &nbsp;&nbsp;&nbsp;<a href="" ><i class="fa-regular fa-copy" id="phone" title="Copy phone #" style="color:white"></i></a></span>
+                    
+
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2: LOGISTICS -->
+        <div class="resource-card">
+            <div class="card-content">
+                <h3>Logistics</h3>
+                <!--<p class="subtitle">Availability & Mobility preferences</p>-->
+                
+                <div class="info-table">
+                    <div class="info-row">
+                        <span class="info-label">RELOCATION</span>
+                        <span class="info-value font-bold">Open</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">WILLING TO TRAVEL</span>
+                        <span class="info-value font-bold">Yes</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">WORK ENVIRONMENT</span>
+                        <span class="info-value font-bold">Flexible</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">CITIZENSHIP</span>
+                        <span class="info-value font-bold">U.S.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 3: TARGET ROLES -->
+        <div class="resource-card">
+            <div class="card-content">
+                <h3>Target Roles</h3>
+              <!--  <p class="subtitle">Core domains & expertise placements</p>-->
+                
+                <div class="info-table">
+                    <div class="info-row">
+                        <span class="info-label-role">CyberSecurity</span>
+                        <span class="info-value highlight-blue">✓</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label-role">IAM & Infrastructure</span>
+                        <span class="info-value highlight-blue">✓</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label-role">System Administrator</span>
+                        <span class="info-value highlight-blue">✓</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label-role">IT System Support II, III</span>
+                        <span class="info-value highlight-blue">✓</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+                  
+</div>
+                  
+                  <!--test area -->
+<div class="beyond-screen-container">
+  <button class="dark-mode-btn" id="toggle-beyond-btn">🖥️
+    Beyond the Screen
+    <svg class="down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <polyline points="19 12 12 19 5 12"></polyline>
+    </svg>
+  </button>
+</div>
+                  
+                  
+                  <div id="BTS" style="max-width:1080px;background:none;height:auto;display:none">
+                  <!--test area end -->
+                  
+                  <!--BTS-->
+<section class="beyond-screen-section">
+    <h2>🖥️&nbsp;Beyond The Screen</h2>
+    <p class="subtitle"></p>
+
+    <div class="interactive-feed">
+      
+      <div class="expandable-card" data-url="https://bytesurgeon.com" onclick="toggleCard(this, event)">
+        <div class="card-visible-surface">
+          <div class="photo-frame">
+            <img src="https://images.lululemon.com/is/image/lululemon/LU9CMAS_043646_1?wid=750&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72" alt="Mobile tech kit setup">
+          </div>
+          <div class="card-preview-text">
+            <h3>What's in My Backpack?</h3>
+            <p>Explore what I carry day-to-day.</p>
+            <span class="action-hint">Click to peek inside →</span>
+          </div>
+        </div>
+        
 
       </div>
+      
+ 
+
+            <!--start-->
+      <div class="expandable-card" data-url="" onclick="toggleCard(this, event)">
+        <div class="card-visible-surface">
+          <div class="photo-frame">
+            <img src="https://i.ibb.co/xq4mQvPb/20250824-153444.jpg" alt="Mobile tech kit setup">
+          </div>
+          <div class="card-preview-text">
+            <h3>Custom building my MacroPad</h3>
+            <p>How I wired, coded, and 3D printed a custom macropad.</p>
+            <span class="action-hint">Click to see →</span>
+          </div>
+        </div>
+        
+
+      </div>
+      <!--end-->
+      
+      
+           <!--start-->
+      <!--
+      <div class="expandable-card" onclick="toggleCard(this, event)">
+        <div class="card-visible-surface">
+          <div class="photo-frame">
+            <img src="https://ipsystemsusa.com/wp-content/uploads/2023/03/the-definitive-guide-to-finding-the-right-soldering-temperature.jpg">
+          </div>
+          <div class="card-preview-text">
+            <h3>What's in My Backpack?</h3>
+            <p>System optimization metrics applied to mobile field infrastructure deployment parameters.</p>
+            <span class="action-hint">Click to inspect kit →</span>
+          </div>
+        </div>
+        
+        <div class="card-deep-dive">
+          <div class="dive-inner">
+            <hr class="divider">
+            <h4>Deployment Kit Manifest</h4>
+            <table class="spec-table">
+              <tr>
+                <td><strong>Compute & Logic</strong></td>
+                <td>Mobile deployment terminal, multi-boot configuration storage array cores.</td>
+              </tr>
+              <tr>
+                <td><strong>Power Architecture</strong></td>
+                <td>High-density GaN multi-port fast charging blocks, multi-device backup cell units.</td>
+              </tr>
+              <tr>
+                <td><strong>Hardware & Link</strong></td>
+                <td>Precision driver toolkit, hardware link validation meters, structural multi-tools.</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+-->      
+<!--end-->
+      
+      <div class="expandable-card" data-url="" onclick="toggleCard(this, event)">
+        <div class="card-visible-surface">
+          <div class="photo-frame">
+            <img src="https://bryananthonio.com/_astro/homelab-pc_u8YoU.jpg" alt="Homelab Server Rack">
+          </div>
+          <div class="card-preview-text">
+            <h3>The Sandbox Homelab</h3>
+            <p>Self-hosted localized virtualization environments, container networks, and storage  modules.</p>
+            <span class="action-hint">Inspect lab →</span>
+          </div>
+        </div>
+        
+
+      </div>
+
+      <div class="expandable-card" data-url="" onclick="toggleCard(this, event)">
+        <div class="card-visible-surface">
+          <div class="photo-frame">
+            <img src="https://i.ibb.co/W4qh89sh/ibnm.jpg" alt="3D Printing & Keyboard modding">
+          </div>
+          <div class="card-preview-text">
+            <h3>Keyboard Collection</h3>
+            <p>My humble keyboard collection.</p>
+            <span class="action-hint">View process →</span>
+          </div>
+        </div>
+       
+
+      </div>
+        <!---->
+
+      <div class="expandable-card" data-url="" onclick="toggleCard(this, event)">
+        <div class="card-visible-surface">
+          <div class="photo-frame">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAx6camOf_G96Zcs2Zj34Yjmy0ysPd-p0oJQ&s" alt="Linux Terminal Desktop">
+          </div>
+          <div class="card-preview-text">
+            <h3>Operational Software Stack</h3>
+            <p>The core daily OS environments, engineering platforms, and systems analysis software utilities.</p>
+            <span class="action-hint">View the stack →</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="expandable-card" data-url="" onclick="toggleCard(this, event)">
+        <div class="card-visible-surface">
+          <div class="photo-frame">
+            <img src="https://newyorkcalisthenics.com/_astro/Outdoor-Calisthenics-Gym-at-J-Hood-Park.Catlkj7O_Zfu8qN.webp">
+          </div>
+          <div class="card-preview-text">
+            <h3>Physical Conditioning</h3>
+            <p>Where the balance happens.</p>
+            <span class="action-hint">check training log →</span>
+          </div>
+        </div>
+        
+
+      </div>
+
+                  
+                  
+                  
     </div>
-  </div>
+  </section></div>
+
+                  <!--BTS-->
+
+<!--footer start-->
+                   <!--img at bottom -->                 
+<!--
+                  <div style="height: 150px; width: 150px; border: ; position: fixed; bottom: 0; right: 100px; overflow: hidden; z-index: 9999;">
+  <img src="https://i.ibb.co/B229YB78/Gemini-Generated-Image-ldxppfldxppfldxp.png" style="height: 100%; width: 100%; object-fit: contain; display: block;">
 </div>
-<!--Footer Ending-->
-</body>
+ <!--img at bottom -->                 
+                
+ <img src="https://i.ibb.co/wrhFJDLf/scuba.png" style="height:200px;width:200px;bottom:-110px;right:-30px;position:relative"> 
+    <footer id="myFoot">
+    <div id="footer-left">
+      Copyright &copy; 2022 - 2026 Gordon Moseley
+    </div>
+    <div id="footer-right">
+      <span>Designed with &nbsp; <i class="fa-solid fa-heart fa-beat" style="color:#ef4444;" aria-hidden="true"></i> &nbsp;by <a href="https://moseleygj.github.io/" target="_blank" id="myName">Gordon</a></span>
+    </div>
+  </footer>
+                 <div id="copyToast" style="max-width:1080px;
+                                                                                                
+  position: fixed;
+  bottom: 0;
+  left: %;
+  width: 100%;
+  height: 50px;
+  background: rgba(83, 83, 91, 0.36);
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  line-height: 50px; /* Centers your text vertically inside the 50px height */
+  border-radius: 20px 20px 0px 0px;
+  z-index: 999;
+  backdrop-filter: blur(12px);
+  /* Hides the div completely below the bottom edge of the screen */
+  transform: translateY(100%);
+  
+  /* Enables the smooth slide up and down animation */
+  transition: transform 0.4s cubic-bezier(0.15, 1, 0.3, 1);"></div>
+
+  </body>
 </html>
+                  <!--footer end-->
+                  <!-- contact end-->
