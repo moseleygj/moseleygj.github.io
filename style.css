@@ -227,7 +227,7 @@ input:checked + .slider:before {
             background-size: cover;
             background-position: center;
             position: relative;
-          background-image:url("https://png.pngtree.com/thumb_back/fh260/background/20241231/pngtree-animated-gif-wavy-effect-image_16531403.jpg")
+          background-image:url("pngtree-animated-gif-wavy-effect-image_16531403.jpg")
         }
 
         /* CENTERED OVERLAPPING AVATAR CONTAINER */
