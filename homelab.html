@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Lab Infrastructure // Data Core</title>
+  <style>
+    /* ==========================================================================
+       1. GLOBAL RESET & DARK BASELINE
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0a0a0a; /* Pure deep dark background */
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Back Link Button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      color: #8e8e93;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      color: #0a84ff; /* Accent Blue */
+    }
+
+    /* ==========================================================================
+       2. HERO ARTICLE HEADER
+       ========================================================================== */
+    .project-header {
+      margin-bottom: 2rem;
+    }
+
+    .project-meta {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #0a84ff;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #f5f5f7;
+    }
+
+    .project-summary {
+      font-size: 1.15rem;
+      color: #a1a1a6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Repository External Action Links */
+    .project-links-array {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      color: #f5f5f7;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .action-link:hover {
+      background-color: #161618;
+      border-color: #2c2c2e;
+    }
+    
+    .action-link:active {
+      transform: scale(0.98);
+    }
+
+    /* Main Project Showcase Photo */
+    .main-hero-photo {
+      width: 100%;
+      height: 450px;
+      border-radius: 24px; /* Premium smooth corners */
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .main-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+
+    /* ==========================================================================
+       3. TOPOLOGY PULSE & SYSTEMS STATUS MATRIX
+       ========================================================================== */
+    .project-pulse {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .pulse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #1c1c1e;
+      margin-bottom: 1.25rem;
+    }
+
+    .pulse-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8e8e93;
+      font-weight: 700;
+    }
+
+    /* Status Badge Engine */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Online State */
+    .status-badge.complete {
+      background-color: rgba(48, 209, 88, 0.1); /* System Green */
+      color: #30d158;
+    }
+    
+    .status-badge.complete .status-dot {
+      background-color: #30d158;
+      box-shadow: 0 0 8px #30d158;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Design Objectives Typography */
+    .pulse-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .pulse-group h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-bottom: 0.25rem;
+    }
+
+    .pulse-group p {
+      color: #a1a1a6;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       4. SOURCES & MATERIALS CARDS (Large Form Grid)
+       ========================================================================== */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 3.5rem 0 1.5rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #1c1c1e;
+      color: #ffffff;
+    }
+
+    /* Grid for Physical Components */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .material-item-card {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .material-item-card:hover {
+      border-color: #2c2c2e;
+      background-color: #161618;
+    }
+
+    /* Hardware Image Viewport */
+    .material-photo-box {
+      width: 100%;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2c2c2e;
+      background-color: #1c1c1e;
+    }
+
+    .material-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .material-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .material-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .material-spec {
+      font-size: 0.9rem;
+      color: #8e8e93;
+    }
+
+    .material-link {
+      font-size: 0.85rem;
+      color: #0a84ff;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      display: inline-block;
+    }
+
+    .material-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       5. MODULAR SYSTEM CALLOUT CONTAINER
+       ========================================================================== */
+    .callout-box {
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin: 2rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .callout-box.info {
+      background-color: rgba(10, 132, 255, 0.05);
+      border: 1px solid rgba(10, 132, 255, 0.15);
+      border-left: 4px solid #0a84ff;
+    }
+    .callout-box.info .callout-icon {
+      color: #0a84ff;
+    }
+
+    .callout-icon {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .callout-text {
+      font-size: 0.95rem;
+      color: #d1d1d6;
+      line-height: 1.5;
+    }
+
+    .callout-text strong {
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       6. BLOG STYLE STEP-BY-STEP WORKFLOW FEED (01-03 Layout)
+       ========================================================================== */
+    .tutorial-feed {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tutorial-step {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .step-number {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a84ff;
+      background-color: rgba(10, 132, 255, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+
+    .step-text {
+      color: #d1d1d6;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* Photo block for environment previews */
+    .step-photo {
+      width: 100%;
+      height: 350px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+    }
+
+    .step-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      cursor: zoom-in;
+    }
+
+    .step-photo img:hover {
+      transform: scale(1.02);
+    }
+
+    /* ==========================================================================
+       7. HIGH-RES LIGHTBOX MODAL
+       ========================================================================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background-color: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* ==========================================================================
+       8. MOBILE OPTIMIZATION RESPONSIVENESS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .project-title {
+        font-size: 2rem;
+      }
+
+      .main-hero-photo {
+        height: 280px;
+      }
+
+      .step-photo {
+        height: 220px;
+      }
+      
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-links-array {
+        gap: 0.5rem;
+      }
+
+      .action-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <a href="#" class="back-btn">← Back to Portfolio</a>
+
+    <header class="project-header">
+      <div class="project-meta">Infrastructure Lab // Systems Deployment</div>
+      <h1 class="project-title">My Home Lab Network & Private Infrastructure</h1>
+      <p class="project-summary">An isolated self-hosted environment configured to Host Services, Monitor Traffic, provide localized network scanning automation, and secure internal file-sharing for all OS.</p>
+      
+      <div class="project-links-array">
+        <a href="https://github.com" class="action-link" target="_blank">
+          <span class="link-icon">🌐</span> View Network Inventory
+        </a>
+      </div>
+
+      <div class="main-hero-photo">
+        <img src="https://i.ibb.co/G4wqRX2Q/20260630-161056.jpg" alt="Home server setup with structured wiring and network switch array" onclick="openLightbox(this.src)">
+      </div>
+    </header>
+
+    <section class="project-pulse">
+      <div class="pulse-header">
+        <h2 class="pulse-title">Main Desktop Server</h2>
+        
+        <div class="status-badge complete">
+          <span class="status-dot"></span>
+          <span class="status-text">Status // Online</span>
+        </div>
+      </div>
+
+      <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>Motherboard</h3>
+          <p>Gigabyte x99 UD4</p>
+        </div>
+        
+        
+                   <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>CPU</h3>
+          <p>Intel Xeon</p>
+        </div>
+                      <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>GPU I</h3>
+          <p>GeForce GTX Titan</p>
+        </div>
+                        
+                              <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>GPU II</h3>
+          <p>GEFORCE GTX 1050 Ti</p>
+        </div>
+            
+                                
+                                              <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>RAM</h3>
+          <p>64GB DDR4</p>
+        </div>
+                                                
+                                                           <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>Storage</h3>
+          <p>18 TB</p>
+        </div>
+                
+                        <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>O.S.</h3>
+          <p>Proxmox Virtual Environment Server</p>
+        </div>   
+                          
+                                                <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>Backup Methods:</h3>
+          <p>3-2-1 Backup</p>
+           <p>Mirror-Backup on some drives</p>
+                    <p>Network File-Sync</p>
+                             <p>VM Snapshots</p>
+
+        </div>  
+                                        
+        <div class="pulse-group">
+          <h3>Future upgrades</h3>
+          <p>PCIE 4-6 port SATA adapter</p>
+         <p>Intel Xeon E5-2699 v4 (22 Cores / 44 Threads)</p>
+
+                    <p></p>
+
+                    <p></p>
+
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-title">Core Equipment Inventory</h2>
+    <div class="sources-grid">
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/7t5JJC37/redhatlogo.jpg" alt="Redhat" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">RedHat Linux</span>
+          <span class="material-spec">RedHat Linux</span>
+          
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/nNyj4Cw9/images.png" alt="Compact multi node compute microserver stack" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name"Fedora Linux</span>
+          <span class="material-spec">My usual default </span>
+    
+        </div>
+      </div>
+      <!-- start-->
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/jPf9t5mF/ubuntu.webp" alt="Compact multi node compute microserver stack" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Ubuntu</span>
+          <span class="material-spec">Ubuntu- What I usually do my test on since it's most popular and has good overall support</span>
+
+        </div>
+      </div>
+      <!--end of card -->
+      
+            <!-- start-->
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/Q3sdss4t/kali-linux-dragon-logo.avif" alt="Kali Linux" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Kali Linux</span>
+          <span class="material-spec">Security related projects and test</span>
+       
+        </div>
+      </div>
+      <!--end of card -->
+      
+                  <!-- start-->
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/WpgmhG0S/windows-logo-isolated-image-features-windows-logo-consisting-four-equally-sized-blue-squares-arrange.webp" alt="Windows 11" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">windows 11</span>
+          <span class="material-spec">Windows 11 Pro test machines</span>
+       
+        </div>
+      </div>
+      <!--end of card -->
+      
+                  <!-- start-->
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/8DZHYvKs/Windows-Server.png" alt="Windows Server" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Windows Server</span>
+          <span class="material-spec">Where I test and maintain Windows server and services</span>
+       
+        </div>
+      </div>
+      <!--end of card -->
+            <!-- start-->
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/wFrpppLp/lamp-stack-1650018927647.jpg" alt="CLAMP Stack" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">LAMP Stack</span>
+          <span class="material-spec">Linux, Apache, MySQL and PHP - the software stack I usually stick to.</span>
+          
+        </div>
+      </div>
+      <!--end of card -->
+            <!-- start-->
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/LzV2qkwz/what-is-docker.png" alt="Docker" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name"Docker</span>
+          <span class="material-spec">Docker Containers</span>
+          
+        </div>
+      </div>
+      <!--end of card -->
+            <!-- start-->
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/84xFRphJ/Calibre-logo-SVG-version.jpg" alt="Calibre" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Calibre</span>
+          <span class="material-spec">Used to serve the eBooks I host.</span>
+  
+        </div>
+      </div>
+      <!--end of card -->
+            <!-- start-->
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/XfZTtCxw/splunk.webp" alt="Compact multi node compute microserver stack" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Splunk</span>
+          <span class="material-spec">Security SIEM</span>
+     
+        </div>
+      </div>
+      <!--end of card -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/HfyL83Yz/jellyfin-header.jpg" alt="JellyFin" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">jellyFin</span>
+          <span class="material-spec">Used for serving videos</span>
+  
+        </div>
+      </div>
+      
+    </div>
+
+    
+
+  </div>
+
+  <div id="image-lightbox" class="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-content" id="lightbox-img" alt="High resolution preview popup box">
+  </div>
+
+  <script>
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      
+      lightboxImg.src = imageSrc;
+      lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('image-lightbox');
+      lightbox.classList.remove('show');
+    }
+  </script>
+</body>
+</html>

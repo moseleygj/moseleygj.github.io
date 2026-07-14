@@ -1,0 +1,1103 @@
+like <!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Deep Dive & Tutorial</title>
+  <style>
+    /* ==========================================================================
+       1. GLOBAL RESET & DARK BASELINE
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0a0a0a; /* Pure deep dark background */
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Back Link Button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      color: #8e8e93;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      color: #0a84ff; /* Accent Blue */
+    }
+
+    /* ==========================================================================
+       2. HERO ARTICLE HEADER
+       ========================================================================== */
+    .project-header {
+      margin-bottom: 2rem;
+    }
+
+    .project-meta {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #0a84ff;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #f5f5f7;
+    }
+
+    .project-summary {
+      font-size: 1.15rem;
+      color: #a1a1a6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Repository External Action Links */
+    .project-links-array {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      color: #f5f5f7;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .action-link:hover {
+      background-color: #161618;
+      border-color: #2c2c2e;
+    }
+    
+    .action-link:active {
+      transform: scale(0.98);
+    }
+
+    /* Main Project Showcase Photo */
+    .main-hero-photo {
+      width: 100%;
+      height: 550px;
+      border-radius: 24px; /* Premium smooth corners */
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .main-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      cursor: zoom-in;
+    }
+
+    /* ==========================================================================
+       3. PROJECT PULSE & OBJECTIVES (Problem, Solution, Status)
+       ========================================================================== */
+    .project-pulse {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .pulse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #1c1c1e;
+      margin-bottom: 1.25rem;
+    }
+
+    .pulse-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8e8e93;
+      font-weight: 700;
+    }
+
+    /* Status Badge Engine */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Active / Incomplete State */
+    .status-badge.incomplete {
+      background-color: rgba(255, 159, 10, 0.1); /* System Amber/Orange */
+      color: #ff9f0a;
+    }
+    
+    .status-badge.incomplete .status-dot {
+      background-color: #ff9f0a;
+      box-shadow: 0 0 8px #ff9f0a;
+    }
+
+    /* Finished / Complete State */
+    .status-badge.complete {
+      background-color: rgba(48, 209, 88, 0.1); /* System Green */
+      color: #30d158;
+    }
+    
+    .status-badge.complete .status-dot {
+      background-color: #30d158;
+      box-shadow: 0 0 8px #30d158;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Problem & Solution Layout Typography */
+    .pulse-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .pulse-group h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-bottom: 0.25rem;
+    }
+
+    .pulse-group p {
+      color: #a1a1a6;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       4. MODIFIED SOURCES & MATERIALS CARDS (Large Form Grid)
+       ========================================================================== */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 3.5rem 0 1.5rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #1c1c1e;
+      color: #ffffff;
+    }
+
+    /* Spacious layout for large item profiles */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .material-item-card {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .material-item-card:hover {
+      border-color: #2c2c2e;
+      background-color: #161618;
+    }
+
+    /* Large Component Showcase Image Container */
+    .material-photo-box {
+      width: 100%;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2c2c2e;
+      background-color: #1c1c1e;
+    }
+
+    .material-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .material-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .material-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .material-spec {
+      font-size: 0.9rem;
+      color: #8e8e93;
+    }
+
+    .material-link {
+      font-size: 0.85rem;
+      color: #0a84ff;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      display: inline-block;
+    }
+
+    .material-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       5. MODULAR SYSTEM CAUTION / INFO CALLOUT CONTAINER
+       ========================================================================== */
+    .callout-box {
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin: 2rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    /* Info Flavor Core Rules */
+    .callout-box.info {
+      background-color: rgba(10, 132, 255, 0.05);
+      border: 1px solid rgba(10, 132, 255, 0.15);
+      border-left: 4px solid #0a84ff;
+    }
+    .callout-box.info .callout-icon {
+      color: #0a84ff;
+    }
+
+    /* Caution Flavor Core Rules */
+    .callout-box.caution {
+      background-color: rgba(255, 69, 58, 0.05);
+      border: 1px solid rgba(255, 69, 58, 0.15);
+      border-left: 4px solid #ff453a; /* System Red */
+    }
+    .callout-box.caution .callout-icon {
+      color: #ff453a;
+    }
+
+    .callout-icon {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .callout-text {
+      font-size: 0.95rem;
+      color: #d1d1d6;
+      line-height: 1.5;
+    }
+
+    .callout-text strong {
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       6. BLOG STYLE STEP-BY-STEP TUTORIAL FEED
+       ========================================================================== */
+    .tutorial-step {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .step-number {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a84ff;
+      background-color: rgba(10, 132, 255, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+
+    .step-text {
+      color: #d1d1d6;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* Photo block for each step */
+.step-photo {
+  width: 100%;
+  /* Remove fixed height */
+  border-radius: 20px; 
+  overflow: hidden;
+  border: 1px solid #1c1c1e;
+}
+
+.step-photo img {
+  width: 100%;
+  height: auto; /* Forces image to scale its height proportionally */
+  display: block; /* Removes unwanted bottom gap in inline elements */
+  transition: transform 0.4s ease;
+  cursor: zoom-in;
+}
+
+    .step-photo img:hover {
+      transform: scale(1.02);
+    }
+
+    /* ==========================================================================
+       7. HIGH-RES LIGHTBOX MODAL
+       ========================================================================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background-color: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* ==========================================================================
+       8. MOBILE OPTIMIZATION RESPONSIVENESS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .project-title {
+        font-size: 2rem;
+      }
+
+      .main-hero-photo {
+        height: 280px;
+      }
+
+      .step-photo {
+        height: 220px;
+      }
+      
+      .sources-grid {
+        grid-template-columns: 1fr; /* Stacks cards smoothly on narrow viewports */
+      }
+
+      .project-links-array {
+        gap: 0.5rem;
+      }
+
+      .action-link {
+        width: 100%; /* Stacks links full width nicely on small devices */
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <a href="#" class="back-btn">← Back to Portfolio</a>
+
+    <header class="project-header">
+      <div class="project-meta">Hardware Modding // 3D Fabrication</div>
+      <h1 class="project-title">Custom Macropad Architecture & Build Pipeline</h1>
+      <p class="project-summary">Design, Wire, and Code a 9-Key MacroPad Matrix.</p>
+      
+      <div class="project-links-array">
+        <a href="https://github.com" class="action-link" target="_blank">
+          <span class="link-icon">⚙️</span> View Source GitHub
+        </a>
+        <a href="https://codepen.io" class="action-link" target="_blank">
+          <span class="link-icon">⚡</span> Run on CodePen
+        </a>
+      </div>
+
+      <div class="main-hero-photo">
+        <img src="https://i.ibb.co/C5YMs52Q/20260616-171613.jpg" alt="Finished macro pad hardware device blueprint" onclick="openLightbox(this.src)">
+      </div>
+    </header>
+
+    <section class="project-pulse">
+      <div class="pulse-header">
+        <h2 class="pulse-title">Project Pulse</h2>
+        
+        <div class="status-badge incomplete">
+          <span class="status-dot"></span>
+          <span class="status-text">In Progress // 75%</span>
+        </div>
+
+        </div>
+
+      <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>The Problem</h3>
+          <p>Many layout designs lacked balance. The goal was to make it aesthetically pleasing both horizontally and vertically. I wanted to keep the retro sidebars and ensure the device had multiple layers of functions that were visually indicated by the four LED lights.</p>
+        </div>
+        <div class="pulse-group">
+          <h3>The Solution</h3>
+          <p>Strike a balance between aesthetics, what's needed, and what can be left behind to keep it minimal..</p>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-title">Sources & Materials</h2>
+    <div class="sources-grid">
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/Gfr7jWr8/f477e32e-641b-4f4b-a93f-5bc1722c4683.webp" alt="Carbon fiber filament engineering compound" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">3d Printer</span>
+          <span class="material-spec">Any 3d Printer will work. You can also send you models to be printed via service like PCBWAY</span>
+          <a href="#" class="material-link" target="_blank">View Filament Source →</a>
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/9kxt5r8Y/RP-Pico-49720.jpg" alt="RP2040 low profile logic controller module" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Raspberry Pi Zero W</span>
+          <span class="material-spec">Low-Profile Logic Microcontroller Node</span>
+          <a href="#" class="material-link" target="_blank">View Hardware Spec →</a>
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/0V23fLkS/s-Iron.jpg" alt="Gateron mechanical linear switches" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Solder Iron</span>
+          <span class="material-spec">any kind will do</span>
+          <a href="#" class="material-link" target="_blank">View Switch Source →</a>
+        </div>
+      </div>
+      
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/7d43Nsvf/flux.jpg" alt="Carbon fiber filament engineering compound" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Flux </span>
+          <span class="material-spec">Flux makes life easier when soldering.   </span>
+          <a href="#" class="material-link" target="_blank">View Filament Source →</a>
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/m525V283/res.png" alt="RP2040 low profile logic controller module" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Resistors</span>
+          <span class="material-spec">Because LEDs dont play well with higher voltage 220-Ohm with 1% tolerance</span>
+          <a href="#" class="material-link" target="_blank">View Hardware Spec →</a>
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/tPvnBg31/switches.webp" alt="Gateron mechanical linear switches" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Switches</span>
+          <span class="material-spec">The actuator under the buttons. You can choose according to you liking. They all feel and sound different</span>
+          <a href="#" class="material-link" target="_blank">View Switch Source →</a>
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/8gt9yT7P/LEDs.jpg" alt="Carbon fiber filament engineering compound" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">LEDs</span>
+          <span class="material-spec">Used to show what layer I'm on</span>
+          <a href="#" class="material-link" target="_blank">View Filament Source →</a>
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/xqbMSYrv/rotary-Pt.webp" alt="RP2040 low profile logic controller module" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Rotary Potentiometer</span>
+          <span class="material-spec">AKA a knob what changes resistance</span>
+          <a href="#" class="material-link" target="_blank">View Hardware Spec →</a>
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/F45pbsxN/bread.jpg" alt="Gateron mechanical linear switches" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">BeadBoard(optional) </span>
+          <span class="material-spec">used for testing</span>
+          <a href="#" class="material-link" target="_blank">View Switch Source →</a>
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/Fbqm7Bt5/jumper-Wire.jpg" alt="Gateron mechanical linear switches" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Jumper Wire </span>
+          <span class="material-spec">for testing within the boardboard before the final solder.</span>
+          <a href="#" class="material-link" target="_blank">View Switch Source →</a>
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/wZvhZNLH/mm.webp" alt="Gateron mechanical linear switches" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">MultiMeter</span>
+          <span class="material-spec">Testing continuity</span>
+          <a href="#" class="material-link" target="_blank">View Switch Source →</a>
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/QvMMDPSm/solder.jpg" alt="Gateron mechanical linear switches" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Solder </span>
+          <span class="material-spec">The solder, bond metal comoments (board & wire)</span>
+          <a href="#" class="material-link" target="_blank">View Switch Source →</a>
+        </div>
+      </div>
+      
+      
+
+      
+    </div>
+
+    <h2 class="section-title">The Build Tutorial Pipeline</h2>
+
+    <div class="callout-box info">
+      <span class="callout-icon">ⓘ</span>
+      <div class="callout-text">
+        <strong>Software:</strong> <a href="https://thonny.org/">Thonny</a> was used to interface with the pi via USB.You'll first load a temporary firmware file, and then you can write and save Python scripts directly onto the board's internal storage using your computer. Supports MAC/Window/Linux
+      </div>
+    </div>
+
+    <div class="tutorial-feed">
+      
+      <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">01</span>
+          <h3 class="step-title">Install MicroPython on your Pico</h3>
+        </div>
+        <p class="step-text">
+          
+          
+          <ul>
+            
+            <h2>Step 1: Install MicroPython on your Pico</h2>
+  <li><strong>Press and hold</strong> the <code>BOOTSEL</code> button on your Pico.</li>
+  <li><strong>Plug the Pico into your computer</strong> using a USB cable while still holding the button.</li>
+  <li><strong>Release the button</strong> once connected. The Pico will appear on your computer as a flash drive named <code>RPI-RP2</code>.</li>
+  <li><strong>Download the correct MicroPython .uf2 file</strong> for your specific board from the official Raspberry Pi Documentation page.</li>
+  <li><strong>Drag and drop the .uf2 file</strong> into the <code>RPI-RP2</code> drive. The Pico will automatically reboot and finish the setup.</li>
+</ul>
+          
+          
+                      <h2>Step 2: Use Thonny to write and load code</h2>
+        
+        <ul>
+  <li><strong>Download and open Thonny</strong> on your computer.</li>
+  <li><strong>Select the interpreter:</strong> Click the Python version in the bottom-right corner of the Thonny window and choose <code>MicroPython (Raspberry Pi Pico)</code>.</li>
+  <li><strong>Write your program:</strong> Type or paste your code directly into the main editor window.</li>
+  <li><strong>Save to the board:</strong> Click <code>File</code> &gt; <code>Save As</code> and select <code>Raspberry Pi Pico</code>.</li>
+  <li><strong>Set to auto-run (Optional):</strong> Name your file <code>main.py</code> if you want the code to execute automatically every time the Pico powers on.</li>
+</ul>
+
+          
+         
+        </p>
+        <div class="step-photo">
+          <img src="step-1-slicing.jpg" alt="3D printer slicing workspace workflow" onclick="openLightbox(this.src)">
+        </div>
+      </article>
+
+     <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">02</span>
+          <h3 class="step-title">Understanding the Basics</h3>
+        </div>
+        <p class="step-text">
+          The raspberry Pi is a single Board Computer(SBC) AKA a miniturized self contained computer. On this computer there are pins that allow the user to interact with it. The ones of focus will be the GPIO pins. A GPIO is a physical connection pin on a computer board or microchip that can be programmed to send or receive electrical signals.<br/>
+
+          <br/>As an <b>Input</b>: The pin reads electrical voltage to sense if a button is pressed or if a sensor (like a motion detector or thermometer) is triggered.<br/>As an <b>Output</b>: The pin sends out electrical voltage to turn on an LED, trigger a relay, or spin a motor.
+        </p>
+        <div class="step-photo">
+          <img src="https://i.ibb.co/SXZ66Nx1/pico2.png" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)">
+        </div>
+         <div class="step-photo">
+          <img src="https://i.ibb.co/tpQphKrZ/Diagram-RPi-Pico.webp" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)" style="object-fit:cover;height:auto;width:100%;">
+        </div>
+      </article>
+
+    
+     <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">02</span>
+          <h3 class="step-title">Matrix Wiring & Logic Assembly</h3>
+        </div>
+        <p class="step-text">
+              When you are building a custom keyboard using a microcontroller like the Raspberry Pi Pico, you are dealing with a limited number of GPIO (General Purpose Input/Output) pins.
+<br/>
+The Raspberry Pi Pico has 26 usable GPIO pins. If you tried to connect every single key of a standard keyboard directly to its own pin, you would run out of pins almost immediately:
+          
+          A direct-pin setup for a small macro pad (12 keys) = 12 pins (Doable).<br/>
+<br/>
+    A direct-pin setup for a 60% keyboard (~61 keys) = 61 pins (Impossible on a Pico).
+<br/>
+A keyboard matrix solves this by routing the keys into a grid of Rows and Columns, drastically reducing the number of pins required.
+          
+          <br/>          <br/>
+
+          For example, to wire up a 60-key keyboard:          <br/>          <br/>
+
+
+
+    Without a Matrix: You need 60 pins (The Pico cannot do this).          <br/>
+
+
+    With a Matrix (5 Rows × 12 Columns): 5×12=60 keys. You only need 17 pins (5+12).          <br/>          <br/>
+
+
+
+<section style="font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; max-width: 600px; color: #e0e0e0; background-color: transparent;">
+  
+  <h3 style="color: #ffffff; margin-bottom: 0.5em;">Hardware Expandability</h3>
+  <p style="margin-top: 0; margin-bottom: 1.5em;">
+    This setup leaves plenty of leftover <strong>GPIO pins</strong> on your Pico. You can use these extra pins to add features like RGB underglow, OLED displays, or rotary encoders.
+  </p>
+
+  <h3 style="color: #ffffff; margin-bottom: 0.5em;">Matrix &amp; Layers</h3>
+  <p style="margin-top: 0; margin-bottom: 1em;">
+    The keypad uses a <strong>3x3 matrix</strong> (9 buttons total) mapped across <strong>4 software layers</strong>:
+  </p>
+  
+  <ul style="padding-left: 1.5rem; margin-bottom: 0; list-style-type: disc;">
+    <li style="margin-bottom: 0.5em;">
+      <strong style="color: #ffffff;">How Layers Work:</strong> Toggling to a different layer reassigns the entire grid to a fresh stack of commands.
+    </li>
+    <li style="margin-bottom: 0.5em;">
+      <strong style="color: #ffffff;">Button Count:</strong> You have <strong>8 usable buttons per layer</strong>, because 1 button is always reserved to switch between layers (9 - 1 = 8).
+    </li>
+    <li>
+      <strong style="color: #ffffff;">Total Actions:</strong> This gives you a total of <strong>32 macro keys</strong> packaged into a tiny 9-button grid.
+    </li>
+  </ul>
+
+</section>
+        </p>
+        <div class="step-photo" style="object-fit:contain">
+          <img src="https://i.ibb.co/d045tTxb/gre-Rl.png" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)" style="object-fit:contain;height:100%;width:100%;">
+        </div>
+      </article>
+
+    
+     <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Visualizing it</h3>
+        </div>
+        <p class="step-text">
+   .......
+        </p>
+        <div class="step-photo">
+          <img src="https://i.ibb.co/fw7PpMT/20250818-220852.jpg" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)">
+        </div>
+               <div class="step-photo">
+          <img src="https://i.ibb.co/vxLNY9B1/20250820-112328.jpg" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)">
+        </div>
+       
+               <div class="step-photo">
+          <img src="https://i.ibb.co/LdpN2CTH/macro-Pad-Layout.png" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)">
+        </div>
+       
+               <div class="step-photo">
+          <img src="step-2-soldering.jpg" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)">
+        </div>
+      </article>
+
+    
+     <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">04</span>
+          <h3 class="step-title">The code</h3>
+        </div>
+        <p class="step-text">
+          Seat your hardware switches into the printed faceplate array. Hand-wire your column diodes along structural tracks to limit pin input constraints on the microboard node, validating continuity parameters using a basic digital probe.
+        </p>
+       
+       <div class="w-full max-w-3xl mx-auto bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden font-mono text-sm">
+  
+  <div class="flex items-center justify-between px-4 py-3 bg-zinc-950 border-b border-zinc-800 select-none">
+    <div class="flex items-center space-x-2">
+      <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+      <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+      <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+      <span class="text-xs text-zinc-500 pl-2">code.py</span>
+    </div>
+  </div>
+
+  <div class="p-6 overflow-x-auto bg-zinc-900/50">
+    <pre class="!margin-0 !padding-0 !bg-transparent"><code class="language-python">
+    
+import board
+import digitalio
+import keypad
+import analogio
+import usb_hid
+import time
+import pwmio
+from adafruit_hid.consumer_control import ConsumerControl
+from adafruit_hid.consumer_control_code import ConsumerControlCode as CCC
+from adafruit_hid.keyboard import Keyboard
+from adafruit_hid.keycode import Keycode
+
+# -------------------- MACROPAD SETUP --------------------
+rows = [board.GP13, board.GP14, board.GP15]
+cols = [board.GP10, board.GP11, board.GP12]
+
+keys = keypad.KeyMatrix(row_pins=rows, column_pins=cols, columns_to_anodes=True)
+
+# -------------------- POTENTIOMETER SETUP --------------------
+POT_PIN = board.GP26
+SAMPLES_MEDIAN = 9
+IIR_ALPHA = 0.30
+VOLUME_LEVELS = 17
+HYSTERESIS_STEPS = 1
+SEND_COOLDOWN = 0.12
+CONFIRM_COUNT = 3
+
+pot = analogio.AnalogIn(POT_PIN)
+
+def read_median(n=SAMPLES_MEDIAN, pause=0.001):
+    vals = []
+    for _ in range(n):
+        vals.append(pot.value)
+        time.sleep(pause)
+    vals.sort()
+    return vals[len(vals)//2]
+
+min_adc = 5
+max_adc = 65000
+
+def adc_to_step(adc_val, min_adc=min_adc, max_adc=max_adc):
+    if adc_val < min_adc:
+        adc_val = min_adc
+    if adc_val > max_adc:
+        adc_val = max_adc
+    return int((adc_val - min_adc) / (max_adc - min_adc) * VOLUME_LEVELS)
+
+# -------------------- HID SETUP --------------------
+cc = ConsumerControl(usb_hid.devices)
+keyboard = Keyboard(usb_hid.devices)
+
+# -------------------- LED LAYER INDICATORS --------------------
+led_pins = [board.GP16, board.GP17, board.GP18, board.GP19]
+leds = []
+
+for pin in led_pins:
+    leds.append(pwmio.PWMOut(pin, frequency=1000, duty_cycle=0))
+
+current_layer = 0
+
+def set_led(index, brightness):
+    leds[index].duty_cycle = int(65535 * brightness)
+
+def update_leds():
+    for i in range(len(leds)):
+        set_led(i, 1.0 if i == current_layer else 0.0)
+
+def startup_animation():
+    FADE_STEPS = 50
+    FADE_DELAY = 0.013
+    PAUSE_BETWEEN = 0.3
+
+    for _ in range(2):
+        for i in range(FADE_STEPS + 1):
+            brightness = i / FADE_STEPS
+            for led in leds:
+                led.duty_cycle = int(65535 * brightness)
+            time.sleep(FADE_DELAY)
+        for i in range(FADE_STEPS, -1, -1):
+            brightness = i / FADE_STEPS
+            for led in leds:
+                led.duty_cycle = int(65535 * brightness)
+            time.sleep(FADE_DELAY)
+        time.sleep(PAUSE_BETWEEN)
+
+    set_led(current_layer, 1.0)
+    time.sleep(0.3)
+    set_led(current_layer, 0.0)
+    time.sleep(0.3)
+    update_leds()
+
+# -------------------- INITIAL POT STATE --------------------
+raw = read_median()
+smoothed = raw
+current_step = adc_to_step(smoothed)
+last_send_time = 0.0
+confirm_target = current_step
+confirm_counter = CONFIRM_COUNT
+
+print("Macropad + Volume Knob + Layer LEDs Ready")
+startup_animation()
+
+# -------------------- MAIN LOOP --------------------
+while True:
+    event = keys.events.get()
+    if event and event.pressed:
+        # Layer / media keys
+        if event.key_number == 0:
+            current_layer = (current_layer + 1) % 4
+            update_leds()
+
+        elif event.key_number == 1:  # Paste then Enter
+            keyboard.press(Keycode.CONTROL, Keycode.V)
+            keyboard.release_all()
+            time.sleep(0.05)
+            keyboard.press(Keycode.ENTER)
+            keyboard.release_all()
+
+        elif event.key_number == 2:  # Next track
+            cc.send(CCC.SCAN_NEXT_TRACK)
+
+        elif event.key_number == 3:  # Mute
+            cc.send(CCC.MUTE)
+
+        elif event.key_number == 4:  # Paste only
+            keyboard.press(Keycode.CONTROL, Keycode.V)
+            keyboard.release_all()
+
+        elif event.key_number == 5:  # Play/Pause
+            cc.send(CCC.PLAY_PAUSE)
+
+        elif event.key_number == 6:  # Mute / other
+            cc.send(CCC.MUTE)
+
+        elif event.key_number == 7:  # Copy
+            keyboard.press(Keycode.CONTROL, Keycode.C)
+            keyboard.release_all()
+
+        elif event.key_number == 8:  # Back / previous
+            cc.send(CCC.SCAN_PREVIOUS_TRACK)
+
+    # Volume knob
+    raw = read_median()
+    smoothed = int((1.0 - IIR_ALPHA) * smoothed + IIR_ALPHA * raw)
+    target_step = adc_to_step(smoothed)
+
+    if target_step == confirm_target:
+        if confirm_counter < CONFIRM_COUNT:
+            confirm_counter += 1
+    else:
+        confirm_target = target_step
+        confirm_counter = 1
+
+    if confirm_counter >= CONFIRM_COUNT:
+        diff = confirm_target - current_step
+        if abs(diff) >= HYSTERESIS_STEPS:
+            now = time.monotonic()
+            if now - last_send_time >= SEND_COOLDOWN:
+                if diff > 0:
+                    cc.send(CCC.VOLUME_INCREMENT)
+                    current_step += 1
+                else:
+                    cc.send(CCC.VOLUME_DECREMENT)
+                    current_step -= 1
+                current_step = max(0, min(VOLUME_LEVELS, current_step))
+                last_send_time = now
+
+    time.sleep(0.01)
+
+    
+    
+    </code></pre>
+  </div>
+</div>
+       
+       
+        <div class="step-photo">
+          <img src="step-2-soldering.jpg" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)">
+        </div>
+      </article>
+
+      <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">05</span>
+          <h3 class="step-title">3D Printed Case</h3>
+        </div>
+        <p class="step-text">
+          Still relatively new to 3D modeling, I used Tinkercad to design this case in modular parts. <a href="https://www.tinkercad.com/things/bU8td7eJVQh-copy-of-macropad">check out some of the various parts here</a> <a href ="https://www.tinkercad.com/things/jZXC04RJ9sw-frantic-borwo-blorr">and here </a>. <a href="https://www.tinkercad.com/things/61TYKk3GesU-potentiometer-knob">buttons and knobs</a>&nbsp; I'll have to revisit this to include any missing files.
+        </p>
+        <div class="step-photo">
+          <img src="https://i.ibb.co/8LxbBbTP/20250903-213131.jpg" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)">
+        </div>
+        
+                <div class="step-photo">
+          <img src="https://i.ibb.co/67TrM007/20250902-201637.jpg" alt="Soldering logic matrix wiring board close view" onclick="openLightbox(this.src)">
+        </div>
+      </article>
+
+      <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">06</span>
+          <h3 class="step-title">In Progress Prototype</h3>
+        </div>
+        <p class="step-text">
+          This is another marcropad I was setteing up to have an integrated screen. I've also been experimenting with 3d printing custom key caps( some  flat, some similar to the MX Keys-style keyboards. This is still a work in progress. I'll revisit this at some time in the future.
+        </p>
+        <div class="step-photo">
+          <img src="https://i.ibb.co/ZRRw5jfC/20250819-082051.jpg" alt="Coding script files on terminal screen window" onclick="openLightbox(this.src)">
+        </div>
+        
+              <div class="step-photo">
+          <img src="https://i.ibb.co/NgktkWJ3/20250819-081839.jpg" alt="Coding script files on terminal screen window" onclick="openLightbox(this.src)">
+        </div>
+      </article>
+<!--
+       <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Compiling Layer Firmware Maps</h3>
+        </div>
+        <p class="step-text">
+          Initialize local code definitions targeting your hardware schematic layouts. Program your custom macro configurations to trigger command terminal strings natively via localized script automation hooks when the key switches form a ground circuit loop.
+        </p>
+        <div class="step-photo">
+          <img src="step-3-firmware.jpg" alt="Coding script files on terminal screen window" onclick="openLightbox(this.src)">
+        </div>
+      </article>
+      
+       <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Compiling Layer Firmware Maps</h3>
+        </div>
+        <p class="step-text">
+          Initialize local code definitions targeting your hardware schematic layouts. Program your custom macro configurations to trigger command terminal strings natively via localized script automation hooks when the key switches form a ground circuit loop.
+        </p>
+        <div class="step-photo">
+          <img src="step-3-firmware.jpg" alt="Coding script files on terminal screen window" onclick="openLightbox(this.src)">
+        </div>
+      </article>
+      
+      -->
+         
+         That's all for now.... EOF
+    </div>
+
+  </div>
+
+  <div id="image-lightbox" class="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-content" id="lightbox-img" alt="High resolution preview popup box">
+  </div>
+
+  <script>
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      
+      lightboxImg.src = imageSrc;
+      lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('image-lightbox');
+      lightbox.classList.remove('show');
+    }
+  </script>
+</body>
+</html>

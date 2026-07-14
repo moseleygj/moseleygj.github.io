@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operational Software Matrix // Core Node</title>
+  <style>
+    /* ==========================================================================
+       1. GLOBAL RESET & DARK BASELINE
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0a0a0a; /* Pure deep dark background */
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Back Link Button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      color: #8e8e93;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      color: #0a84ff; /* Accent Blue */
+    }
+
+    /* ==========================================================================
+       2. HERO ARTICLE HEADER
+       ========================================================================== */
+    .project-header {
+      margin-bottom: 2rem;
+    }
+
+    .project-meta {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #0a84ff;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #f5f5f7;
+    }
+
+    .project-summary {
+      font-size: 1.15rem;
+      color: #a1a1a6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Repository External Action Links */
+    .project-links-array {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      color: #f5f5f7;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .action-link:hover {
+      background-color: #161618;
+      border-color: #2c2c2e;
+    }
+    
+    .action-link:active {
+      transform: scale(0.98);
+    }
+
+    /* Main Project Showcase Photo */
+    .main-hero-photo {
+      width: 100%;
+      height: 450px;
+      border-radius: 24px; /* Premium smooth corners */
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .main-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+
+    /* ==========================================================================
+       3. ENVIRONMENT PULSE & RUNTIME STATUS GRID
+       ========================================================================== */
+    .project-pulse {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .pulse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #1c1c1e;
+      margin-bottom: 1.25rem;
+    }
+
+    .pulse-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8e8e93;
+      font-weight: 700;
+    }
+
+    /* Status Badge Engine */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Nominal Status State */
+    .status-badge.complete {
+      background-color: rgba(48, 209, 88, 0.1); /* System Green */
+      color: #30d158;
+    }
+    
+    .status-badge.complete .status-dot {
+      background-color: #30d158;
+      box-shadow: 0 0 8px #30d158;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Logic Architecture Layout Typography */
+    .pulse-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .pulse-group h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-bottom: 0.25rem;
+    }
+
+    .pulse-group p {
+      color: #a1a1a6;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       4. SOURCES & MATERIALS CARDS (Large Form Grid)
+       ========================================================================== */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 3.5rem 0 1.5rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #1c1c1e;
+      color: #ffffff;
+    }
+
+    /* Grid for Software Utilities */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .material-item-card {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .material-item-card:hover {
+      border-color: #2c2c2e;
+      background-color: #161618;
+    }
+
+    /* Large App Preview Image Container */
+    .material-photo-box {
+      width: 100%;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2c2c2e;
+      background-color: #1c1c1e;
+    }
+
+    .material-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .material-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .material-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .material-spec {
+      font-size: 0.9rem;
+      color: #8e8e93;
+    }
+
+    .material-link {
+      font-size: 0.85rem;
+      color: #0a84ff;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      display: inline-block;
+    }
+
+    .material-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       5. MODULAR SYSTEM INFO CALLOUT CONTAINER
+       ========================================================================== */
+    .callout-box {
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin: 2rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .callout-box.info {
+      background-color: rgba(10, 132, 255, 0.05);
+      border: 1px solid rgba(10, 132, 255, 0.15);
+      border-left: 4px solid #0a84ff;
+    }
+    .callout-box.info .callout-icon {
+      color: #0a84ff;
+    }
+
+    .callout-icon {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .callout-text {
+      font-size: 0.95rem;
+      color: #d1d1d6;
+      line-height: 1.5;
+    }
+
+    .callout-text strong {
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       6. BLOG STYLE STEP-BY-STEP ENVIRONMENT FEED (01-03 Layout)
+       ========================================================================== */
+    .tutorial-feed {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tutorial-step {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .step-number {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a84ff;
+      background-color: rgba(10, 132, 255, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+
+    .step-text {
+      color: #d1d1d6;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* Photo block for environment previews */
+    .step-photo {
+      width: 100%;
+      height: 350px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+    }
+
+    .step-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      cursor: zoom-in;
+    }
+
+    .step-photo img:hover {
+      transform: scale(1.02);
+    }
+
+    /* ==========================================================================
+       7. HIGH-RES LIGHTBOX MODAL
+       ========================================================================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background-color: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* ==========================================================================
+       8. MOBILE OPTIMIZATION RESPONSIVENESS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .project-title {
+        font-size: 2rem;
+      }
+
+      .main-hero-photo {
+        height: 280px;
+      }
+
+      .step-photo {
+        height: 220px;
+      }
+      
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-links-array {
+        gap: 0.5rem;
+      }
+
+      .action-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <a href="#" class="back-btn">← Back to Portfolio</a>
+
+    <header class="project-header">
+      <div class="project-meta">System Environment // Software Blueprint</div>
+      <h1 class="project-title">Operational Software </h1>
+      <p class="project-summary">What I use most often on a regular basis.</p>
+      
+      <div class="project-links-array">
+        <a href="https://github.com" class="action-link" target="_blank">
+          <span class="link-icon">⚙️</span> View Dotfiles Repository
+        </a>
+      </div>
+
+      <div class="main-hero-photo">
+        <img src="https://miro.medium.com/1*OZEhgP0nZgn5C-Pgd1Fhmg.jpeg" alt="Minimalist text editor and system monitor terminal layout workspace" onclick="openLightbox(this.src)">
+      </div>
+    </header>
+
+    <section class="project-pulse">
+      <div class="pulse-header">
+        <h2 class="pulse-title">Runtime Environment </h2>
+        
+        <div class="status-badge complete">
+          <span class="status-dot"></span>
+          <span class="status-text">All Systems Nominal // Verified</span>
+        </div>
+      </div>
+
+      <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>The Goal</h3>
+<p>
+  My goal is to achieve a focused, distraction-free state using a minimal toolset, while maintaining the flexibility to spin up any environment I need via VMs, SSH, or remote desktop.
+</p><br/>
+<p>
+  Over time, I’ve realized that no single operating system does everything perfectly. macOS is a polished Unix environment but falls short for gaming. Windows offers near-universal compatibility but is notoriously resource-intensive. Linux provides a fast, low-overhead development environment but can lack out-of-the-box support for certain proprietary drivers and software.
+</p>
+          <br/>
+<p>
+  This is why I choose Fedora. Having installed almost every major Linux distribution over the years—including legacy, CLI-only distros—I’ve learned a valuable lesson: while compiling and configuring everything from scratch is a great flex, an unexpected bug can instantly derail your workflow. You end up spending hours troubleshooting the OS instead of doing the actual work you set out to do. Fedora simply gets out of the way and lets you focus on the build.
+</p>
+          </p>
+        </div>
+        <!--<div class="pulse-group">
+          <h3>Execution Protocol</h3>
+          <p>Minimize dependencies on graphic subsystems. Prioritize fast shell parsing, secure memory space segmentation, and modular script handling via optimized interpreter wrappers.</p>
+        </div>
+      </div>-->
+    </section>
+
+    <h2 class="section-title">Core Workspace Utilities</h2>
+    <div class="sources-grid">
+
+      
+      
+           <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://remmina.org/assets/images/org.remmina.Remmina.svg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Remmina
+
+</span>
+          <span class="material-spec">Remote access screen and file sharing to your desktop.</span>
+          <a href="https://remmina.org/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+      
+
+      
+      
+           <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-wKN_iTUanbXRViOfOFm0FItaKAScRFUxTQ&s" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">LocalSend</span>
+          <span class="material-spec">Open source and cross-platform file sharing for everyone.</span>
+          <a href="https://localsend.org/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+      
+      
+           <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://vscodium.com/img/codium_cnl.svg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">VSCodium</span>
+          <span class="material-spec">VSCodium is a community-driven, freely-licensed binary distribution of Microsoft’s editor VS Code.</span>
+          <a href="https://vscodium.com/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+           <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://community-assets.home-assistant.io/optimized/3X/9/b/9b5c86ae9c7748bb16ce904b834e8612c6d391b7_2_500x500.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Proxmox</span>
+          <span class="material-spec">Proxmox Virtual Environment is a complete open-source platform for enterprise virtualization</span>
+          <a href="https://www.proxmox.com/en/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+           <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://static.gnome.org/catalog/app-icon/scalable/org.gnome.Boxes.svg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Boxes</span>
+          <span class="material-spec">Virtualization made simple</span>
+          <a href="https://apps.gnome.org/en/Boxes/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+      
+      
+      
+      
+      
+      
+       <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/250px-GNOME_Terminal_icon_2019.svg.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Gnome-Terminal
+          </span>
+          <span class="material-spec">GNOME Terminal is a terminal emulator for the GNOME desktop environment </span>
+         
+        </div>
+      </div>
+      <!--stop-->
+            <!--stop-->     <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://www.splunk.com/content/dam/splunk2/images/logos/splunk/splunk-black-white-bg.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Splunk</span>
+          <span class="material-spec">Splunk is a data platform that collects and indexes machine logs in real time for enterprise cybersecurity, IT observability, and data analysis.</span>
+          <a href="https://www.splunk.com/" class="material-link" target="_blank">View Site →</a>
+        </div>
+      </div>
+      <!--stop-->
+            <!--stop-->     <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Python</span>
+          <span class="material-spec">a high-level, general-purpose programming language famed for its readability and simplicity</span>
+          <a href="https://www.python.org/" class="material-link" target="_blank">View Config Matrix →</a>
+        </div>
+      </div>
+      <!--stop-->
+            <!--stop-->     <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://nmap.org/images/sitelogo.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">NMap</span>
+          <span class="material-spec">Network scanner</span>
+          <a href="https://nmap.org/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+            <!--stop-->     <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://1000logos.net/wp-content/uploads/2020/08/VirtualBox-Logo.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">VirtualBox</span>
+          <span class="material-spec">Powerful open source virtualization</span>
+          <a href="https://www.virtualbox.org/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+            <!--stop-->     <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://phoenixweb.com.au/wp-content/uploads/2016/11/LAMP-Stack-logo.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">LAMP Stack</span>
+          <span class="material-spec">Linux, Apache, MySQL, PHP. Used to create, host, and maintain web content.</span>
+          <a href="https://aws.amazon.com/what-is/lamp-stack/" class="material-link" target="_blank">View Config Matrix →</a>
+        </div>
+      </div>
+      <!--stop-->
+            <!--stop-->     <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://obsproject.com/assets/images/new_icon_small-r.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">OBS Studio</span>
+          <span class="material-spec">software for video recording and live streaming.</span>
+          <a href="https://obsproject.com/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+       <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://www.w3schools.com/js/img_javascript_480.jpg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">JavaScript</span>
+          <span class="material-spec">JavaScript is a programming language used to create dynamic, interactive web page behavior.</span>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" class="material-link" target="_blank">View Docs →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+       <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Official_CSS_Logo.svg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">CSS (Cascading Style Sheets)</span>
+          <span class="material-spec">is a style sheet language used to shape the presentation, layout, and visual formatting of documents written in markup languages like HTML.</span>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="material-link" target="_blank">View Docs →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+       <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Wireshark_icon_new.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Wireshark</span>
+          <span class="material-spec">Network protocol analyzer</span>
+          <a href="https://www.wireshark.org/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+             <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDB96A61hDd7w-K_UJWNuS9D6B89p-FlK8Iw&s" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Anything LLM</span>
+          <span class="material-spec">My Private AI LLM. utilizing  RAG. Dolphin 3:8b on Win11 with a NVidia 1080TI(12GB), 32GB RAM, Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz </span>
+          <a href="https://anythingllm.com/" class="material-link" target="_blank">View Docs →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+             <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://freepng.com/uploads/images/202512/utodesk-fusion60-logo-vector-png_1020x.jpg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">AudoDesk Fusion</span>
+          <span class="material-spec">a cloud-based 3D modeling, CAD,and PCB software platform that integrates the entire product development process into a single, collaborative platform. Interesting has quite the learning curve. I'm still learning this</span>
+          <a href="https://www.autodesk.com/?_gl=1*12a1m1j*_ga*MTczNjk0NzgwMS4xNzgyMjQyNjE0*_ga_NZSJ72N6RX*czE3ODIyNDI2MTQkbzEkZzEkdDE3ODIyNDI2MTQkajYwJGwwJGgw&_ga=2.206235415.588949274.1782242614-1736947801.1782242614" class="material-link" target="_blank">View Page →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+       <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://linuxmasterclub.com/wp-content/uploads/2021/08/ONLYOFFICE-logo.png" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">OnlyOffice</span>
+          <span class="material-spec">free, open-source office suite and collaborative software platform designed as an alternative to Microsoft Office.</span>
+          <a href="https://www.onlyoffice.com/t" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      
+                 <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Calligrakrita-base.svg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Krita</span>
+          <span class="material-spec">raster graphics editor designed primarily for digital art and 2D animation. </span>
+          <a href="https://krita.org/en/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop-->
+        <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://static.gnome.org/catalog/app-icon/scalable/com.rafaelmardojai.Blanket.svg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Blanket</span>
+          <span class="material-spec">Listen to ambient sounds</span>
+          <a href="https://apps.gnome.org/Blanket/" class="material-link" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <!--stop--> 
+      
+            
+     <!--start--> <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://imgproxy.flathub.org/insecure/dpr:1/f:avif/q:100/rs:fit:128:128/aHR0cHM6Ly9kbC5mbGF0aHViLm9yZy9tZWRpYS9ubC9oamRza2VzL2djb2xvcjMvMWNkNzFlNDRlODE4ODlhZjNhNGQ4ZmNhMzYyYjk4MzQvaWNvbnMvMTI4eDEyOC9ubC5oamRza2VzLmdjb2xvcjMucG5n" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Color Picker</span>
+          <span class="material-spec">Color Picker enables you to pick the color from any pixel on your screen. It also offers a palette, so that you can easily mix and match a couple of colors together. </span>
+          <a href="https://flathub.org/en/apps/nl.hjdskes.gcolor3" class="material-link" target="_blank">View project →</a>
+        </div>
+      </div>
+      <!--stop-->
+      <!--stop-->
+      
+      
+
+      
+
+      
+       <!--start--> <!--<div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://www.w3schools.com/js/img_javascript_480.jpg" alt="Discript" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">JavaScript</span>
+          <span class="material-spec">JavaScript is a programming language used to create dynamic, interactive web page behavior.</span>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" class="material-link" target="_blank">View Docs →</a>
+        </div>
+      </div>
+      <!--stop-->
+      
+    </div>
+
+   
+  <div id="image-lightbox" class="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-content" id="lightbox-img" alt="High resolution preview popup box">
+  </div>
+
+  <script>
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      
+      lightboxImg.src = imageSrc;
+      lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('image-lightbox');
+      lightbox.classList.remove('show');
+    }
+  </script>
+</body>
+</html>

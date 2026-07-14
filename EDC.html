@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's In My Backpack // Everyday Carry Ecosystem</title>
+  <style>
+    /* ==========================================================================
+       1. GLOBAL RESET & DARK BASELINE
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0a0a0a; /* Pure deep dark background */
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Back Link Button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      color: #8e8e93;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      color: #0a84ff; /* Accent Blue */
+    }
+
+    /* ==========================================================================
+       2. HERO ARTICLE HEADER & INTERACTIVE GALLERY
+       ========================================================================== */
+    .project-header {
+      margin-bottom: 2rem;
+    }
+
+    .project-meta {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #0a84ff;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #f5f5f7;
+    }
+
+    .project-summary {
+      font-size: 1.15rem;
+      color: #a1a1a6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Repository External Action Links */
+    .project-links-array {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      color: #f5f5f7;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .action-link:hover {
+      background-color: #161618;
+      border-color: #2c2c2e;
+    }
+    
+    .action-link:active {
+      transform: scale(0.98);
+    }
+
+    /* Main Project Showcase Photo Container */
+    .main-hero-photo {
+      width: 100%;
+      height: 450px;
+      border-radius: 24px; /* Premium smooth corners */
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      background-color: #121212;
+    }
+
+    .main-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: zoom-in;
+      transition: opacity 0.25s ease;
+    }
+
+    /* Sub-section Smaller Photo Grid Layout */
+    .gallery-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .thumbnail-box {
+      height: 80px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      background-color: #121212;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .thumbnail-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Hover and Selected Terminal Interface Interactions */
+    .thumbnail-box:hover {
+      transform: translateY(-2px);
+    }
+    
+    .thumbnail-box:hover img {
+      opacity: 0.9;
+    }
+
+    .thumbnail-box.active {
+      border-color: #0a84ff; /* System Accent Blue Border */
+    }
+
+    .thumbnail-box.active img {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       3. ECOSYSTEM PULSE & OBJECTIVES (Philosophy, Core Logic, Status)
+       ========================================================================== */
+    .project-pulse {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .pulse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #1c1c1e;
+      margin-bottom: 1.25rem;
+    }
+
+    .pulse-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8e8e93;
+      font-weight: 700;
+    }
+
+    /* Status Badge Engine */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Active / Locked State */
+    .status-badge.complete {
+      background-color: rgba(48, 209, 88, 0.1); /* System Green */
+      color: #30d158;
+    }
+    
+    .status-badge.complete .status-dot {
+      background-color: #30d158;
+      box-shadow: 0 0 8px #30d158;
+    }
+
+    /* Incomplete / Iterating State */
+    .status-badge.incomplete {
+      background-color: rgba(255, 159, 10, 0.1); /* System Amber/Orange */
+      color: #ff9f0a;
+    }
+    
+    .status-badge.incomplete .status-dot {
+      background-color: #ff9f0a;
+      box-shadow: 0 0 8px #ff9f0a;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Problem & Solution Layout Typography */
+    .pulse-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .pulse-group h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-bottom: 0.25rem;
+    }
+
+    .pulse-group p {
+      color: #a1a1a6;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       4. SOURCES & MATERIALS CARDS (Large Form Grid)
+       ========================================================================== */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 3.5rem 0 1.5rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #1c1c1e;
+      color: #ffffff;
+    }
+
+    /* Spacious layout for large item profiles */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .material-item-card {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .material-item-card:hover {
+      border-color: #2c2c2e;
+      background-color: #161618;
+    }
+
+    /* Large Component Showcase Image Container */
+    .material-photo-box {
+      width: 100%;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2c2c2e;
+      background-color: #1c1c1e;
+    }
+
+    .material-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .material-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .material-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .material-spec {
+      font-size: 0.9rem;
+      color: #8e8e93;
+    }
+
+    .material-link {
+      font-size: 0.85rem;
+      color: #0a84ff;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      display: inline-block;
+    }
+
+    .material-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       5. MODULAR SYSTEM CAUTION / INFO CALLOUT CONTAINER
+       ========================================================================== */
+    .callout-box {
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin: 2rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    /* Info Flavor Core Rules */
+    .callout-box.info {
+      background-color: rgba(10, 132, 255, 0.05);
+      border: 1px solid rgba(10, 132, 255, 0.15);
+      border-left: 4px solid #0a84ff;
+    }
+    .callout-box.info .callout-icon {
+      color: #0a84ff;
+    }
+
+    /* Caution Flavor Core Rules */
+    .callout-box.caution {
+      background-color: rgba(255, 69, 58, 0.05);
+      border: 1px solid rgba(255, 69, 58, 0.15);
+      border-left: 4px solid #ff453a; /* System Red */
+    }
+    .callout-box.caution .callout-icon {
+      color: #ff453a;
+    }
+
+    .callout-icon {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .callout-text {
+      font-size: 0.95rem;
+      color: #d1d1d6;
+      line-height: 1.5;
+    }
+
+    .callout-text strong {
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       6. BLOG STYLE STEP-BY-STEP TUTORIAL FEED
+       ========================================================================== */
+    .tutorial-step {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .step-number {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a84ff;
+      background-color: rgba(10, 132, 255, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+
+    .step-text {
+      color: #d1d1d6;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* Photo block for each step */
+    .step-photo {
+      width: 100%;
+      height: 450px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+    }
+
+    .step-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      cursor: zoom-in;
+    }
+
+    .step-photo img:hover {
+      transform: scale(1.02);
+    }
+
+    /* ==========================================================================
+       7. HIGH-RES LIGHTBOX MODAL
+       ========================================================================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background-color: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* ==========================================================================
+       8. MOBILE OPTIMIZATION RESPONSIVENESS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .project-title {
+        font-size: 2rem;
+      }
+
+      .main-hero-photo {
+        height: 280px;
+      }
+
+      .gallery-thumbnails {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+      }
+
+      .thumbnail-box {
+        height: 60px;
+      }
+
+      .step-photo {
+        height: 220px;
+      }
+      
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-links-array {
+        gap: 0.5rem;
+      }
+
+      .action-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Top Navigation -->
+    <a href="https://moseleyg.github.io" class="back-btn">← Back to Portfolio</a>
+
+    <!-- Hero Content Header -->
+    <header class="project-header">
+      <div class="project-meta">Beyond the Screen // Everyday Carry (EDC)</div>
+      <h1 class="project-title">What's In My Backpack: Minimalist version</h1>
+      <p class="project-summary">A high-efficiency, streamlined tool loadout tailored for remote technical diagnostics, infrastructure management, and secure field logic operations.</p>
+      
+      <!-- EXTERNAL REPOSITORY / LAYOUT MATRIX LINK -->
+      <div class="project-links-array">
+        <a href="https://github.com" class="action-link" target="_blank">
+          <span class="link-icon">🎒</span> View Full Kit Checklist
+        </a>
+      </div>
+
+      <!-- Main Feature Showcase Frame -->
+      <div class="main-hero-photo">
+        <img id="hero-display-img" src="https://i.ibb.co/Xf1f6vd1/20260616-162322.jpg" alt="Minimalist technical gear grid layout setup" onclick="openLightbox(this.src)">
+      </div>
+
+      <!-- Sub-section Thumbnail Gallery Grid -->
+      <div class="gallery-thumbnails">
+        <div class="thumbnail-box active" onclick="switchHeroImage('https://i.ibb.co/Xf1f6vd1/20260616-162322.jpg', this)">
+          <img src="https://i.ibb.co/Xf1f6vd1/20260616-162322.jpg" alt="Primary full gear ecosystem loadout layout">
+        </div>
+        <div class="thumbnail-box" onclick="switchHeroImage('https://i.ibb.co/fdrW36z9/20260616-161832.jpg', this)">
+          <img src="https://i.ibb.co/fdrW36z9/20260616-161832.jpg" alt="Sleek technical pack baseline profile structural view">
+        </div>
+        
+                <div class="thumbnail-box" onclick="switchHeroImage('https://i.ibb.co/C59N1sWR/20260617-155226-2.jpg', this)">
+          <img src="https://i.ibb.co/C59N1sWR/20260617-155226-2.jpg" alt="Utility gear accessories storage pouch loadout module">
+        </div>
+        
+        <div class="thumbnail-box" onclick="switchHeroImage('https://i.ibb.co/pjV06s5n/Screenshot-20260617-132635.png', this)">
+          <img src="https://i.ibb.co/pjV06s5n/Screenshot-20260617-132635.png" alt="Mobile Unix terminal core interface layout close up">
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Project Pulse / System Configuration Block -->
+    <section class="project-pulse">
+      <div class="pulse-header">
+        <h2 class="pulse-title">Ecosystem Pulse</h2>
+        
+        <!-- ACTIVE OPTION: Complete / Deployment Locked -->
+        <div class="status-badge complete">
+          <span class="status-dot"></span>
+          <span class="status-text">Active Setup // Locked</span>
+        </div>
+      </div>
+
+      <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>The Philosophy</h3>
+          <p>Every device, cable, and utility module must serve a multi-layered deployment purpose while maintaining strict volume constraints and clean aesthetic uniformity.</p>
+        </div>
+        <div class="pulse-group">
+          <h3>Core Logic</h3>
+          <p>Bring only what's needed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gear Matrix (Sources & Materials Cards) -->
+    <h2 class="section-title">Core Hardware & Gear</h2>
+    <div class="sources-grid">
+      <!-- Item Card 01 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://www.wisetekmarket.com/cdn/shop/files/LENOVOTHINKPADX1YOGASTOCK_00ad4f28-7213-4c5e-be46-b8a9d1ee6d8b.png?v=1721436238&width=640" onclick="openLightbox(this.src)" style="object-fit: cover">
+        </div>
+        <div class="material-details">
+          <span class="material-name">X1 Carbon 7th Gen</span>
+          <span class="material-spec">IBM ThinkPad X1 Carbon 7th Gen </span>
+          <!--<a href="https://www.amazon.com/Anker-Charger-Compact-MacBook-Pixelbook/dp/B0C4YTB56H/ref=sr_1_16?crid=21BBUEQC3MUXY&dib=eyJ2IjoiMSJ9.VOWGcnZZnJd6cYWSqWaG8JwGOfWaOY0aVIdOdRSpu_7yPdn9E18Rs81BQEc2RKW7ScTPpNAWHpSRbYkZvYN4ndFoJpSTSsDwb7_90dkw8GftdrYtxq8Sae2kAutUHYGGIlZrGRkdGHpC1P4Gf8JqMq4iKVv4JZEW9BYv_Xoi7LTPZSEf0l7aG91qmoyfcMF3Y9_SGlmZ35LJk1LoVr6rixClUjh4zs6jyenAQpn8Kb0.HIgLMjuwiSwK2nXvQIeAvsOtTmJ8HEBk4EYmsSbJUMw&dib_tag=se&keywords=ravpower&qid=1781646429&sprefix=rav%2Caps%2C363&sr=8-16" class="material-link" target="_blank">View charger Source →</a>-->
+        </div>
+      </div>
+      
+      <!-- Item Card 1 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/51KUzDBK-bL._AC_UY218_.jpg" alt="Minimalist durable everyday carry pack shell" onclick="openLightbox(this.src)" style="object-fit: cover">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Charger</span>
+          <span class="material-spec">Anker USB Charger Block,67W GaN Wall Charger,3-Port </span>
+          <a href="https://www.amazon.com/Anker-Charger-Compact-MacBook-Pixelbook/dp/B0C4YTB56H/ref=sr_1_16?crid=21BBUEQC3MUXY&dib=eyJ2IjoiMSJ9.VOWGcnZZnJd6cYWSqWaG8JwGOfWaOY0aVIdOdRSpu_7yPdn9E18Rs81BQEc2RKW7ScTPpNAWHpSRbYkZvYN4ndFoJpSTSsDwb7_90dkw8GftdrYtxq8Sae2kAutUHYGGIlZrGRkdGHpC1P4Gf8JqMq4iKVv4JZEW9BYv_Xoi7LTPZSEf0l7aG91qmoyfcMF3Y9_SGlmZ35LJk1LoVr6rixClUjh4zs6jyenAQpn8Kb0.HIgLMjuwiSwK2nXvQIeAvsOtTmJ8HEBk4EYmsSbJUMw&dib_tag=se&keywords=ravpower&qid=1781646429&sprefix=rav%2Caps%2C363&sr=8-16" class="material-link" target="_blank">View charger Source →</a>
+        </div>
+      </div>
+      
+      <!-- Item Card 2 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/71Yxi-lqvbL._AC_UY218_.jpg" alt="Thin performance mobile unix workstation terminal" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Battery Pack</span>
+          <span class="material-spec">65W Power Bank, 25000mAh for laptop/phone </span>
+          <a href="#" class="material-link" target="_blank">View Device Profile →</a>
+        </div>
+      </div>
+      
+      <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/71ad3V1g2iL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">M.2 NVMe SATA SSD Enclosure Adapter</span>
+          <span class="material-spec">ORICO M.2 NVMe SATA SSD Enclosure Adapter Tool-Free, USB C 3.2 Gen 2 10Gbps</span>
+          <a href="https://www.amazon.com/ORICO-Enclosure-Tool-Free-Aluminum-External/dp/B0BJ24GHC7/ref=sr_1_19?crid=2I5X95C3SA8P1&dib=eyJ2IjoiMSJ9.BpaDZCmmyabsGkDY7Of5ztqEvKhQPJu8xse2r5XsaEwDrTjlT4PgILIoG8YObUQH_Eu-gDd1y3XbFLeR6vyhl19Oel4WufFl1y5wNqMonyQmTFUjP5BwbxuGVN0SO7pt2mMcEKIBZHHSbWqb96u6Fi1EUx1OUYWJJjXTIX0q7vwu4ZpyISEdV2n7zxCcHRv8w_OZy1XpdNF7dFhtsymW6w.6f9tYaTe-hmaYYYpmFPeaNSVm5IwdJLl8HMh9ObLS-0&dib_tag=se&keywords=nvme%2Benclosure%2Bportable&qid=1781647276&sprefix=nvme%2Bexcloser%2Bportable%2Caps%2C110&xpid=eZ1it8ZZBxWur&th=1" class="material-link" target="_blank">View adapter Source →</a>
+        </div>
+      </div>
+      
+      
+            <!-- Item Card 4 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/51p5NyookDL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Soundcore by Anker Liberty 4</span>
+          <span class="material-spec">Soundcore by Anker Liberty 4 NC Wireless Earbuds, 98.5% Noise Reduction,</span>
+          <a href="#" class="material-link" target="_blank">View earbud Source →</a>
+        </div>
+      </div>
+      
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/61jTYo7ukyL._AC_SX466_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Anker USB C Hub, 11-in-1 Docking Station</span>
+          <span class="material-spec">Anker USB C Hub, 11-in-1 Docking Station Dual Monitor, 10 Gbps USB-C and USB-A Data Ports, 4K HDMI and DisplayPort, 85W Power Delivery</span>
+          <a href="https://www.amazon.com/Anker-DisplayPort-Delivery-Ethernet-microSD/dp/B09Q5V9G5P/ref=sr_1_1?crid=I7VD3M4TRPN2&dib=eyJ2IjoiMSJ9.lxgmR7PwsMX3H3-4J9ZHCoLasw1oh2XQeV32HigoekCLnx54RtTZrB3C_is0FdlO9MDnhebHZa2gm7ePkr_l9YxCnkxDGZPelhvFA8A-0g84JFXsBQ_N_iJDktP3k1rrmnJSxsHafYi-IAqJTRCxYT75Ek9gDXhgmJUAtAcz_ePGU3CGL1hnnESymUtukYNESUuMGjMIwCdtNIpZIryLZ-vjpsegZdzZCw_EgftaiHsMdm5UO6HfchHRRFIrYThR1G4DRFG-8wg4Oc-MTaewXHdhg_CzfMm1_mmbIKWgMko.B2ClvNv3UYEvomj-cHPaLfDzh8swYu9jtEZ6QzTfWS0&dib_tag=se&keywords=anker+565&qid=1781647647&s=electronics&sprefix=anker+565%2Celectronics%2C98&sr=1-1" class="material-link" target="_blank">View Dock Source →</a>
+        </div>
+      </div>
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/61+OT7FPABL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Logitech
+MX Master 3S</span>
+          <span class="material-spec">Logitech MX Master 3S Wireless Mouse</span>
+          <a href="https://www.amazon.com/Logitech-Wireless-Ultra-fast-Scrolling-Bluetooth/dp/B09HM94VDS/ref=sr_1_1?crid=BO35ZYQS1KD6&dib=eyJ2IjoiMSJ9.XpaXk6ZymnXILbMee6Y71twq0-q1xtKL-sXtIyyfRl24xqImsfBaqWySNkz6lk1aE_yEEK_usF4uvD2b2CXmYXslpGe_PafuJaH40398nqQUwswEzA468D57etwP_OpYKJdu9I6dOUK_tFdRzCwVkkUCC4lLVwEQKlqmduMQTbqCxmx8ZQCeUohjpO4b0W-M-hR9nXQoEKZpVM3fprvbjQbvw2ebV6nSYaSJOphYdc-aO4CQvivU0-UyaWjoK80u8LF7m8axkosTSyJEVysGRI_ecivpwig2dEDVZ6wAIpM.lbcuamNzXnuouIkdx56PNWSl1aLRL-7VgEHEjQMnvmM&dib_tag=se&keywords=logitech+mx+master+3+s&qid=1781647918&s=electronics&sprefix=logitech+mx+maste+3+s%2Celectronics%2C121&sr=1-1&ufe=app_do%3Aamzn1.fos.9fe8cbfa-bf43-43d1-a707-3f4e65a4b666" class="material-link" target="_blank">View Mouse Source →</a>
+        </div>
+      </div>
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/71G2BYNQERL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Samsung AKG Earbuds </span>
+          <span class="material-spec">Many Audiophiles consider it the best wired earbuds(Dolby Atmos and spatial audio)</span>
+          <a href="https://www.amazon.com/Samsung-Earbuds-Original-Earbud-Headphones/dp/B0B5JN5FXY/ref=sr_1_1?crid=37L4F1339ZM2C&dib=eyJ2IjoiMSJ9.MAX30wkxVPlx6aUFWii4PczWoOKa15d5SMdOASJmGr_HaTmxROaAiTsLM2zdICX0K4YhJpKnmbxo0Ip7e7i_tL0sNBuG3Q-TkfqbTDMf36hUymOLK3luOvp5g31D4gdRNUotzqE8L3xr2oINcrCankYy8T-qPt-fLqoplHFOkZg7OrLogc-SFgN4f2mCeqrICyuQc5fipBBSjvkNzVQHlLd2_Jh8inkDskAsPVm869lOwCvyyZRt7tO3PWb3rudZaLKUfCuDz-R-R8XIvq4fdFLlTFPDVHItRf7rvVNznQs.TsVuhS7grEy_nshWjYdWDQXjcF9Sg8iRh6iwDSrMfu4&dib_tag=se&keywords=samsung+akg+wired+earbuds&qid=1781648144&s=electronics&sprefix=samsung+akg+wire+earbud%2Celectronics%2C96&sr=1-1" class="material-link" target="_blank">View EarBuds Source →</a>
+        </div>
+      </div>
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/71o3FE6sOIL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">USB C Car Charger</span>
+          <span class="material-spec">125W Fast Car Charger, USB C PD65W & QC65W,</span>
+          <a href="https://www.amazon.com/MRGLAS-Charger-iPhone-Cigarette-Lighter/dp/B0CF51HNSL/ref=sr_1_20?crid=2CTGF4CS2EWMJ&dib=eyJ2IjoiMSJ9.gDyHhp5zKZcdFXu9i6kn09yF4PtdkWhktYcWY1hUN8MpcACHZn21lsQriTDE6RR4g5yzsco6uMSfRnd8hstnl5IVRUH92l5Y-ZiUHYhtFP5V11W22I66hlx8PfprQIbmqoBWOP-WuGCl5lZdYainwjtTq07NQTCeLAeiskxWkwI-q8MjWGGBxl1LovNCGSbfp8kZ74BynlbCjlUlyMPkIeLXR_C31zC2pIGM3hmKBaiqt6T07X1hRviLZ1IEIdyMqKa3AdQ-81wi6WrwQYR0-2U5v8HRG1-nD_OG-j98IYM.KsL5mer6S6sbHSByZIHipl4aZLKjD5FJXKOsmrAGCQM&dib_tag=se&keywords=car%2B65w%2Bpd%2Bcigarette%2Blighter%2Bcharger&qid=1781648441&s=electronics&sprefix=car%2B65w%2Bpd%2Bcigarette%2Blighter%2Bcharger%2Celectronics%2C109&sr=1-20&th=1" class="material-link" target="_blank">View Charger Source →</a>
+        </div>
+      </div>
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://images.samsung.com/is/image/samsung/p6pim/us/muf-128ab-am/gallery/us--muf-128ab-am-550271894?$product-details-jpg$" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">128GB USB 3.2 Flash Drive FIT Plus</span>
+          <span class="material-spec">SAMSUNG FIT Plus 3.1 USB Flash Drive, 128GB, 400MB/s</span>
+          <a href="https://www.amazon.com/Samsung-MUF-128AB-AM-Plus-128GB/dp/B07D7PDLXC/ref=sr_1_1?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.9c9dWP86StMY1rHtWhsR66tlUZMJHvwzYvkXgZsIYF-RGvxsFDoiSpXZUn6-0uPQPsf_smYjd-gOJNChSXdyyr2FNZceisRiEUDhaMaqBoAavhtwLvXEsfeRc4LTdIx70srrIiGcdtqUmawuNtoCU8d5_0EkPMrx_mBhTig-D7x2yoXNALNVIgus95LSA-9eNdtuYLwAaDeSh6CPcwQ0xj-e-Z1JG8qdaQZL_buql6I.v4Mf9CDdf6oz8CykbKr9A4i-jxsfUgBNsEw6-9k9v4U&dib_tag=se&keywords=samsung%2Bfit%2Bplus%2Busb%2Bflash%2Bdrive&plpRedirect=mhFallback&qid=1781649321&sr=8-1&th=1" class="material-link" target="_blank">View USB Source →</a>
+        </div>
+      </div>
+      
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/61Qd9Z9caRL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">AirTag (2nd Generation)</span>
+          <span class="material-spec">AirTag (2nd Generation)</span>
+          <a href="https://www.apple.com/shop/buy-airtag/airtag" class="material-link" target="_blank">View Tracker Source →</a>
+        </div>
+      </div>
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/61qyxqYNNDL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">USB to USB C Adapter</span>
+          <span class="material-spec">USB to USB C Adapter</span>
+          <a href="https://www.amazon.com/UGREEN-Adapter-10Gbps-Converter-Samsung/dp/B0CY1Y3TSQ/ref=sr_1_6_sspa?crid=25KO7FK6B5O70&dib=eyJ2IjoiMSJ9.y6lTDhww1xwH_BnQm1LsR2QSsNVLCL0VfVsqwuD35YXA_c5Cx0dP68lycdKZfymvve1Z22IKKT8c5Lz5k4NcXEZDVTkX0BFgLh_owOlKldns7GJ60xbEq0KfrgWS9yAwD8Tae11BPysq0Kf-9RTARaK4N8_3_d1QfStJjjOwTSBqyRE1qpPCvgWYFJ63eWkyrxH3jzz7v71Ddba8_RomnjzRXiDot615e6fH7oIP0ps.RtF2GU9CX_GBxV3Jjr_5sZOkwTK70_Tw5mbpwzawdpQ&dib_tag=se&keywords=usb-c%2Bto%2Busb%2Badapter&qid=1781650590&sprefix=usb-c%2Bto%2Busb%2Badapter%2Caps%2C140&sr=8-6-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&th=1" class="material-link" target="_blank">View USB Adapter Source →</a>
+        </div>
+      </div>
+      
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/61BqJb-loUL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">4 Pack Micro USB to USB C Adapter</span>
+          <span class="material-spec">4 Pack Micro USB to USB C Adapter</span>
+          <a href="https://www.amazon.com/Adapter-Micro-USB-Compatible-Samsung-MacBook/dp/B0FYNL8HDM/ref=sr_1_2_sspa?crid=1TICUW2J162CD&dib=eyJ2IjoiMSJ9.TaRDgQ47WVjN3lhZDsWxjXD5nJs_9zdu3dlG4rjC3G5yZYzn4HzQh3uB3tbhrCCAKNV46wJjDVc9PdKQ7azfSy3bw5_gXjmL6LSoSL2KEqgtFNwUPfd5WfzTQwNEJI1D6nnzexuXjisUrzeEgnGh6XN6CaZtu1iVnUuD08B1BKZ9_oq1iqI8XkWdD9WYSlRf4v0Dl5cwf5RtJ4Wz9iSOWIWc9MvXpWzAh6xxtc3l0XE.DtTzX9KTeqGzjkRZwWjOX1iB_7lM7IlOPvUAmPqYbzQ&dib_tag=se&keywords=usb-micro+to+usb+c+adapter+samsung&qid=1781651650&sprefix=usb-micro+to+usb+c+adapter+samsung%2Caps%2C155&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1" class="material-link" target="_blank">View  USB Adapter Source →</a>
+        </div>
+      </div>
+      
+      
+<!---->
+
+      
+            <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://m.media-amazon.com/images/I/71Nq20Q--sL._AC_UY218_.jpg" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">USB-C Cord</span>
+          <span class="material-spec">LEIRUI USB-C cable</span>
+          <a href="https://www.amazon.com/Charging-Braided-Support-Thunderbolt-Samsung/dp/B0CBKC8V74/ref=sr_1_1_sspa?crid=NTTJ1XR3QPZB&dib=eyJ2IjoiMSJ9.4IUOXqW0nC6Dnsk5CkxNWZXeFzVlZkP3jtBXr2wsTYnZVij1DgqM-YB4sxhAafCMtNk-EWMWgx8lQwxbP8jX_S9NEQFcNjXxpKuJXc2C60MEiI7fmYOwmkAGA0enZf2ORXs5xpgn2LDnYYhB0Saco2888zkINkPvXpBw_xrDznt0TR58ANjYyWnfVZ7jT4Zw_t5aX8G3vBxIznY_4V2XM7Lrd1yRKiF6GNFK7PWyCvY.z4oSlkdJGaaM0grr3RD34qE7i1XDPM2ykRJOdseuAOc&dib_tag=se&keywords=LEIRUI%2BUSB-C%2Bcable&qid=1781709495&sprefix=leirui%2Busb-c%2Bcable%2Caps%2C166&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1" class="material-link" target="_blank">View Cord Source →</a>
+        </div>
+      </div>
+      
+            <!-- Item Card 3 -->
+                  <!-- Item Card 3 -->
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://media.printables.com/media/prints/376433/images/3164351_6ceffff6-1ffc-44a8-bc01-d381123e8927/thumbs/inside/1280x960/png/tabletstand1.webp" alt="Tech accessories utility management pouch block" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Tablet/Phone stand</span>
+          <span class="material-spec">Adjustable 3D-Printed tablet stand. Flexible, light and folds flat</span>
+          <a href="https://www.printables.com/model/376433-tablet-stand" class="material-link" target="_blank">View STL file Source →</a>
+        </div>
+      </div>
+      
+            <!-- Item Card 3 -->
+
+    </div>
+
+
+    
+    
+    
+    
+    
+    
+    
+    <!-- Tier Breakdown Pipeline -->
+    <h2 class="section-title">Internal Organization Tiers</h2>
+
+    <!-- INFO CALLOUT (ACTIVE) -->
+    <div class="callout-box info">
+      <span class="callout-icon">ⓘ</span>
+      <div class="callout-text">
+        <strong>Weight Distribution Tip:</strong> Always secure your heaviest processing assets flat against the rear internal frame channel to minimize lumbar strain during transit.
+      </div>
+    </div>
+
+    <div class="tutorial-feed">
+      
+      <!-- Tier 1 -->
+      <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">01</span>
+          <h3 class="step-title">Where the magic happens... ( IBM X1 Carbon ThinkPad )</h3>
+        </div>
+        <p class="step-text">
+          This is my primary mobile machine. I probably should get a new one but - it's still works. ¯\_(ツ)_/¯
+          
+          
+          
+          <!---->
+          <div class="step-photo">
+          <img src="https://i.ibb.co/pjV06s5n/Screenshot-20260617-132635.png" alt="Workstation laptop sliding into safe rear sleeve compartment" onclick="openLightbox(this.src)" style="object-fit: cover">
+        </div>
+          <!-- specs --><div class="w-full max-w-5xl mx-auto bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden font-mono text-sm text-zinc-300">
+  
+  <!-- Terminal Header -->
+  <div class="flex items-center justify-between px-4 py-3 bg-zinc-950 border-b border-zinc-800">
+    <div class="flex items-center space-x-2">
+      <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+      <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+      <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+    </div>
+    <div class="w-12"></div> 
+  </div>
+
+  <!-- Main Container: Side-by-Side Panels (Specs left, Q&A right) -->
+  <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+    
+    <!-- Left Panel: Strict Table Spec Sheet -->
+    <div class="p-6">
+      <table class="w-full border-separate border-spacing-y-3">
+        <tbody>
+          
+          <!-- Laptop Model -->
+          <tr class="group hover:bg-zinc-800/20 transition-colors">
+            <td class="w-36 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+              <strong>⚡ Laptop</strong>
+            </td>
+            <td class="font-normal text-zinc-300 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+              ThinkPad X1 Gen 7
+            </td>
+          </tr>
+
+          <!-- OS -->
+          <tr class="group hover:bg-zinc-800/20 transition-colors">
+            <td class="w-36 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+              <strong>💿 OS</strong>
+            </td>
+            <td class="font-normal text-emerald-400 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+              Fedora 43 Workstation
+            </td>
+          </tr>
+
+          <!-- Desktop Environment -->
+          <tr class="group hover:bg-zinc-800/20 transition-colors">
+            <td class="w-36 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+              <strong>🖥️ DE</strong>
+            </td>
+            <td class="font-normal text-zinc-300 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+              GNOME / KDE / XFCE
+            </td>
+          </tr>
+
+          <!-- CPU -->
+          <tr class="group hover:bg-zinc-800/20 transition-colors">
+            <td class="w-36 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+              <strong>🧠 CPU</strong>
+            </td>
+            <td class="font-normal text-zinc-300 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+              Intel® Core™ i7-8665u
+            </td>
+          </tr>
+
+          <!-- RAM -->
+          <tr class="group hover:bg-zinc-800/20 transition-colors">
+            <td class="w-36 pb-2 text-zinc-100 align-middle pl-2 rounded-l">
+              <strong>📊 RAM</strong>
+            </td>
+            <td class="font-normal text-cyan-400 pb-2 align-middle pr-2 rounded-r">
+              16 GB
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Right Panel: Q&A Session -->
+    <div class="p-6 space-y-5">
+      
+      <!-- Question 1 -->
+      <div class="space-y-1.5">
+                  <br/><br/>
+
+        <div class="text-zinc-100"><strong>❓ Why did you choose this laptop?</strong></div>
+        <div class="font-normal text-zinc-400 pl-6 leading-relaxed">
+          It's Linux friendly, It's a ThinkPad so it has great keyboard, it lightweightand the battery life isn't too bad.
+          <br/><br/>
+          
+                  <div class="text-zinc-100"><strong>❓ If I were to upgrade today what would be your options?</strong></div>
+        <div class="font-normal text-zinc-400 pl-6 leading-relaxed">
+         <ul class="list-disc list-inside space-y-2 font-mono text-sm text-zinc-300 bg-zinc-900 border border-zinc-800 p-4 rounded-xl max-w-md mx-auto shadow-xl">
+  <li class="hover:text-zinc-100 transition-colors">IBM ThinkPad X1 Carbon(Newer)</li>
+  <li class="hover:text-zinc-100 transition-colors">IBM ThinkPad P1</li>
+  <li class="hover:text-zinc-100 transition-colors">MacBook Pro 14"</li>
+</ul>
+          <br/><br/>
+          
+          
+        </div>
+      </div>
+
+      <!-- Question 2 (Pros) -->
+      <div class="space-y-1.5">
+        <div class="text-emerald-400"><strong>👍 Pros:</strong></div>
+        <ul class="font-normal text-zinc-400 pl-6 list-disc list-inside space-y-1">
+          <li>Exceptional, tactile keyboard layout optimized for efficient coding sessions.</li>
+          <li>Flawless out-of-the-box hardware compatibility with Fedora and upstream drivers.</li>
+          <li>Rugged  chassis.</li>
+        </ul>
+      </div>
+
+      <!-- Question 3 (Cons) -->
+                <br/><br/>
+
+      <div class="space-y-1.5">
+        <div class="text-red-400"><strong>👎 Cons:</strong></div>
+        <ul class="font-normal text-zinc-400 pl-6 list-disc list-inside space-y-1">
+          <li>Soldered configuration components limit future memory expansion options.</li>
+          <li>Monitor is 1080p @60Hz refresh rate</li>
+        </ul>
+      </div>
+
+    </div>
+    
+  </div>
+</div>
+          <!-- specs -->
+          
+        </p>
+        
+      </article>
+
+      <!-- Tier 2 -->
+      <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">02</span>
+          <h3 class="step-title">Stage 2- My Pouch (optional carry)</h3>
+        </div>
+        <p class="step-text">
+          A dedicated standalone pouch with Security/wirless related tools and Single Board Computere (SBC) and MicroCrontrollers.
+        </p>
+        
+        
+        <div class="step-photo">
+          <img src="https://i.ibb.co/C59N1sWR/20260617-155226-2.jpg" alt="Neatly arrayed cables and accessories inside gear pouch organizer" onclick="openLightbox(this.src)">
+        </div>
+        
+        <div class="w-full max-w-2xl mx-auto bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden font-mono text-sm text-zinc-300">
+  
+  <div class="flex items-center justify-between px-4 py-3 bg-zinc-950 border-b border-zinc-800">
+    <div class="flex items-center space-x-2">
+      <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+      <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+      <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+    </div>
+    <span class="text-xs text-zinc-500 select-none">Toys</span>
+    <div class="w-4"></div> 
+  </div>
+
+  <div class="p-6">
+    <table class="w-full border-separate border-spacing-y-3">
+      <tbody>
+        
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🔌 ESP32</strong>
+          </td>
+          <td class="font-normal text-cyan-400 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            Dual-Core / Wi-Fi & BT / IoT Microcontroller (modified :antenna added)
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🍓 Pi 4 (4GB)</strong>
+          </td>
+          <td class="font-normal text-zinc-300 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            LPDDR4 / Broadcom BCM2711 / Quad-core Cortex-A72
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🍓 Pi Zero 2 W</strong>
+          </td>
+          <td class="font-normal text-emerald-400 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            512MB RAM / RP3A0 SiP / Quad-core 64-bit ARM Cortex-A53
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>📡 Alfa AC1200</strong>
+          </td>
+          <td class="font-normal text-zinc-300 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            802.11ac Wireless Adapter / High-Gain Dual-Band
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>📡 Cisco AE6000</strong>
+          </td>
+          <td class="font-normal text-zinc-300 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            Wireless-AC Mini USB Adapter / Dual-Band Link
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🎴 TF to SD Adapter</strong>
+          </td>
+          <td class="font-normal text-zinc-300 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            MicroSD to Standard SD Storage Enclosure Pass-through
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>📹 HDMI to USB</strong>
+          </td>
+          <td class="font-normal text-amber-400 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            UVC Video Capture Dongle / 1080p Stream Input Link
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>💾 MicroSD Cards</strong>
+          </td>
+          <td class="font-normal text-cyan-400 align-middle pr-2 rounded-r">
+            High-Endurance Flash Storage / OS Boot Media
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+      </article>
+
+      
+       <!-- Tier 3 -->
+      <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Stage 3 - Heavier Loadout</h3>
+        </div>
+        <p class="step-text">
+          What I bring if weight doesnt matter, or  I'm going to be staying for a while
+        </p>
+        
+        
+        <div class="step-photo">
+          <img src="https://i.ibb.co/JYrdZr5/1783020582632-1.png" alt="Neatly arrayed cables and accessories inside gear pouch organizer" onclick="openLightbox(this.src)">
+        </div>
+        
+        <div class="w-full max-w-2xl mx-auto bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden font-mono text-sm text-zinc-300">
+  
+  <div class="flex items-center justify-between px-4 py-3 bg-zinc-950 border-b border-zinc-800">
+    <div class="flex items-center space-x-2">
+      <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+      <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+      <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+    </div>
+    <span class="text-xs text-zinc-500 select-none">The extra</span>
+    <div class="w-4"></div> 
+  </div>
+
+  <div class="p-6">
+    <table class="w-full border-separate border-spacing-y-3">
+      <tbody>
+        
+<tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🎧 Sony WH-1000XM5</strong>
+          </td>
+          <td class="font-normal text-cyan-400 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+         Noise Canceling HeadPhones
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🖥️ 4K 16" Portable Monitor</strong>
+          </td>
+          <td class="font-normal text-zinc-300 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+           USB-C One-Cable Setup 
+          </td>
+        </tr>
+<tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🔥 Fire TV Stick 4K</strong>
+          </td>
+          <td class="font-normal text-cyan-400 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            for streaming from another device, mirroring, or simply watching.
+          </td>
+        </tr>
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🧲 MagSafe Foldable Stand&nbsp;</strong>
+          </td>
+          <td class="font-normal text-emerald-400 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            Multi-Angle Phone & Tablet MagSafe Desk stand 
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 pb-2 border-b border-zinc-800/50 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🔥 Pinecil 64 </strong>
+          </td>
+          <td class="font-normal text-amber-400 pb-2 border-b border-zinc-800/50 align-middle pr-2 rounded-r">
+            Smart Portable USB-C Soldering Iron
+          </td>
+        </tr>
+
+        <tr class="group hover:bg-zinc-800/20 transition-colors">
+          <td class="w-48 text-zinc-100 align-middle pl-2 rounded-l">
+            <strong>🎮 Xbox X|S Controller</strong>
+          </td>
+          <td class="font-normal text-zinc-300 align-middle pr-2 rounded-r">
+            RetoArch, Steam gameplay
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+      </article>
+      <!-- Tier 3 -->
+      <!--
+      <article class="tutorial-step">
+        <div class="step-header">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Quick-Access Operations Bay</h3>
+        </div>
+        <p class="step-text">
+          Positioned within top or immediate perimeter zipper tracks. Reserved strictly for tools that require deployment under sub-five-second conditions, including writing implements, identity badges, and core offline storage media keys.
+        </p>
+        
+        
+        <div class="step-photo">
+          <img src="tier-3-access.jpg" alt="Reaching into top fast-access pocket for quick tool retrieval" onclick="openLightbox(this.src)">
+        </div>
+        
+        
+        
+        
+      </article> -->
+
+    </div>
+
+  </div>
+
+  <!-- Global Lightbox Viewport -->
+  <div id="image-lightbox" class="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-content" id="lightbox-img" alt="High resolution preview popup box">
+  </div>
+
+  <!-- JavaScript Interaction Logic -->
+  <script>
+    // Switches the main hero graphic when clicking a lower row thumbnail node
+    function switchHeroImage(imageSrc, thumbnailElement) {
+      const heroImg = document.getElementById('hero-display-img');
+      
+      // Smooth fade transition handler logic
+      heroImg.style.opacity = '0';
+      
+      setTimeout(() => {
+        heroImg.src = imageSrc;
+        heroImg.style.opacity = '1';
+      }, 200);
+
+      // Drops active styling borders across all nodes, assigns color border to the active target
+      const thumbnails = document.querySelectorAll('.thumbnail-box');
+      thumbnails.forEach(box => box.classList.remove('active'));
+      thumbnailElement.classList.add('active');
+    }
+
+    // High-Res Lightbox Modal Triggers
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      
+      lightboxImg.src = imageSrc;
+      lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('image-lightbox');
+      lightbox.classList.remove('show');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Mechanical Keyboards // Build Lab</title>
+  <style>
+    /* ==========================================================================
+       1. GLOBAL RESET & DARK BASELINE
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0a0a0a; /* Pure deep dark background */
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Back Link Button */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      color: #8e8e93;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      color: #0a84ff; /* Accent Blue */
+    }
+
+    /* ==========================================================================
+       2. HERO ARTICLE HEADER
+       ========================================================================== */
+    .project-header {
+      margin-bottom: 2rem;
+    }
+
+    .project-meta {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #0a84ff;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #f5f5f7;
+    }
+
+    .project-summary {
+      font-size: 1.15rem;
+      color: #a1a1a6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Repository External Action Links */
+    .project-links-array {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      color: #f5f5f7;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .action-link:hover {
+      background-color: #161618;
+      border-color: #2c2c2e;
+    }
+    
+    .action-link:active {
+      transform: scale(0.98);
+    }
+
+    /* Main Project Showcase Photo */
+    .main-hero-photo {
+      width: 100%;
+      height: 450px;
+      border-radius: 24px; /* Premium smooth corners */
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .main-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+
+    /* ==========================================================================
+       3. PROJECT PULSE & LAB STATUS MATRIX
+       ========================================================================== */
+    .project-pulse {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .pulse-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #1c1c1e;
+      margin-bottom: 1.25rem;
+    }
+
+    .pulse-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8e8e93;
+      font-weight: 700;
+    }
+
+    /* Status Badge Engine */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Active / Tuning State */
+    .status-badge.incomplete {
+      background-color: rgba(255, 159, 10, 0.1); /* System Amber/Orange */
+      color: #ff9f0a;
+    }
+    
+    .status-badge.incomplete .status-dot {
+      background-color: #ff9f0a;
+      box-shadow: 0 0 8px #ff9f0a;
+    }
+
+    /* Finished / Stock State */
+    .status-badge.complete {
+      background-color: rgba(48, 209, 88, 0.1); /* System Green */
+      color: #30d158;
+    }
+    
+    .status-badge.complete .status-dot {
+      background-color: #30d158;
+      box-shadow: 0 0 8px #30d158;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Target Intent & Acoustics Typography */
+    .pulse-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .pulse-group h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f5f5f7;
+      margin-bottom: 0.25rem;
+    }
+
+    .pulse-group p {
+      color: #a1a1a6;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       4. SOURCES & MATERIALS CARDS (Large Form Grid Layout)
+       ========================================================================== */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 3.5rem 0 1.5rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #1c1c1e;
+      color: #ffffff;
+    }
+
+    /* Spacious layout for large item profiles */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .material-item-card {
+      background-color: #121212;
+      border: 1px solid #1c1c1e;
+      border-radius: 20px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .material-item-card:hover {
+      border-color: #2c2c2e;
+      background-color: #161618;
+    }
+
+    /* Large Component Showcase Image Container */
+    .material-photo-box {
+      width: 100%;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2c2c2e;
+      background-color: #1c1c1e;
+    }
+
+    .material-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .material-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .material-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .material-spec {
+      font-size: 0.9rem;
+      color: #8e8e93;
+    }
+
+    .material-link {
+      font-size: 0.85rem;
+      color: #0a84ff;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      display: inline-block;
+    }
+
+    .material-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       5. MODULAR SYSTEM CAUTION / INFO CALLOUT CONTAINER
+       ========================================================================== */
+    .callout-box {
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin: 2rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    /* Info Flavor Core Rules */
+    .callout-box.info {
+      background-color: rgba(10, 132, 255, 0.05);
+      border: 1px solid rgba(10, 132, 255, 0.15);
+      border-left: 4px solid #0a84ff;
+    }
+    .callout-box.info .callout-icon {
+      color: #0a84ff;
+    }
+
+    /* Caution Flavor Core Rules */
+    .callout-box.caution {
+      background-color: rgba(255, 69, 58, 0.05);
+      border: 1px solid rgba(255, 69, 58, 0.15);
+      border-left: 4px solid #ff453a; /* System Red */
+    }
+    .callout-box.caution .callout-icon {
+      color: #ff453a;
+    }
+
+    .callout-icon {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .callout-text {
+      font-size: 0.95rem;
+      color: #d1d1d6;
+      line-height: 1.5;
+    }
+
+    .callout-text strong {
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       6. BLOG STYLE STEP-BY-STEP TUTORIAL FEED
+       ========================================================================== */
+    .tutorial-feed {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tutorial-step {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .step-number {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a84ff;
+      background-color: rgba(10, 132, 255, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f5f5f7;
+    }
+
+    .step-text {
+      color: #d1d1d6;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* Photo block for steps and timeline items */
+    .step-photo {
+      width: 100%;
+      height: 350px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #1c1c1e;
+    }
+
+    .step-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      cursor: zoom-in;
+    }
+
+    .step-photo img:hover {
+      transform: scale(1.02);
+    }
+
+    /* ==========================================================================
+       7. HIGH-RES LIGHTBOX MODAL
+       ========================================================================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background-color: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* ==========================================================================
+       8. MOBILE OPTIMIZATION RESPONSIVENESS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .project-title {
+        font-size: 2rem;
+      }
+
+      .main-hero-photo {
+        height: 280px;
+      }
+
+      .step-photo {
+        height: 220px;
+      }
+      
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-links-array {
+        gap: 0.5rem;
+      }
+
+      .action-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <a href="#" class="back-btn">← Back to Portfolio</a>
+
+    <header class="project-header">
+      <div class="project-meta">Hardware Customization // Studio Logs</div>
+      <h1 class="project-title">Keyboards</h1>
+      <p class="project-summary">This all about keyboards I've tried/own.</p>
+      
+      <div class="project-links-array">
+        <a href="https://github.com" class="action-link" target="_blank">
+          <span class="link-icon">⌨️</span> View QMK/VIAL Firmware
+        </a>
+      </div>
+My current keyboard
+      <div class="main-hero-photo">
+        <img src="https://i.ibb.co/W4qh89sh/ibnm.jpg" alt="High-end custom mechanical keyboard array assembly blueprint" onclick="openLightbox(this.src)">
+      </div>
+    </header>
+
+    <section class="project-pulse">
+      <div class="pulse-header">
+        <h2 class="pulse-title">Build Lab Status</h2>
+        
+        <div class="status-badge incomplete">
+          <span class="status-dot"></span>
+          <span class="status-text">Active Tune // Artisan keycaps</span>
+        </div>
+
+        </div>
+
+      <div class="pulse-content">
+        <div class="pulse-group">
+          <h3>The Target Intent</h3>
+          <p>show a keyboard journey.</p>
+        </div>
+        <div class="pulse-group">
+          <h3>overall thoughts. TLDR;</h3>
+          <p>Older IBM keyboards have always given a superior typing experience to me. Im speaking of the x61, x220,t40 model keyboards. I've often tried to find subsitutes or an even better keyboard but the journey continues.</p>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-title">The current collection</h2>
+    <div class="sources-grid">
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/W4qh89sh/ibnm.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">IBM SK-8845</span>
+          <span class="material-spec">Recent acquisition. uses the old IBM thinkpad style layout<br/><b>Negatives:</b> No Windows key, can't swap Fn & Ctrl </span>
+          
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/rKz6M2xk/20260616-160116.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">ThinkPad TrackPointkeyboard II (KC-1957)</span>
+          <span class="material-spec">Same keyboards as in the laptops. USB/Blueooth compaitable. one of the best</span>
+         
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/RpwpFP5T/20260616-155959.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">MX Keys Mini</span>
+          <span class="material-spec">great keyboard, replaced my full sized MX keys</span>
+         
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/39msp6j9/20260620-123241.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Keychron Q3 Max</span>
+          <span class="material-spec">My first mechnical TKL 80% keyboard with knob. Silent switches. </span>
+          
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/35kz2VDP/20260621-180807.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">logitech  k380</span>
+          <span class="material-spec">logitech  k380</span>
+         
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/KxbQsdnG/d93ad0dc-7c58-462b-93eb-9b956b4a875f.webp" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Logitech - K400 Plus TKL</span>
+          <span class="material-spec">The keyboard that's gotten me out of a lot of jams quickly (not needing to go find both a mouse and keyboard for a simple task). Also good for multimedia devices</span>
+          
+        </div>
+      </div>
+      
+                  <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/k6hJ4yj5/20260621-181003.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Logitech MX Keys</span>
+          <span class="material-spec">Logitech MX Keys</span>
+          
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/vfbv2qL/20260621-181049.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Apple  keyboard (wired full)</span>
+          <span class="material-spec">Apple wired full keyboard</span>
+         
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/jk3BCdZw/20260621-183122.jpg" alt="Premium custom tactile mechanical switch batch" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Apple Keyboard(Mini)</span>
+          <span class="material-spec">Just an apple bluetooth keyboard</span>
+         
+        </div>
+      </div>
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/8yk5Z7F/20260621-181153.jpg" alt="High contrast dye-sub keycap profile upgrades" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">SiCK-68</span>
+          <span class="material-spec">3D Printed keyboard (work in progress).The SiCK-68 is a custom mechanical keyboard built from scratch </span>
+          
+        </div>
+      </div>
+      
+    </div>
+
+    <h2 class="section-title">What I'm current looking at</h2>
+<!--looking-->
+    
+    <div class="sources-grid">
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/SXfx93p7/tex-shinobi-mini-review-v0-osqvzf04zpwf1.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">tex-shinobi</span>
+          <span class="material-spec">mechanical keyboard version of a thinkpad </span>
+          
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/bRRp1Nyz/hhkb2.png" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">HHKB Studio</span>
+          <span class="material-spec">Happy Hacking KeyBoard(HHKB); Topre</span>
+          
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/bMb4ggf6/dusk67.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">Dusk67</span>
+          <span class="material-spec">Wooden Keyboard</span>
+
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/0RBcMCwm/g915.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">G915</span>
+          <span class="material-spec">Although the LogiTech G915 is frowned upon by some people, It provides a good typing experience </span>
+          
+        </div>
+      </div>
+      
+            <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/rR3xVqcR/G1-BFx-Qzas-AATl-P3.jpg" alt="Barebone mechanical keyboard enclosure frame" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">-</span>
+          <span class="material-spec">-</span>
+          
+        </div>
+      </div>
+      
+         
+      
+      <div class="material-item-card">
+        <div class="material-photo-box">
+          <img src="https://i.ibb.co/JWHcm85S/2-7d282090-50fd-4602-86f6-36a3b6d7e94e.webp" alt="High contrast dye-sub keycap profile upgrades" onclick="openLightbox(this.src)">
+        </div>
+        <div class="material-details">
+          <span class="material-name">KiiBOOM Phantom 64</span>
+          <span class="material-spec">-</span>
+        
+        </div>
+      </div>
+      
+    </div>
+
+    
+
+  </div>
+
+  <div id="image-lightbox" class="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-content" id="lightbox-img" alt="High resolution preview popup box">
+  </div>
+
+  <script>
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      
+      lightboxImg.src = imageSrc;
+      lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('image-lightbox');
+      lightbox.classList.remove('show');
+    }
+  </script>
+</body>
+</html>
