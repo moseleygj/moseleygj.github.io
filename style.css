@@ -245,7 +245,7 @@ input:checked + .slider:before {
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid #161a22; 
+            border: 5px solid #2a313d; 
             background-color: #2a313d;
         }
 
@@ -1703,3 +1703,214 @@ box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.7);    }
   }
 }
 /**animated hove end**/
+
+/** In Progress **/
+    /* Global Dark Theme */
+   /* body { background-color: #121212; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 20px; }*/
+    
+    /*.project-section { border: 1px solid #333; padding: 1.5rem; border-radius: 12px; background-color: #181818; }*/
+   /* .project-section summary { font-weight: bold; cursor: pointer; padding: 10px; font-size: 1.2rem; color: #fff; }*/
+.project-section summary {
+  /* Ensure it doesn't default to list-item */
+  display: block; 
+  
+  /* Reset alignment */
+  text-align: left;
+  
+  /* Prevent the arrow from pushing the text */
+  list-style: none;
+  
+  /* Your existing styles */
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  cursor: pointer;
+}
+
+
+/* Ensure the container stays stable */
+.project-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1080px;
+    margin-top: 1.6em;
+}
+
+.section-title {
+  text-align: left;
+  margin-bottom: 10px;
+  /* Ensure it doesn't shrink during toggle */
+  flex-shrink: 0; 
+}
+
+.content-wrapper {
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+/* Optional: Keep a min-height if you want to avoid layout shifts */
+.content-wrapper.hidden {
+  display: none;
+}
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 15px; max-width:1080px;}
+
+    /* Card Styling */
+    .card { background-color: #1e1e1e; padding: 1rem; border-radius: 12px; border: 1px solid #333; transition: transform 0.2s; }
+    .card:hover { border-color: #555; }
+    .card h3 { margin: 15px 0 5px 0; color: #fff; }
+    .meta { color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
+
+    /* Gallery Styling */
+    .gallery { position: relative; height: 350px; width: 100%; overflow: hidden; border-radius: 8px; background: #000; }
+    .gallery img { width: 100%; height: 100%; object-fit: fill; display: none; }
+    .gallery img.active { display: block; }
+    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; cursor: pointer; padding: 10px; z-index: 1; }
+    .prev { left: 5px; } .next { right: 5px; }
+
+    /* Details & Checklist */
+    .details-view summary { color: #00d4ff; font-weight: 600; cursor: pointer; margin-top: 10px; }
+    .status-content { padding: 10px 0; border-top: 1px solid #333; margin-top: 10px; }
+    .status-content h4 { color: #fff; margin: 15px 0 5px 0; font-size: 0.9rem; }
+    
+    .status-list { list-style: none; padding: 0; font-size: 0.85rem; color: #bbb; margin: 0; }
+    .status-list li { display: flex; align-items: center; margin-bottom: 6px; }
+    .status-list input[type="checkbox"] { margin-right: 10px; accent-color: #00d4ff; cursor: default; }
+
+    /* Progress Bar */
+    .progress-bar { background: #333; height: 6px; border-radius: 3px; margin: 15px 0 5px 0; }
+    .progress-fill { background: #00d4ff; height: 100%; border-radius: 3px; }
+
+    /* Documentation Button */
+    .doc-btn { display: block; margin-top: 15px; padding: 8px; background: #252525; border: 1px solid #444; color: #fff; text-align: center; text-decoration: none; border-radius: 4px; font-size: 0.85rem; transition: 0.2s; }
+    .doc-btn:hover { background: #333; border-color: #00d4ff; color: #00d4ff; }
+
+    @media (max-width: 900px) { .project-grid { grid-template-columns: 1fr; } }
+/** in progress end **/
+summ
+font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+
+
+
+  /**carrot for view more section
+**/
+
+/* Standardize summary behavior for all details elements in this section */
+.project-section summary,
+.project-details summary,
+.details-view summary {
+    list-style: none; /* Hide native marker */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: none;
+    
+}
+
+/* Hide native marker for WebKit/Firefox */
+.project-section summary::-webkit-details-marker,
+.project-details summary::-webkit-details-marker,
+.details-view summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Uniform Arrow Implementation */
+.project-section summary::before,
+.project-details summary::before,
+.details-view summary::before {
+    content: '▶';
+    margin-right: 10px;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+/* Rotate the arrow when the parent is open */
+.project-section[open] > summary::before,
+.project-details[open] > summary::before,
+.details-view[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+
+/*test*/
+.avatar-wrapper {
+position: relative; 
+    display: inline-block;
+    margin-left: 10px; /* Adjust spacing to sit next to your current avatar */
+    vertical-align: middle;
+}
+.status-dot {
+    position: absolute;
+    bottom: 15px;
+    right: 19px;
+    width: 18px;
+    height: 18px;
+    background-color: #23a559; /* Green status */
+    border-radius: 50%;
+    border: 5px solid #232428; /* Creates the cut-out effect */
+    z-index: 4;
+}
+
+/* The main status bubble */
+.thought-bubble {
+    position: absolute;
+    bottom: 54px;
+    left: 170px; /* Pushes the bubble out to the right of the avatar */
+    background-color: #383b40; /* Bubble background color */
+    color: #dbdee1;
+    padding: 8px 14px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    z-index: 2;
+    white-space: nowrap;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Italicize text exactly like the image */
+.thought-bubble em {
+    font-style: italic;
+    color: #b5bac1; /* Slightly muted text color */
+}
+
+/* Creates the rounded connecting bump */
+.thought-bubble::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: #383b40;
+    border-radius: 50%;
+    z-index: -1; /* Pushes it behind the main bubble body */
+}
+
+/* Creates the tiny floating dot above the bump */
+.thought-bubble::after {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: -9px;
+    width: 12px;
+    height: 12px;
+    background-color: #383b40;
+    border-radius: 50%;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Optional: Styling the plus icon */
+.icon {
+    color: #80848e;
+    font-weight: bold;
+}

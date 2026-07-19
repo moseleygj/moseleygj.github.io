@@ -65,3 +65,13 @@ document.getElementById('toggle-beyond-btn').addEventListener('click', function(
     btsSection.style.display = 'none';
   }
 });
+
+//in progress section
+    function moveSlide(btn, direction) {
+        const gallery = btn.parentElement;
+        const images = gallery.querySelectorAll('img');
+        let index = Array.from(images).findIndex(img => img.classList.contains('active'));
+        images[index].classList.remove('active');
+        index = (index + direction + images.length) % images.length;
+        images[index].classList.add('active');
+    }
