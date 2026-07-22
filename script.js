@@ -1,6 +1,6 @@
 const contactData = {
   email: 'moseleygj@gmail.com',
-  phone: '+1-'
+  phone: '+1-(347) 670-3223 '
 };
 
 // Global reference tracker to manage overlapping quick clicks cleanly
