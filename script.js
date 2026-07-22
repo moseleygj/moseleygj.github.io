@@ -75,3 +75,21 @@ document.getElementById('toggle-beyond-btn').addEventListener('click', function(
         index = (index + direction + images.length) % images.length;
         images[index].classList.add('active');
     }
+
+
+
+
+    /**Secret sauce **/
+
+    const art = `
+      ( Hello, Stranger. I see you're 👀looking at my secret sauce... Take what you like, Enjoy! -Gordon Moseley)
+     o
+    .
+ ^__^
+ (👀\\_______
+ (__)\\       )\\/\\
+     ||----w |
+     ||     ||
+`;
+
+    console.log(art);
