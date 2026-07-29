@@ -1,0 +1,143 @@
+:root {
+            --bg-color: #000000;
+            --surface-color: #1c1c1e;
+            --surface-hover: #2c2c2e;
+            --text-primary: #c1b89b;
+            --text-secondary: #939a85;
+            --accent-green: #6c8062;
+            --accent-green-hover: #7d9372;
+            --accent-dark: #4a5c43;
+            --border-color: rgba(147, 154, 133, 0.15);
+        }
+
+        /* Base Reset & Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+        }
+
+        /* Menubar Styling */
+        header {
+            background-color: var(--surface-color);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+        }
+
+        /* Hamburger Button */
+        .hamburger {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background-color: var(--accent-green);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Slide-out Menu / Dropdown */
+        .menu-list {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--surface-color);
+            width: 290px;
+            list-style: none;
+            border-left: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: -2px 5px 10px rgba(0,0,0,0.6);
+            max-height: 0;
+            overflow-y: auto;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .menu-list.active {
+            max-height: 700px;
+        }
+
+        /* Group Headers */
+        .menu-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem 0.25rem 1.5rem;
+            background-color: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .menu-list li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s, color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .menu-list li a:hover {
+            background-color: var(--surface-hover);
+            color: var(--accent-green-hover);
+        }
+
+        .menu-list svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent-green);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 600px;
+            margin: 3rem auto;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+        }
