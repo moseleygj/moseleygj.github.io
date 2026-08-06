@@ -1,11 +1,247 @@
-  <html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="menu.css">
-  <script src="menuJS.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Ladder Generator</title>
+    <link rel="stylesheet" href="menu.css">
+    <script src="menuJS.js" defer></script>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --surface-color: #1c1c1e;
+            --surface-hover: #2c2c2e;
+            --text-primary: #c1b89b;
+            --text-secondary: #939a85;
+            --accent-green: #6c8062;
+            --accent-green-hover: #7d9372;
+            --accent-dark: #4a5c43;
+            --border-color: rgba(147, 154, 133, 0.15);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        /* Specific Ladder Page Layout */
+        .ladder-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .ladder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .ladder-header h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Control Group */
+        .control-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: left;
+        }
+
+        .control-group label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .control-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .control-group select:focus {
+            border-color: var(--accent-green);
+        }
+
+        /* Summary Stats Cards - 3 columns */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        /* Eyebrow / Toggle Switch Icon Styles */
+        .eye-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 2px;
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .eye-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .eye-btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .masked-value {
+            filter: blur(5px);
+            user-select: none;
+            transition: filter 0.2s;
+        }
+
+        /* Formula Breakdown Display */
+        .formula-box {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+
+        .formula-box span {
+            color: var(--text-primary);
+        }
+
+        /* Interactive Steps Table / Checklist */
+        .steps-container {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--bg-color);
+            text-align: left;
+        }
+
+        .step-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .step-item:last-child {
+            border-bottom: none;
+        }
+
+        .step-item:hover {
+            background-color: var(--surface-hover);
+        }
+
+        .step-item.completed {
+            opacity: 0.4;
+            text-decoration: line-through;
+        }
+
+        .step-label {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Custom Checkbox Design */
+        .checkbox-box {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-color);
+            transition: all 0.2s;
+        }
+
+        .step-item.completed .checkbox-box {
+            background-color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .checkbox-box svg {
+            width: 14px;
+            height: 14px;
+            stroke: #ffffff;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .step-item.completed .checkbox-box svg {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
 
- <!-- Menubar Section -->
+    <!-- Menubar Section (Consolidated single clean header) -->
     <header>
         <div class="logo">FitTools</div>
         <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation">
@@ -14,82 +250,79 @@
             <span></span>
         </button>
         <ul class="menu-list" id="menuList">
-            <!-- Group 1: Timers & Workouts -->
             <li class="menu-category">Timers & Workouts</li>
             <li>
-                <a href="#tabata">
+                <a href="/tabata.html">
                     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                     Tabata Timer
                 </a>
             </li>
             <li>
-                <a href="#emom">
+                <a href="/EMOM.html">
                     <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-                    EMOM Timer
+                    EMOM Timer!
                 </a>
             </li>
             <li>
-                <a href="#density">
+                <a href="/density.html">
                     <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
                     Density Training
                 </a>
             </li>
             <li>
-                <a href="#ladders">
+                <a href="/ladders.html">
                     <svg viewBox="0 0 24 24"><path d="M8 2v20M16 2v20M4 6h16M4 12h16M4 18h16"></path></svg>
                     Ladders
                 </a>
             </li>
             <li>
-                <a href="#stopwatch">
+                <a href="/stopwatch.html">
                     <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2"></path><path d="M5 3L2 6"></path><path d="M19 3l3 3"></path></svg>
                     Stopwatch
                 </a>
             </li>
             <li>
-                <a href="#rest">
+                <a href="/restTimer.html">
                     <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
                     Rest Timer
                 </a>
             </li>
 
-            <!-- Group 2: Tools & Calculators -->
             <li class="menu-category">Tools & Calculators</li>
             <li>
-                <a href="#onerm">
+                <a href="/1RepMax.html">
                     <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M3 12h18M6 3v18M18 3v18"></path></svg>
                     1 Rep Max
                 </a>
             </li>
             <li>
-                <a href="#calculator">
+                <a href="/plateCalc.html">
                     <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg>
                     Plate Calculator
                 </a>
             </li>
             <li>
-                <a href="#strength-level">
+                <a href="/strength.html">
                     <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
                     Strength Standards
                 </a>
             </li>
             <li>
-                <a href="#nutrient-density">
+                <a href="/NutrientDensity.html">
                     <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                     Nutrient Density Score
                 </a>
             </li>
             <li>
-                <a href="#tally">
+                <a href="/tallyCalc.html">
                     <svg viewBox="0 0 24 24"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
                     Tally Counter
                 </a>
             </li>
 
-            <!-- Group 3: Reference -->
             <li class="menu-category">Library</li>
             <li>
-                <a href="#exercise">
+                <a href="/exerciseByBodayPart.html">
                     <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                     Exercise by Body Part
                 </a>
@@ -97,6 +330,160 @@
         </ul>
     </header>
 
-</body>
+    <!-- Main Ladder Content Container -->
+    <main class="ladder-container">
+        <div class="ladder-header">
+            <h1>Workout Ladder Generator</h1>
+        </div>
 
+        <div class="control-group">
+            <label for="ladderSelect">Select Ladder Peak (!N up to 50):</label>
+            <select id="ladderSelect">
+                <!-- Dynamically populated via JS up to 50 -->
+            </select>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total</div>
+                <div class="stat-value" id="totalReps">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Completed</div>
+                <div class="stat-value" id="completedReps">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">
+                    Remaining 
+                    <button class="eye-btn" id="toggleRemaining" aria-label="Toggle Remaining Visibility" title="Hide/Show Remaining">
+                        <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </button>
+                </div>
+                <div class="stat-value" id="remainingReps">0</div>
+            </div>
+        </div>
+
+        <div class="formula-box" id="formulaDisplay">
+            Formula: <span>!0 = 0</span>
+        </div>
+
+        <div class="control-group">
+            <label>Interactive Rep Checklist (Click steps as you complete them):</label>
+            <div class="steps-container" id="stepsContainer">
+                <!-- Checklist generated dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ladderSelect = document.getElementById('ladderSelect');
+            const totalRepsEl = document.getElementById('totalReps');
+            const completedRepsEl = document.getElementById('completedReps');
+            const remainingRepsEl = document.getElementById('remainingReps');
+            const formulaDisplay = document.getElementById('formulaDisplay');
+            const stepsContainer = document.getElementById('stepsContainer');
+            const toggleRemainingBtn = document.getElementById('toggleRemaining');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            let isRemainingHidden = false;
+            let completedSteps = new Set();
+
+            // Populate dropdown up to 50
+            for (let i = 1; i <= 50; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                const totalForI = (i * (i + 1)) / 2;
+                option.textContent = `!${i} = ${totalForI} total reps`;
+                if (i === 5) option.selected = true; 
+                ladderSelect.appendChild(option);
+            }
+
+            function calculateLadder() {
+                const n = parseInt(ladderSelect.value);
+                completedSteps.clear(); 
+                
+                let sequence = [];
+                let total = 0;
+                
+                for (let i = n; i >= 1; i--) {
+                    sequence.push(i);
+                    total += i;
+                }
+
+                totalRepsEl.textContent = total;
+                formulaDisplay.innerHTML = `Formula: <span>!${n} = ${sequence.join(' + ')} = ${total}</span>`;
+
+                stepsContainer.innerHTML = '';
+                sequence.forEach((rep, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'step-item';
+                    item.dataset.index = index;
+                    item.dataset.reps = rep;
+
+                    item.innerHTML = `
+                        <div class="step-label">Step ${index + 1}: ${rep} Reps</div>
+                        <div class="checkbox-box">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                    `;
+
+                    item.addEventListener('click', () => {
+                        if (completedSteps.has(index)) {
+                            completedSteps.delete(index);
+                            item.classList.remove('completed');
+                        } else {
+                            completedSteps.add(index);
+                            item.classList.add('completed');
+                        }
+                        updateStats();
+                    });
+
+                    stepsContainer.appendChild(item);
+                });
+
+                updateStats();
+            }
+
+            function updateStats() {
+                const n = parseInt(ladderSelect.value);
+                let total = (n * (n + 1)) / 2;
+                
+                let completedSum = 0;
+                document.querySelectorAll('.step-item.completed').forEach(item => {
+                    completedSum += parseInt(item.dataset.reps);
+                });
+
+                let remaining = total - completedSum;
+
+                // Update all three displays
+                completedRepsEl.textContent = completedSum;
+                remainingRepsEl.textContent = remaining;
+                
+                if (isRemainingHidden) {
+                    remainingRepsEl.classList.add('masked-value');
+                } else {
+                    remainingRepsEl.classList.remove('masked-value');
+                }
+            }
+
+            // Eyeball Switch functionality
+            toggleRemainingBtn.addEventListener('click', () => {
+                isRemainingHidden = !isRemainingHidden;
+                if (isRemainingHidden) {
+                    remainingRepsEl.classList.add('masked-value');
+                    eyeIcon.innerHTML = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>`;
+                } else {
+                    remainingRepsEl.classList.remove('masked-value');
+                    eyeIcon.innerHTML = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>`;
+                }
+            });
+
+            ladderSelect.addEventListener('change', calculateLadder);
+
+            // Initial load
+            calculateLadder();
+        });
+    </script>
+</body>
 </html>

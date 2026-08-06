@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabata Timer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="menu.css">
+  <script src="menuJS.js" defer></script>
+<style>
+:root {
+    --bg-color: #000000;
+    --surface-color: #1c1c1e;
+    --surface-hover: #2c2c2e;
+    --text-primary: #c1b89b;
+    --text-secondary: #939a85;
+    --accent-green: #6c8062;
+    --accent-green-hover: #7d9372;
+    --accent-dark: #4a5c43;
+    --accent-orange: #ff9800;
+    --border-color: rgba(147, 154, 133, 0.15);
+}
+
+html, body {
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5vh 2vw;
+}
+
+header {
+  width: 100% !important;
+  max-width: none !important;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+body > *:not(header) {
+  margin-top: calc(56px + 1vh);
+}
+
+.phase-indicator {
+  font-size: min(4vh, 3.5vw);
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  transition: color 0.3s;
+  flex-shrink: 0;
+  margin-top: 0;
+    margin-top: 3vh;
+
+}
+
+.phase-indicator.work { color: var(--accent-green); }
+.phase-indicator.rest { color: var(--accent-orange); font-size: min(4.8vh, 4.2vw); }
+
+.overall-progress {
+  width: 100%;
+  max-width: 500px;
+  height: 1.5vh;
+  max-height: 14px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+#overallBar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--accent-green);
+  transition: width 0.5s linear;
+}
+
+.set-dots {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  flex-shrink: 0;
+}
+.set-dots .dot {
+  width: min(2.5vh, 2.5vw);
+  height: min(2.5vh, 2.5vw);
+  max-width: 12px;
+  max-height: 12px;
+  border-radius: 50%;
+  background-color: var(--surface-hover);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s;
+}
+.set-dots .dot.completed { background-color: var(--accent-green); border-color: var(--accent-green); }
+.set-dots .dot.current { 
+  background-color: #ffeb3b; 
+  border-color: #ffeb3b; 
+  animation: pulseDot 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+}
+
+.time-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  flex-shrink: 0;
+}
+.time-container .current-time { 
+  font-size: min(8vh, 9vw); 
+  color: var(--text-secondary);
+  font-weight: bold;
+  line-height: 1;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 45vh;
+  max-height: 45vh;
+  margin: 0 auto;
+  min-height: 0;
+  background:none;
+  border:none;
+}
+canvas { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain;
+}
+
+.controls {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+  flex-shrink: 0;
+  margin-bottom: 1vh;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  width: 100%;
+}
+
+@media (orientation: landscape) {
+  body {
+    justify-content: space-around;
+  }
+  
+  .controls {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 15px;
+    max-width: 100%;
+  }
+
+  .input-group {
+    width: auto;
+    flex: 1;
+  }
+
+  #startStopBtn, #pauseBtn {
+    flex: 1;
+    max-width: none;
+    font-size: min(2.5vh, 2vw);
+    padding: 1.2vh 2vw;
+    white-space: nowrap;
+  }
+
+  .input-group label {
+    font-size: min(2.5vh, 2vw);
+  }
+
+  .controls input[type="number"] {
+    width: 8vw;
+    font-size: min(2.5vh, 2vw);
+    padding: 0.5vh;
+  }
+
+  .container {
+  /*  max-width: 32vh;
+    max-height: 32vh;*/
+  }
+}
+
+.input-group label { 
+  font-weight: bold; 
+  font-size: min(3vh, 3.5vw); 
+  color: var(--text-secondary);
+}
+
+.controls input[type=number] {
+  width: 15vw;
+  font-size: min(3vh, 3.5vw);
+  padding: 0.8vh;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.controls button {
+  font-size: min(3vh, 3.5vw);
+  font-weight: bold;
+  padding: 1.2vh 3vw;
+  width: 100%;
+  max-width: 327px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  transition: background-color 0.2s;
+}
+
+#startStopBtn { background-color: var(--accent-green); }
+#startStopBtn:hover { background-color: var(--accent-green-hover); }
+#startStopBtn.stop { background-color: #f44336; }
+#pauseBtn { background-color: var(--accent-orange); }
+#pauseBtn:disabled { background-color: var(--surface-hover); color: var(--text-secondary); cursor: default; }
+</style>
+</head>
+<body>
+
+    <!-- Menubar Section -->
+    <header>
+        <div class="logo">FitTools</div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="menu-list" id="menuList">
+            <!-- Group 1: Timers & Workouts -->
+            <li class="menu-category">Timers & Workouts</li>
+            <li>
+                <a href="/tabata.html">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Tabata Timer
+                </a>
+            </li>
+            <li>
+                <a href="/EMOM.html">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                    EMOM Timer!
+                </a>
+            </li>
+            <li>
+                <a href="/density.html">
+                    <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                    Density Training
+                </a>
+            </li>
+            <li>
+                <a href="/ladders.html">
+                    <svg viewBox="0 0 24 24"><path d="M8 2v20M16 2v20M4 6h16M4 12h16M4 18h16"></path></svg>
+                    Ladders
+                </a>
+            </li>
+            <li>
+                <a href="/stopwatch.html">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2"></path><path d="M5 3L2 6"></path><path d="M19 3l3 3"></path></svg>
+                    Stopwatch
+                </a>
+            </li>
+            <li>
+                <a href="/restTimer.html">
+                    <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                    Rest Timer
+                </a>
+            </li>
+
+            <!-- Group 2: Tools & Calculators -->
+            <li class="menu-category">Tools & Calculators</li>
+            <li>
+                <a href="/1RepMax.html">
+                    <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M3 12h18M6 3v18M18 3v18"></path></svg>
+                    1 Rep Max
+                </a>
+            </li>
+            <li>
+                <a href="/plateCalc.html">
+                    <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg>
+                    Plate Calculator
+                </a>
+            </li>
+            <li>
+                <a href="/strength.html">
+                    <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
+                    Strength Standards
+                </a>
+            </li>
+            <li>
+                <a href="/NutrientDensity.html">
+                    <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    Nutrient Density Score
+                </a>
+            </li>
+            <li>
+                <a href="/tallyCalc.html">
+                    <svg viewBox="0 0 24 24"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
+                    Tally Counter
+                </a>
+            </li>
+
+            <!-- Group 3: Reference -->
+            <li class="menu-category">Library</li>
+            <li>
+                <a href="/exerciseByBodayPart.html">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Exercise by Body Part
+                </a>
+            </li>
+        </ul>
+    </header>
+
+<div class="phase-indicator" id="phaseIndicator">READY</div>
+
+<div class="overall-progress">
+  <div id="overallBar"></div>
+</div>
+
+<div class="set-dots" id="setDots"></div>
+
+<div class="time-container">
+  <div class="current-time" id="timeRemaining">00:20</div>
+</div>
+
+<div class="container">
+  <canvas id="currentGauge" width="450" height="450"></canvas>
+</div>
+
+<div class="controls">
+  <div class="input-group">
+    <label for="roundsInput">SETS</label>
+    <input type="number" id="roundsInput" min="1" max="99" value="8" />
+  </div>
+  <button id="startStopBtn">▶&nbspSTART</button>
+  <button id="pauseBtn" disabled>⏸&nbspPAUSE</button>
+</div>
+
+<script>
+const workTime = 20; 
+const restTime = 10; 
+let totalRounds = 8;
+let currentRound = 0;
+let isRestPhase = false;
+let timeLeft = workTime;
+let running = false;
+let paused = false;
+let timer;
+
+const canvas = document.getElementById("currentGauge");
+const ctx = canvas.getContext("2d");
+const overallBar = document.getElementById("overallBar");
+const roundsInput = document.getElementById("roundsInput");
+const startStopBtn = document.getElementById("startStopBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const setDots = document.getElementById("setDots");
+const timeRemaining = document.getElementById("timeRemaining");
+const phaseIndicator = document.getElementById("phaseIndicator");
+
+let displayedPercent = 0;
+let targetPercent = 0;
+
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  drawGauge(displayedPercent);
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function drawGauge(percent = 0) {
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const radius = Math.min(centerX, centerY) - 8;
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = "#1c1c1e";
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY);
+  ctx.fillStyle = isRestPhase ? "#ff9800" : "#6c8062";
+  ctx.arc(centerX, centerY, radius, -Math.PI/2, -Math.PI/2 + percent*2*Math.PI, false);
+  ctx.lineTo(centerX, centerY);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius-22, 0, 2*Math.PI);
+  ctx.fillStyle = "#000000";
+  ctx.fill();
+
+  ctx.fillStyle = "#c1b89b";
+  ctx.font = `${Math.max(14, canvas.width/4.5)}px Arial`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(`${Math.round(percent*100)}%`, centerX, centerY);
+}
+
+function updateOverallProgressBar(percent) {
+  overallBar.style.width = (percent*100)+"%";
+}
+
+function updateSetDots() {
+  setDots.innerHTML = "";
+  for(let i=0; i<totalRounds; i++){
+    const dot = document.createElement("div");
+    dot.classList.add("dot");
+    
+    if(isRestPhase) {
+      if(i <= currentRound) {
+        dot.classList.add("completed");
+      } else if(i === currentRound + 1) {
+        dot.classList.add("current");
+      }
+    } else {
+      if(i < currentRound) {
+        dot.classList.add("completed");
+      } else if(i === currentRound) {
+        dot.classList.add("current");
+      }
+    }
+    setDots.appendChild(dot);
+  }
+}
+
+function playBeep(freq=1000,duration=150){
+  try{
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.type='sine';
+    oscillator.frequency.value=freq;
+    oscillator.start();
+    gainNode.gain.setValueAtTime(1,audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+duration/1000);
+    oscillator.stop(audioCtx.currentTime+duration/1000);
+  }catch(e){console.warn("Audio not supported", e);}
+}
+
+function formatTime(sec){
+  const m = Math.floor(sec/60);
+  const s = sec%60;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function tick(){
+  if(!paused && running){
+    timeLeft--;
+
+    if (!isRestPhase && timeLeft > 0 && timeLeft <= 5) {
+      playBeep(880, 120);
+    } else if (isRestPhase && timeLeft > 0 && timeLeft <= 3) {
+      playBeep(660, 120);
+    }
+
+    if(timeLeft < 0){
+      if(!isRestPhase) {
+        if(currentRound >= totalRounds - 1) {
+          playBeep(800, 500);
+          stopTimer();
+          return;
+        } else {
+          isRestPhase = true;
+          timeLeft = restTime;
+          playBeep(500, 300);
+          phaseIndicator.textContent = "REST";
+          phaseIndicator.className = "phase-indicator rest";
+        }
+      } else {
+        isRestPhase = false;
+        currentRound++;
+        timeLeft = workTime;
+        playBeep(700, 300);
+        phaseIndicator.textContent = `ROUND ${currentRound + 1} OF ${totalRounds}`;
+        phaseIndicator.className = "phase-indicator work";
+      }
+    }
+
+    const currentPhaseTotal = isRestPhase ? restTime : workTime;
+    targetPercent = (currentPhaseTotal - timeLeft) / currentPhaseTotal;
+    updateSetDots();
+
+    const totalSessionSeconds = totalRounds * workTime + (totalRounds - 1) * restTime;
+    let elapsedSeconds = 0;
+    for(let i = 0; i < currentRound; i++) {
+      elapsedSeconds += workTime + restTime;
+    }
+    if(isRestPhase) {
+      elapsedSeconds += workTime + (restTime - timeLeft);
+    } else {
+      elapsedSeconds += (workTime - timeLeft);
+    }
+    let overallPercent = elapsedSeconds / totalSessionSeconds;
+    updateOverallProgressBar(overallPercent);
+
+    timeRemaining.textContent = formatTime(timeLeft);
+  }
+}
+
+function animateGauge() {
+  if (Math.abs(displayedPercent - targetPercent) > 0.001) {
+    displayedPercent += (targetPercent - displayedPercent) * 0.1;
+    drawGauge(displayedPercent);
+  } else {
+    drawGauge(targetPercent);
+  }
+  requestAnimationFrame(animateGauge);
+}
+animateGauge();
+
+function startTimer(){
+  totalRounds = parseInt(roundsInput.value)||8;
+  if(totalRounds<1) totalRounds=1;
+  currentRound=0;
+  isRestPhase=false;
+  timeLeft=workTime;
+  running=true;
+  paused=false;
+
+  phaseIndicator.textContent = `ROUND 1 OF ${totalRounds}`;
+  phaseIndicator.className = "phase-indicator work";
+
+  drawGauge(0);
+  updateOverallProgressBar(0);
+  updateSetDots();
+  timeRemaining.textContent = formatTime(timeLeft);
+
+  startStopBtn.textContent="■ STOP";
+  startStopBtn.classList.add("stop");
+  pauseBtn.disabled=false;
+  pauseBtn.textContent="⏸ PAUSE";
+
+  timer=setInterval(tick,1000);
+}
+
+function stopTimer(){
+  clearInterval(timer);
+  running=false;
+  paused=false;
+  currentRound=0;
+  isRestPhase=false;
+  timeLeft=workTime;
+
+  phaseIndicator.textContent = "READY";
+  phaseIndicator.className = "phase-indicator";
+
+  drawGauge(0);
+  updateOverallProgressBar(0);
+  updateSetDots();
+  timeRemaining.textContent=formatTime(workTime);
+
+  startStopBtn.textContent="▶ START";
+  startStopBtn.classList.remove("stop");
+  pauseBtn.disabled=true;
+  pauseBtn.textContent="⏸ PAUSE";
+}
+
+function togglePause(){
+  if(!running) return;
+  paused=!paused;
+  pauseBtn.textContent = paused?"▶ RESUME":"⏸ PAUSE";
+}
+
+startStopBtn.addEventListener("click",()=>running?stopTimer():startTimer());
+pauseBtn.addEventListener("click",togglePause);
+
+drawGauge(0);
+updateOverallProgressBar(0);
+updateSetDots();
+timeRemaining.textContent=formatTime(workTime);
+</script>
+</body>
+</html>

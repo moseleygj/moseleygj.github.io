@@ -82,7 +82,7 @@ document.getElementById('toggle-beyond-btn').addEventListener('click', function(
     /**Secret sauce **/
 
     const art = `
-      ( Hello, Stranger. I see you're 👀looking at my secret sauce... Take what you like, Enjoy! -Gordon Moseley)
+      ( Hello, Stranger. I see you're looking at my secret sauce... Take what you like, Enjoy! -Gordon Moseley)
      o
     .
  ^__^

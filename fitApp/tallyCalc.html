@@ -1,0 +1,398 @@
+  <html>
+<head>
+  <link rel="stylesheet" href="menu.css">
+  <script src="menuJS.js" defer></script>
+
+  <style>
+        :root {
+            --bg-color: #000000;
+            --surface-color: #1c1c1e;
+            --surface-hover: #2c2c2e;
+            --text-primary: #c1b89b;
+            --text-secondary: #939a85;
+            --accent-green: #6c8062;
+            --accent-green-hover: #7d9372;
+            --accent-dark: #4a5c43;
+            --border-color: rgba(147, 154, 133, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        /* Apple-style Glassmorphism Header (Timer) */
+        .timer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(28, 28, 30, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 14px 20px;
+            border-bottom: 0.5px solid var(--border-color);
+            z-index: 10;
+        }
+
+        .timer-display {
+            font-size: 1.1rem;
+            font-weight: 500;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .timer-btn {
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            background-color: var(--surface-hover);
+            color: var(--text-primary);
+        }
+
+        .timer-btn:active {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+
+        #timer-start-pause {
+            background-color: var(--accent-green);
+            color: var(--bg-color);
+            font-weight: 600;
+        }
+
+        /* Main Click Area */
+        #click-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background: radial-gradient(circle at center, rgba(74, 92, 67, 0.15) 0%, transparent 70%), var(--bg-color);
+            transition: background-color 0.15s ease;
+            position: relative;
+        }
+
+        #click-area:active {
+            background-color: rgba(108, 128, 98, 0.08);
+        }
+
+        .counter-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        #counter-display {
+            font-size: clamp(8rem, 25vw, 14rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -4px;
+            line-height: 0.9;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .hint {
+            position: absolute;
+            bottom: 24px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        /* Apple-style Control Dock */
+        .controls {
+            display: flex;
+            gap: 12px;
+            padding: 20px 24px calc(env(safe-area-inset-bottom, 20px) + 10px);
+            background-color: rgba(28, 28, 30, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            justify-content: center;
+            border-top: 0.5px solid var(--border-color);
+        }
+
+        button {
+            padding: 16px 28px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        button:active {
+            transform: scale(0.96);
+            opacity: 0.85;
+        }
+
+        #btn-minus {
+            background-color: var(--surface-hover);
+            color: var(--text-primary);
+            flex: 1;
+            max-width: 120px;
+        }
+
+        #btn-reset {
+            background-color: var(--surface-hover);
+            color: var(--text-secondary);
+            flex: 1;
+            max-width: 120px;
+        }
+
+        #btn-plus {
+            background-color: var(--accent-green);
+            color: var(--bg-color);
+            font-weight: 600;
+            flex: 2;
+            max-width: 200px;
+        }
+
+        @media (max-width: 480px) {
+            .controls {
+                gap: 8px;
+                padding: 16px;
+            }
+            button {
+                padding: 14px 16px;
+                font-size: 0.95rem;
+                border-radius: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+ <!-- Menubar Section -->
+    <header>
+        <div class="logo">FitTools</div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="menu-list" id="menuList">
+            <!-- Group 1: Timers & Workouts -->
+            <li class="menu-category">Timers & Workouts</li>
+            <li>
+                <a href="/tabata.html">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Tabata Timer
+                </a>
+            </li>
+            <li>
+                <a href="/EMOM.html">
+                    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                    EMOM Timer!
+                </a>
+            </li>
+            <li>
+                <a href="/density.html">
+                    <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                    Density Training
+                </a>
+            </li>
+            <li>
+                <a href="/ladders.html">
+                    <svg viewBox="0 0 24 24"><path d="M8 2v20M16 2v20M4 6h16M4 12h16M4 18h16"></path></svg>
+                    Ladders
+                </a>
+            </li>
+            <li>
+                <a href="/stopwatch.html">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2"></path><path d="M5 3L2 6"></path><path d="M19 3l3 3"></path></svg>
+                    Stopwatch
+                </a>
+            </li>
+            <li>
+                <a href="/restTimer.html">
+                    <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                    Rest Timer
+                </a>
+            </li>
+
+            <!-- Group 2: Tools & Calculators -->
+            <li class="menu-category">Tools & Calculators</li>
+            <li>
+                <a href="/1RepMax.html">
+                    <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M3 12h18M6 3v18M18 3v18"></path></svg>
+                    1 Rep Max
+                </a>
+            </li>
+            <li>
+                <a href="/plateCalc.html">
+                    <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg>
+                    Plate Calculator
+                </a>
+            </li>
+            <li>
+                <a href="/strength.html">
+                    <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
+                    Strength Standards
+                </a>
+            </li>
+            <li>
+                <a href="/NutrientDensity.html">
+                    <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    Nutrient Density Score
+                </a>
+            </li>
+            <li>
+                <a href="/tallyCalc.html">
+                    <svg viewBox="0 0 24 24"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
+                    Tally Counter
+                </a>
+            </li>
+
+            <!-- Group 3: Reference -->
+            <li class="menu-category">Library</li>
+            <li>
+                <a href="/exerciseByBodayPart.html">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Exercise by Body Part
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Apple-style Timer Header -->
+    <div class="timer-header">
+        <div id="timer-display" class="timer-display">00:00:00</div>
+        <div class="timer-controls">
+            <button id="timer-start-pause" class="timer-btn">Start</button>
+            <button id="timer-reset" class="timer-btn">Reset</button>
+        </div>
+    </div>
+
+    <!-- Main Clickable Area -->
+    <div id="click-area">
+        <div class="counter-label">Tally</div>
+        <div id="counter-display">0</div>
+        <div class="hint">Tap anywhere to count</div>
+    </div>
+
+    <!-- Control Dock -->
+    <div class="controls">
+        <button id="btn-minus" aria-label="Decrease count">-</button>
+        <button id="btn-reset" aria-label="Reset count">Reset</button>
+        <button id="btn-plus" aria-label="Increase count">+</button>
+    </div>
+
+    <script>
+        // Tally Logic
+        let count = 0;
+        const counterDisplay = document.getElementById('counter-display');
+        const clickArea = document.getElementById('click-area');
+        const btnMinus = document.getElementById('btn-minus');
+        const btnReset = document.getElementById('btn-reset');
+        const btnPlus = document.getElementById('btn-plus');
+
+        function updateDisplay() {
+            counterDisplay.textContent = count;
+        }
+
+        clickArea.addEventListener('click', () => {
+            count++;
+            updateDisplay();
+        });
+
+        btnPlus.addEventListener('click', (event) => {
+            event.stopPropagation();
+            count++;
+            updateDisplay();
+        });
+
+        btnMinus.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (count > 0) {
+                count--;
+                updateDisplay();
+            }
+        });
+
+        btnReset.addEventListener('click', (event) => {
+            event.stopPropagation();
+            count = 0;
+            updateDisplay();
+        });
+
+        // Timer Logic
+        let secondsElapsed = 0;
+        let timerInterval = null;
+        let isRunning = false;
+
+        const timerDisplay = document.getElementById('timer-display');
+        const timerStartPauseBtn = document.getElementById('timer-start-pause');
+        const timerResetBtn = document.getElementById('timer-reset');
+
+        function formatTime(totalSeconds) {
+            const hrs = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
+            const mins = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
+            const secs = (totalSeconds % 60).toString().padStart(2, '0');
+            return `${hrs}:${mins}:${secs}`;
+        }
+
+        function updateTimerDisplay() {
+            timerDisplay.textContent = formatTime(secondsElapsed);
+        }
+
+        timerStartPauseBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (!isRunning) {
+                isRunning = true;
+                timerStartPauseBtn.textContent = 'Pause';
+                timerStartPauseBtn.style.backgroundColor = '#939a85';
+                timerInterval = setInterval(() => {
+                    secondsElapsed++;
+                    updateTimerDisplay();
+                }, 1000);
+            } else {
+                isRunning = false;
+                clearInterval(timerInterval);
+                timerStartPauseBtn.textContent = 'Start';
+                timerStartPauseBtn.style.backgroundColor = '#6c8062';
+            }
+        });
+
+        timerResetBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            clearInterval(timerInterval);
+            isRunning = false;
+            secondsElapsed = 0;
+            updateTimerDisplay();
+            timerStartPauseBtn.textContent = 'Start';
+            timerStartPauseBtn.style.backgroundColor = '#6c8062';
+        });
+    </script>
+</body>
+
+</html>
