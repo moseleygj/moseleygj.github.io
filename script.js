@@ -76,8 +76,38 @@ document.getElementById('toggle-beyond-btn').addEventListener('click', function(
         images[index].classList.add('active');
     }
 
+/*Dynamic Image Avatar */
 
+document.addEventListener('DOMContentLoaded', () => {
+  const overlayImg = document.getElementById('avatar-overlay');
+  if (!overlayImg) return;
 
+  const targets = document.querySelectorAll('.hover-target');
+
+  // Preload all 5+ images so there is zero delay on hover
+  targets.forEach(item => {
+    const src = item.getAttribute('data-avatar');
+    if (src) {
+      const img = new Image();
+      img.src = src;
+    }
+  });
+
+  // Handle cross-fade on hover
+  targets.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const newSrc = item.getAttribute('data-avatar');
+      if (newSrc) {
+        overlayImg.src = newSrc;
+        overlayImg.classList.add('is-visible');
+      }
+    });
+
+    item.addEventListener('mouseleave', () => {
+      overlayImg.classList.remove('is-visible');
+    });
+  });
+});
 
     /**Secret sauce **/
 
