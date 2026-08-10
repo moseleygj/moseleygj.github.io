@@ -230,7 +230,17 @@ input:checked + .slider:before {
           background-image:url("pngtree-animated-gif-wavy-effect-image_16531403.jpg")
         }
 
-        /* CENTERED OVERLAPPING AVATAR CONTAINER */
+        .banner-background-container {width: 100%;
+            height: 200px;}
+
+  
+
+            #particleCanvas {
+            width: 100%;
+            height: 200px;
+            position: relative;
+          # background: #2c2c2e; /* Fallback color */}
+    /* CENTERED OVERLAPPING AVATAR CONTAINER */
         .avatar-wrapper {
             position: relative;
             width: 160px;
@@ -880,7 +890,8 @@ input:checked + .slider:before {
             background-color: #4a423a; /* Spine line color */
             transform: translateX(-50%);
             z-index: 1;
-          height: 815px;
+            height: 815px;
+            border-radius:5px;
         }
 
         /* INDIVIDUAL ROW BLOCKS */
