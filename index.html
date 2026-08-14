@@ -59,11 +59,20 @@
 </head>
 <body>
 
-    <!-- HERO SECTION CONTAINER -->
+    <!-- HERO SECTION CONTAINER 2nd overlay -->
+     
     <div class="profile-header-card">
-        <div class="banner-background"><canvas id="particleCanvas"></canvas></div>
+        <div class="banner-background"><div style="object-fit: fill;position: relative;z-index: 6;" class="video-container">
+  <!-- Added "loop", "autoplay", and "muted" attributes -->
+  <!--<video style="object-fit: fill" width="100%" height="100%"  autoplay muted loop playsinline>
+    <source src="gal.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>-->
+</div>
+
+</div>
         
-        <div class="avatar-wrapper">
+        <div class="avatar-wrapper" style="z-index: 6;">
             <img id="avatar-img" src="avatar/avatarDefault.png" alt="Profile Photo">
             <img id="avatar-overlay" class="avatar-overlay" src="avatar/avatarWink.png" alt="Profile Photo Hover">
 <div class="status-dot"></div>
@@ -133,9 +142,10 @@
 
               <!-- Cert 4 -->
             <div class="cert-card">
-                <div class="cert-info">
+                <div class="cert-info" >
                     <h3>SSCP (Systems Security Certified Practitioner)</h3>
                     <p>ISC²</p>
+                    
                 </div>
             </div>
 
@@ -193,10 +203,15 @@
   
 <!--courses taken-->
 <!--courses taken-->
-<details class="project-section" open style="width: 100%; max-width: 1080px; box-sizing: border-box; display: flex; flex-direction: column; align-items: stretch;">
-  <summary style="width: 100%; text-align: left; cursor: pointer; color: #ffffff;">Continuous Learning: <i style="color:whitesmoke">Recent Courses &amp; Cert Prep</i></summary>
+<details class="project-section"  style="width: 100%; max-width: 1080px; box-sizing: border-box; display: flex; flex-direction: column; align-items: stretch;">
+  <summary style="width: 100%; text-align: left; cursor: pointer; color: #ffffff;">Continuous Learning: <i style="color:#939292">Recent Courses, webinars &amp; Cert Prep</i></summary>
   <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 6px 16px; margin-top: 12px; width: 100%; max-width: 1080px; box-sizing: border-box; text-align: left;">
     
+
+    <div style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.9rem;">
+      <span style="font-weight: 600; color: #ffffff; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-width: 70%; padding-right: 15px;" title=""> <i class="fa-solid fa-circle-check" style="color:#30d158"></i>&nbsp; Inside OSAI EAP: Preparing Your Team for AI Security</span>
+      <span style="color: #cccccc; font-size: 0.85rem; white-space: nowrap; text-align: right; flex-shrink: 0;">OffSec -  Aug&nbsp; 2026</span>
+    </div>
 
     <div style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.9rem;">
       <span style="font-weight: 600; color: #ffffff; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-width: 70%; padding-right: 15px;" title=""> <i class="fa-solid fa-circle-check" style="color:#30d158"></i>&nbsp; IBM Cybersecurity Analyst Professional Certificate</span>
@@ -370,7 +385,8 @@
 <!--The Panda Music Project-->
 <div class="dashboard-card">
             <div class="card-preview-area">
-                <img src="https://i.ibb.co/yBfWbzLt/Panda-Music.gif" alt="The Panda Music Project">
+                <img src="panda.png" onmouseover="this.src = 'Panda-Music.gif';" onmouseleave="this.src = 'panda.png';" alt="Panda Music System">
+
             </div>
             <div class="card-meta-footer">
                 <div class="meta-header-row">
@@ -401,7 +417,9 @@
 <!--Stylized Nmap-->
         <div class="dashboard-card">
             <div class="card-preview-area">
-                <img src="https://moseleygj.github.io/cleanNMap.gif" alt="Stylized Nmap Scanner">
+                <!--<img src="https://moseleygj.github.io/cleanNMap.gif" alt="Stylized Nmap Scanner">-->
+                <img src="nmap.png" onmouseover="this.src = 'cleanNMap.gif';" onmouseleave="this.src = 'nmap.png';" alt="Nmap stylized">
+
             </div>
             <div class="card-meta-footer">
                 <div class="meta-header-row">
@@ -427,7 +445,9 @@
 <!--SSH Security Monitoring & IP Blocking Tool-->
         <div class="dashboard-card">
             <div class="card-preview-area">
-                <img src="https://moseleygj.github.io/cyberSecurityPython.gif" alt="SSH Security Monitoring & IP Blocking Tool">
+                <!--<img src="cyberSecurityPython.gif" alt="SSH Security Monitoring & IP Blocking Tool">-->
+                <img src="sshMonitor.png" onmouseover="this.src = 'cyberSecurityPython.gif';" onmouseleave="this.src = 'sshMonitor.png';" alt="Nmap stylized">
+
             </div>
             <div class="card-meta-footer">
                 <div class="meta-header-row">
@@ -441,8 +461,8 @@
                     <span class="tag-badge alt-stack">PYTHON</span>
                     <span class="tag-badge alt-stack">BASH</span>
                     <span class="tag-badge alt-stack">LINUX</span>
-
                 </div>
+
                 <div class="metrics-bar">
                     <div class="metric-badge"><i class="fa-brands fa-github"></i> GitHub</div>
                     <div class="metric-badge"><i class="fa-solid fa-eye"></i> View</div>
@@ -451,11 +471,9 @@
         </div>
 <!--SSH Security Monitoring & IP Blocking Tool end-->
 
-
-
         <div class="dashboard-card">
             <div class="card-preview-area">
-                <img src="https://moseleygj.github.io/integrity.gif" alt="Linux System Integrity Checker">
+                <img src="integrity.png" onmouseover="this.src = 'integrity.gif';" onmouseleave="this.src = 'integrity.png';" alt="Linux System Integrity Checker">
             </div>
             <div class="card-meta-footer">
                 <div class="meta-header-row">
@@ -477,11 +495,10 @@
             </div>
         </div>
 
-
 <!--Project: ClinSend -->
            <div class="dashboard-card">
             <div class="card-preview-area">
-                <img src="https://i.ibb.co/6JGw9Z7H/7.png" alt="Auth Gateway API Preview">
+                <img src="7.png" alt="Auth Gateway API Preview">
             </div>
             <div class="card-meta-footer">
                 <div class="meta-header-row">
@@ -541,7 +558,10 @@ IT Automation with Python Google - January 2026
 
         <div class="dashboard-card">
             <div class="card-preview-area">
-                <img src="azar-light.gif" alt="UI Component Library Preview">
+              <!--  <img src="azar-light.gif" alt="UI Component Library Preview">-->
+                <img src="azar.png" onmouseover="this.src = 'azar-light.gif';" onmouseleave="this.src = 'azar.png';" alt="Nmap stylized">
+
+
             </div>
             <div class="card-meta-footer">
                 <div class="meta-header-row">
@@ -640,7 +660,6 @@ IT Automation with Python Google - January 2026
                     <li><input type="checkbox" checked disabled> Tally Counter with timer</li>   
                     <li><input type="checkbox" checked disabled> Plate calculator that tells the user exactly how to load the barbell on both sides, saving time and mental math.</li>
                     <li><input type="checkbox" checked disabled> Enable super-sets/Giant Sets</li>
-
           </ul>
 
           <h4>Pending</h4>
@@ -784,7 +803,7 @@ IT Automation with Python Google - January 2026
             <div class="timeline-row right" id="linkContact">
                 <div class="timeline-dot color-coral" id="currentJob"></div>
                 <div class="timeline-content">
-                    <div class="event-header">BlackRock (BeamLiving)</div>
+                    <div class="event-header">BlackStone </div>
                     <p class="event-description">IAM & Infrastructure </p>
                 </div>
             </div>
@@ -908,7 +927,7 @@ IT Automation with Python Google - January 2026
       <div class="expandable-card" data-url="/EDC.html" onclick="toggleCard(this, event)">
         <div class="card-visible-surface">
           <div class="photo-frame">
-            <img src="backpack.webp" alt="Mobile tech kit setup">
+            <img src="backpack1.avif" alt="Mobile tech kit setup">
           </div>
           <div class="card-preview-text">
             <h3>What's in My Backpack?</h3>
@@ -980,7 +999,7 @@ IT Automation with Python Google - January 2026
       <div class="expandable-card" data-url="https://moseleygj.github.io/homelab.html" onclick="toggleCard(this, event)">
         <div class="card-visible-surface">
           <div class="photo-frame">
-            <img src="homelab-pc_u8YoU.jpg" alt="Homelab Server Rack">
+            <img src="20260630-161056.jpg" alt="Homelab Server Rack">
           </div>
           <div class="card-preview-text">
             <h3>The Sandbox Homelab</h3>
