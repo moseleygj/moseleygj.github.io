@@ -718,7 +718,7 @@ input:checked + .slider:before {
         .card-preview-area img {
             width: 100%;
             height: 100%;
-            object-fit: cover; 
+            object-fit: fill; 
             display: block;
             opacity: 0.85; /* Softened image glare so tags read easier below */
             transition: opacity 0.2s ease;
@@ -1794,7 +1794,7 @@ box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.7);    }
 
     /* Gallery Styling */
     .gallery { position: relative; height: 350px; width: 100%; overflow: hidden; border-radius: 8px; background: #000; }
-    .gallery img { width: 100%; height: 100%; object-fit: fill; display: none; }
+    .gallery img { width: 100%; height: 100%; object-fit: contain; display: none; }
     .gallery img.active { display: block; }
     .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; cursor: pointer; padding: 10px; z-index: 1; }
     .prev { left: 5px; } .next { right: 5px; }
