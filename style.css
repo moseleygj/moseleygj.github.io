@@ -890,7 +890,7 @@ input:checked + .slider:before {
             background-color: #4a423a; /* Spine line color */
             transform: translateX(-50%);
             z-index: 1;
-            height: 815px;
+            height: 900px;
             border-radius:5px;
         }
 
